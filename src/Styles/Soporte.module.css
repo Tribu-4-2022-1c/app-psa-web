@@ -1,58 +1,12 @@
 .content{
-    width: 100%;
+    padding-top: 20px;
+    border-bottom: 1px solid black;
+}
+
+.contentAudio{
     height: 100%;
+    padding: 20px;
     display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    padding: 20px 0;
-}
-
-.contentCards{
-    height: 750px;
-    width: 30%;
-    background: #f7f7f7;
-    padding: 15px;
-}
-
-.card{
-    padding: 15px 40px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 2px 12px #00000029;
-    display: flex;
-    justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
-}
-
-.contentFilters{
-
-}
-
-.contentTickets{
-    padding: 15px;
-}
-
-h3{
-    font-weight: 700;
-}
-
-p{
-    margin: 0;
-}
-
-.contentItem{
-    display: flex;
-    flex-direction: row;
-}
-
-.label{
-    font-weight: 600;
-}
-
-.contentIcon{
-    font-size: 30px;
-    display: flex;
     justify-content: center;
-    align-items: center;
 }

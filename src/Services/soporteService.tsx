@@ -52,23 +52,41 @@ const soporteService = () => {
     }
   ]
 
+  const tickets = [
+    {
+      id:"Version 6"
+    },
+    {
+      id:"Version 7"
+    },
+    {
+      id:"Version 8"
+    },
+    {  
+      id:"Version 9"
+    }
+    ,
+    {  
+      id:"Version 10"
+    }
+  ]
+  
   const getProducts = async () => {
-    const url = "";
+    const url = "https://psa-api-soporte.herokuapp.com/products";
     return fetch(url).then( async (response) => {
       if(response){
-        return products;
+        return response.json();
       }else{
         return []
       }
     })
    .catch( error => {
-      console.log(error);
       return []
    })
   }
 
   const getVersiones = (productSelect:any) => {
-    const url = "" ;
+    const url = "https://psa-api-soporte.herokuapp.com/versions" ;
     return fetch(url).then( async (response) => {
       if(response){
         if(productSelect.id === 'Producto 1')
@@ -80,14 +98,28 @@ const soporteService = () => {
       }
     })
     .catch( error => {
-      console.log(error);
+      return []
+   })
+  }
+
+  const getAllVersiones = () => {
+    const url = "https://psa-api-soporte.herokuapp.com/versions";
+    return fetch(url).then( async (response) => {
+      if(response){
+        return response.json();
+      }else{
+        return []
+      }
+    })
+   .catch( error => {
       return []
    })
   }
 
   return {
     getProducts,
-    getVersiones
+    getVersiones,
+    getAllVersiones
   }
 }
 

@@ -1,12 +1,10 @@
 .card{
-    padding: 15px 40px;
-    background: white;
-    border-radius: 10px;
-    box-shadow: 0px 2px 12px #00000029;
+    padding: 0 40px;
+    background: #003066;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    color: white;
 }
 
 .label{
@@ -23,4 +21,11 @@
 .isSelected{
     background: #0083C61A;
     border: 1px solid #0083C6;
+}
+
+.contentDescription{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    width: 40%;
 }

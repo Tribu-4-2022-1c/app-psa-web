@@ -4,25 +4,24 @@ import soporteService from '../../Services/soporteService';
 import { VersionSoporte } from './VersionSoporte';
 
 export const VersionesSoporte = (props:any) => {
-    const {productSelect} = props;
     const {setcurrentVersion} = props;
-    const {currentVersion} = props;
-    const [versions, setversions] = useState([]);
+    const {product} = props;
+    const {versions} = props;
+    const [filterVersions, setfilterVersions] = useState([]);
     useEffect(() => {
-      const versiones = async () => {
-        const list:any = await soporteService().getVersiones(productSelect);
-        setversions(list);
-        setcurrentVersion(list[0]);
+      const element =  () => {
+        let filterVersions = versions.filter( (version:any) => version.product === product.name);
+        console.log(filterVersions);
+        setfilterVersions(filterVersions);
       }
-      versiones();
-    }, [productSelect]);
+      element();
+    }, []);
     
   return (
     <div>
-      <h3>VERSIONES: {(productSelect.id!=='')?productSelect['id']:"No Hay Producto Seleccionado"}</h3>
-      {(versions&&versions.length>0)&&<div>
-        {versions.map( (version,index:number) => 
-          <VersionSoporte currentVersion={currentVersion} setcurrentVersion={setcurrentVersion} key={index} version = {version} />
+      {(filterVersions&&filterVersions.length>0)&&<div>
+        {filterVersions.map( (version:any,index:number) => 
+          <VersionSoporte currentVersion={filterVersions} setcurrentVersion={setcurrentVersion} key={index} version = {version} />
         )} 
       </div>}
        

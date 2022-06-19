@@ -4,14 +4,13 @@ import { FaProductHunt } from 'react-icons/fa'
 const ProductoSoporte = (props:any) => {
   const {product} = props;
   const {productSelect} = props;
-  const {changeProduct} = props;
   return (
-    <div onClick={() => changeProduct(product) }
+    <div
       className={`${ProductoSoporteCSS.card} 
       ${(productSelect&&product&&productSelect.id===product.id)?ProductoSoporteCSS.isSelected:''}`}>
-            <div>
-              <p className={ProductoSoporteCSS.label}>Nombre:</p>
-              <p>{product['id']} </p>
+            <div className={ProductoSoporteCSS.contentDescription}>
+              <p className={ProductoSoporteCSS.label}>Nombre de Producto:</p>
+              <p>{product['name']} </p>
             </div>
             <div className={ProductoSoporteCSS.contentIcon}>
               <FaProductHunt />

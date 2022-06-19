@@ -1,12 +1,11 @@
 .card{
-    padding: 15px 40px;
+    padding: 0px 40px;
     background: white;
-    border-radius: 10px;
-    box-shadow: 0px 2px 12px #00000029;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 20px;
+    border-top: 1px solid #003066;
+    color: #003066;
 }
 
 .label{
@@ -16,11 +15,37 @@
 .contentIcon{
     font-size: 30px;
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
+    width: 6%;
 }
 
 .isSelected{
     background: #0083C61A;
-    border: 1px solid #0083C6;
+}
+
+.contentDescription{
+    display: flex;
+    width: 80%;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+.buttonPopover{
+    background-color: #003066;
+}
+
+.panelPopover{
+    position: absolute;
+    background: red;
+}
+
+.styleNav{
+    text-decoration: none;
+    color: #003066;
+    font-size: 25px;
+}
+
+.styleNav:hover{
+    opacity: 0.8;
 }
