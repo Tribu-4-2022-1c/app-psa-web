@@ -1,5 +1,5 @@
 import React from 'react'
-import ProductoSoporteCSS from '../Soporte/ProductoSoporte.module.css'
+import ProductoSoporteCSS from  '../../Styles/ProductoSoporte.module.css'//'../ Soporte/'
 import { FaProductHunt } from 'react-icons/fa'
 const ProductoSoporte = (props:any) => {
   const {product} = props;

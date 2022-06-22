@@ -9,6 +9,11 @@
 
 .label{
     font-weight: 600;
+    margin: 10px;
+}
+
+.contentDescription p{
+    margin: 10px;
 }
 
 .contentIcon{

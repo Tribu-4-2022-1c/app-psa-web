@@ -8,8 +8,13 @@
     color: #003066;
 }
 
+.descItem{
+    margin: 10px;
+}
+
 .label{
     font-weight: 600;
+    margin: 10px;
 }
 
 .contentIcon{
@@ -44,6 +49,7 @@
     text-decoration: none;
     color: #003066;
     font-size: 25px;
+    display: flex;
 }
 
 .styleNav:hover{

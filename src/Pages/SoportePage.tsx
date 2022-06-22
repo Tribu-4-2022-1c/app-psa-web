@@ -1,9 +1,8 @@
+import React from 'react'
 import soporteCSS from '../Styles/Soporte.module.css';
 import { useEffect, useState } from 'react';
 import soporteService from '../Services/soporteService';
-import { TicketsSoporte } from '../Components/Soporte/TicketsSoporte';
 import { VersionesSoporte } from '../Components/Soporte/VersionesSoporte';
-import { ProductosSoporte } from '../Components/Soporte/ProductosSoporte';
 import ProductoSoporte from '../Components/Soporte/ProductoSoporte';
 import { Audio } from 'react-loader-spinner';
 
@@ -51,7 +50,7 @@ const SoportePage = () => {
           ariaLabel='loading'
         />
         </div>}
-      {!load&&products.map((product) => <div>
+      {!load&&products.map((product,index) => <div key={index}>
         <ProductoSoporte product={product} />
         <div>
           <VersionesSoporte versions={versions} product={product} currentVersion = {currentVersion} setcurrentVersion={setcurrentVersion} />

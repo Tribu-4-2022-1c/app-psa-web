@@ -1,10 +1,128 @@
-import React from 'react'
-import { useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { Table } from 'react-bootstrap';
+import { FaFilter, FaEye } from 'react-icons/fa';
+import { Link, NavLink, useParams } from 'react-router-dom';
+import soporteService from '../../Services/soporteService';
+import ticketsCSS from '../../Styles/Tickets.module.css';
+import versionSoporteStyle from '../../Styles/VersionSoporte.module.css';
 
 export const Tickets = (props:any) => {
     const {product} = useParams();
     const {version} = useParams();
+    const [tickets,settickets] = useState([]);
+    const [severities, setseverities] = useState([]);
+    const [employees, setemployees] = useState([]);
+    const [clients, setclients] = useState([]);
+    const headsTable = [
+      {
+        id:"Cliente",
+      },
+      {
+        id:"Código",
+      },
+      {
+        id:"Estado",
+      },
+      {
+        id:"Título",
+      },
+      {
+        id:"Fecha de Creación",
+      },
+      {
+        id:"Fecha de Actualización",
+      },
+      {
+        id:"Dias Faltantes",
+      },
+      {
+        id:"Fecha Resolución Estimada",
+      },
+      {
+        id:"Tipo de ticket",
+      },
+      {
+        id:"Ver Detalle",
+      }
+    ]
+
+    useEffect(() => {
+      const tickets_ = async () =>{
+        const allTickets:any = await soporteService().getAllTickets();
+        const allseverities:any = await soporteService().getSeverities();
+        const allemployees:any = await soporteService().getEmployees();
+        const allclients :any = await soporteService().getAllClients();
+        settickets(allTickets);
+        setseverities(allseverities);
+        setemployees(allemployees);
+        setclients(allclients);
+      }
+      tickets_();
+    },[]);
+
+    const getDays = (severity:string,fecha:string) => {
+      return "6";
+    }
+
+    const isConsulta = (typeTicket:string) =>{
+      return typeTicket==='CONSULTA';
+    }
+
+    const isError = (typeTicket:string) => {
+      return typeTicket==='ERROR';
+    }
   return (
-    <div>{product}</div>
+    <div>
+      <div className={ticketsCSS.contentDetail}>
+        <div className={ticketsCSS.contenDescription}>
+          <div className={ticketsCSS.item}>
+            <p className={ticketsCSS.label}>PRODUCTO:</p>
+            <p className={ticketsCSS.input}>{product}</p>
+          </div>
+          <div className={ticketsCSS.item}>
+            <p className={ticketsCSS.label}>VERSION:</p>
+            <p className={ticketsCSS.input}>{version}</p>
+          </div>
+        </div>
+        <div className={ticketsCSS.contentButton}>
+          <div className={ticketsCSS.button}>
+            <p>NUEVO TICKET</p>
+          </div>  
+        </div>        
+      </div>
+      <Table responsive bordered >
+        <thead>
+          <tr >
+            {headsTable&&headsTable.map((head,index) => <th key={index}>
+              <div className={ticketsCSS.contentFilter}>
+                <p>{head.id}</p>
+                {index!=(headsTable.length-1)&&
+                <p><FaFilter/></p>}
+              </div>
+            </th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {(tickets)&&tickets.map( (ticket,index) => <tr key={index}>
+            <td>{ticket['client']}</td>
+            <td>{ticket['code']}</td>
+            <td>{ticket['status']}</td>
+            <td>{ticket['title']}</td>
+            <td>{ticket['creationDate']}</td>
+            <td>{ticket['lastUpdated']}</td>
+            <td>{getDays(ticket['severity'],ticket['creationDate'])}</td>
+            <td>{ticket['resolution']}</td>
+            <td className={`${isError(ticket['type'])?ticketsCSS.error:isConsulta(ticket['type'])?ticketsCSS.consulta:ticketsCSS.default}`}>{ticket['type']}</td>
+            <td className={`${ticketsCSS.contentIcon} `}>
+              <Link className={versionSoporteStyle.styleNav} 
+                to={`/soporte/ticket/detalle`} 
+                state={{ ticket }}>
+                <FaEye />
+              </Link>
+            </td>
+          </tr>)}
+        </tbody>
+      </Table>
+    </div>
   )
 }

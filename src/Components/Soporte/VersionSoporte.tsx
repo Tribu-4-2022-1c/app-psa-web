@@ -1,6 +1,6 @@
 import { FaFolderOpen, FaPlusCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
-import versionSoporteStyle from '../Soporte/VersionSoporte.module.css';
+import versionSoporteStyle from '../../Styles/VersionSoporte.module.css'//'../../Styles/Soporte/VersionSoporte.module.css';
 export const VersionSoporte = (props:any) => {
     const {version} = props;
     const {currentVersion} = props;

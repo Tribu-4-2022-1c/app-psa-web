@@ -1,6 +1,4 @@
-import { version } from 'os';
 import React, { useEffect, useState } from 'react'
-import soporteService from '../../Services/soporteService';
 import { VersionSoporte } from './VersionSoporte';
 
 export const VersionesSoporte = (props:any) => {
@@ -15,7 +13,7 @@ export const VersionesSoporte = (props:any) => {
         setfilterVersions(filterVersions);
       }
       element();
-    }, []);
+    }, [product,versions]);
     
   return (
     <div>
