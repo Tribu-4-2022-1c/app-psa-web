@@ -1,8 +1,9 @@
-import recursosCSS from '../Styles/Recursos.module.css';
+import recursosCSS from '../Styles/Recursos/Recursos.module.css';
 import { useEffect, useState } from 'react';
 import soporteService from '../Services/soporteService';
 import { VersionesSoporte } from '../Components/Soporte/VersionesSoporte';
 import ProductoSoporte from '../Components/Soporte/ProductoSoporte';
+import LoginButton from '../Components/Recursos/LoginButton';
 import { Audio } from 'react-loader-spinner';
 
 const RecursosPage = () => {
@@ -11,7 +12,7 @@ const RecursosPage = () => {
     id: ''
   }
   const winHeight =  window.innerHeight*.8;
-  
+  const loginButton = useState();    
   const [products, setproducts] = useState([]);
   const [currentVersion, setcurrentVersion] = useState(initialStateVersion);
   const [versions, setversions] = useState([]);
@@ -51,8 +52,8 @@ const RecursosPage = () => {
         </div>}
         {!load && 
       
-      <div className={`${recursosCSS.titulo}`}>
-         Listado de Recursos 
+      <div >
+         <LoginButton loginButton={loginButton} /> 
       </div>
       
       }
