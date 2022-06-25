@@ -49,6 +49,13 @@ const RecursosPage = () => {
           ariaLabel='loading'
         />
         </div>}
+        {!load && 
+      
+      <div className={`${recursosCSS.titulo}`}>
+         Listado de Recursos 
+      </div>
+      
+      }
       {!load&&products.map((product,index) => <div key={index}>
         <ProductoSoporte product={product} />
         <div>
