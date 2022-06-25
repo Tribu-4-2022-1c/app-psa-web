@@ -4,8 +4,7 @@ import { FaSortAmountDown, FaEye } from 'react-icons/fa';
 import { Link, NavLink, useParams } from 'react-router-dom';
 import recursosService from '../../Services/recursosService';
 import empleadosCSS from '../../Styles/Empleados.module.css';
-import versionSoporteStyle from '../../Styles/VersionSoporte.module.css';
-import ticketsCSS from "../../Styles/Tickets.module.css";
+
 
 export const Empleados = (props:any) => {
   const {product} = useParams();
@@ -31,8 +30,8 @@ export const Empleados = (props:any) => {
       const allApellidos:any = await recursosService().getApellidos();
       const allLegajos:any = await recursosService().getLegajos();
       setnombre(allNombres);
-      setapellido(allApellidos)
-      setlegajo(allLegajos)
+      /*setapellido(allApellidos)
+      setlegajo(allLegajos)*/
     }
     recursos_();
   },[]);
@@ -53,7 +52,7 @@ export const Empleados = (props:any) => {
         <div className={empleadosCSS.contentDetail}>
           <div className={empleadosCSS.contenDescription}>
             <div className={empleadosCSS.item}>
-              <p className={empleadosCSS.label}>Recursos:</p>
+              <p className={empleadosCSS.label}>Recursos</p>
             </div>
           </div>
           <div className={empleadosCSS.contentButton}>

@@ -4,12 +4,14 @@ import recursosService from "../Services/recursosService";
 import {Empleados} from "../Components/Recursos/Empleados";
 
 import recursosCSS from '../Styles/Recursos/Recursos.module.css';
+import empleadosCSS from '../Styles/Recursos/Empleados.module.css';
 import { useEffect, useState } from 'react';
 import soporteService from '../Services/soporteService';
 import { VersionesSoporte } from '../Components/Soporte/VersionesSoporte';
 import ProductoSoporte from '../Components/Soporte/ProductoSoporte';
 import LoginButton from '../Components/Recursos/LoginButton';
 import { Audio } from 'react-loader-spinner';
+import loginButton from "../Components/Recursos/LoginButton";
 
 const RecursosPage = () => {
 
@@ -43,13 +45,14 @@ const RecursosPage = () => {
           color='#003066'
           ariaLabel='loading'
         />
+
         </div>}
-        {!load && 
-      
+        {!load &&
+
       <div >
-         <LoginButton loginButton={loginButton} /> 
+         <LoginButton loginButton={loginButton} />
       </div>
-      
+
       }
 
         {!load &&
@@ -59,9 +62,12 @@ const RecursosPage = () => {
             </div>
 
         }
-        {!load&&nombres.map((employee, index) => <div key={index}>
-          <Empleados employee={employee} />
-        </div>)}
+      {!load &&
+          <div className={`${Empleados}`}>
+            <Empleados employee={nombres} />
+          </div>
+      }
+
       </div >
   )
 }
