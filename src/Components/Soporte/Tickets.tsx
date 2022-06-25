@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import { FaFilter, FaEye } from 'react-icons/fa';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import soporteService from '../../Services/soporteService';
 import ticketsCSS from '../../Styles/Tickets.module.css';
 import versionSoporteStyle from '../../Styles/VersionSoporte.module.css';
+import MenuDescription from './MenuDescription';
 
 export const Tickets = (props:any) => {
     const {product} = useParams();
@@ -73,23 +74,7 @@ export const Tickets = (props:any) => {
     }
   return (
     <div>
-      <div className={ticketsCSS.contentDetail}>
-        <div className={ticketsCSS.contenDescription}>
-          <div className={ticketsCSS.item}>
-            <p className={ticketsCSS.label}>PRODUCTO:</p>
-            <p className={ticketsCSS.input}>{product}</p>
-          </div>
-          <div className={ticketsCSS.item}>
-            <p className={ticketsCSS.label}>VERSION:</p>
-            <p className={ticketsCSS.input}>{version}</p>
-          </div>
-        </div>
-        <div className={ticketsCSS.contentButton}>
-          <div className={ticketsCSS.button}>
-            <p>NUEVO TICKET</p>
-          </div>  
-        </div>        
-      </div>
+      <MenuDescription version={version} product={product} />
       <Table responsive bordered >
         <thead>
           <tr >
@@ -116,7 +101,7 @@ export const Tickets = (props:any) => {
             <td className={`${ticketsCSS.contentIcon} `}>
               <Link className={versionSoporteStyle.styleNav} 
                 to={`/soporte/ticket/detalle`} 
-                state={{ ticket }}>
+                state={{ ticket,version,product,severities }}>
                 <FaEye />
               </Link>
             </td>

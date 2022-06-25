@@ -1,3 +1,4 @@
+import { Ticket } from "../models/Soporte.models";
 
 const soporteService = () => {
 
@@ -88,8 +89,8 @@ const soporteService = () => {
     })
     .catch( (error) => {
       console.log(error);
-      return tickets;
-      /*return [];*/
+      //return tickets;
+      return [];
     })
   }
 
@@ -105,8 +106,8 @@ const soporteService = () => {
     })
     .catch( (error) => {
       console.log(error);
-      return tickets;
-      /*return [];*/
+      //return tickets;
+      return [];
     })
   }
 
@@ -170,13 +171,35 @@ const soporteService = () => {
    })
   }
 
+  const updateTicket =(body:Ticket) => {
+    const requestOptions = {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    };
+    const url = `https://psa-api-soporte.herokuapp.com/tickets/${body.code}`;
+    return fetch(url,requestOptions).then( async (response) => {
+      if(response){
+        response.json();
+      }
+      else{
+        return false;
+      }
+    })
+    .catch( (error) => {
+      console.log(error);
+      return false;
+    })
+  }
+
   return {
     getProducts,
     getAllVersiones,
     getAllTickets,
     getAllClients,
     getEmployees,
-    getSeverities
+    getSeverities,
+    updateTicket
   }
 }
 

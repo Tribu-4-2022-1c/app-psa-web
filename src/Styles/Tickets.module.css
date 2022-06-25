@@ -86,7 +86,7 @@
 .contentIcon{
     display: flex;
     justify-content: center;
-    height: 40px;
+    height: 30px;
 }
 
 .error{
