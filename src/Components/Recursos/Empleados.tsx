@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
-import { FaSortAmountDown, FaEye } from 'react-icons/fa';
-import { Link, NavLink, useParams } from 'react-router-dom';
+import {FaSortAmountDown, FaEye, FaFolderOpen, FaPlusCircle} from 'react-icons/fa';
+import {Link, NavLink, useNavigate, useParams} from 'react-router-dom';
 import recursosService from '../../Services/recursosService';
 import empleadosCSS from '../../Styles/Empleados.module.css';
+import versionSoporteStyle from "../../Styles/VersionSoporte.module.css";
 
 
 export const Empleados = (props:any) => {
@@ -47,6 +48,11 @@ export const Empleados = (props:any) => {
   const isError = (typeTicket:string) => {
     return typeTicket==='ERROR';
   }
+
+
+  const goCalendario = () => {
+  }
+
   return (
       <div>
         <div className={empleadosCSS.contentDetail}>
@@ -55,10 +61,15 @@ export const Empleados = (props:any) => {
               <p className={empleadosCSS.label}>Recursos</p>
             </div>
           </div>
-          <div className={empleadosCSS.contentButton}>
-            <div className={empleadosCSS.button}>
-              <p>CALENDARIO</p>
-            </div>
+          <div className={empleadosCSS.contentButton} >
+            <NavLink
+                to={'/recursos/calendario'}
+                className={versionSoporteStyle.styleNav}
+            >
+              <div className={empleadosCSS.button} onClick={() => {goCalendario()}} >
+                <p>CALENDARIO</p>
+              </div>
+            </NavLink>
           </div>
         </div>
         <Table responsive bordered >
