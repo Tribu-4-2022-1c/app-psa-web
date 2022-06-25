@@ -1,3 +1,8 @@
+import React from 'react'
+
+import recursosService from "../Services/recursosService";
+import {Empleados} from "../Components/Recursos/Empleados";
+
 import recursosCSS from '../Styles/Recursos/Recursos.module.css';
 import { useEffect, useState } from 'react';
 import soporteService from '../Services/soporteService';
@@ -8,37 +13,26 @@ import { Audio } from 'react-loader-spinner';
 
 const RecursosPage = () => {
 
-  const initialStateVersion = {
-    id: ''
-  }
-  const winHeight =  window.innerHeight*.8;
-  const loginButton = useState();    
-  const [products, setproducts] = useState([]);
-  const [currentVersion, setcurrentVersion] = useState(initialStateVersion);
-  const [versions, setversions] = useState([]);
+  const [nombres, setnombres] = useState([]);
   const [load, setload] = useState(true);
 
+  const winHeight =  window.innerHeight*.8;
+
   useEffect(() => {
-    const getProducts = async () => {
-      let listProducts = await getAllProducts();
-      setproducts(listProducts);
-      const versions = await getAllVersion();
-      setversions(versions);
+    const getEmployees = async () => {
+      let listNombres = await getAllNombres();
+      setnombres(listNombres);
       setload(false);
     }
-    getProducts();
-    
+    getEmployees();
+
   }, []);
 
-  const getAllProducts = async () => {
-    let listProducts: any = await soporteService().getProducts();
-    return listProducts;
+  const getAllNombres = async () => {
+    let listNombres =  recursosService().getNombres();
+    return listNombres;
   }
 
-  const getAllVersion = async () => {
-    let listVersions: any = await soporteService().getAllVersiones();
-    return listVersions;
-  }
 
   return (
     <div className={recursosCSS.content}>
@@ -57,13 +51,18 @@ const RecursosPage = () => {
       </div>
       
       }
-      {!load&&products.map((product,index) => <div key={index}>
-        <ProductoSoporte product={product} />
-        <div>
-          <VersionesSoporte versions={versions} product={product} currentVersion = {currentVersion} setcurrentVersion={setcurrentVersion} />
-        </div>
-      </div>)}
-    </div >
+
+        {!load &&
+
+            <div className={`${recursosCSS.titulo}`}>
+              Listado de Recursos
+            </div>
+
+        }
+        {!load&&nombres.map((employee, index) => <div key={index}>
+          <Empleados employee={employee} />
+        </div>)}
+      </div >
   )
 }
 
