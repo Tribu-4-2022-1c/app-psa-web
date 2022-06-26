@@ -99,7 +99,6 @@
 .contentRow{
     padding: 0 30px;
     margin: 0;
-    /* border-bottom: 2px solid #003066; */
 }
 
 .iconSave{
@@ -110,4 +109,24 @@
 
 .iconClose{
     color: #EA6960;
+}
+
+.contentTaskTickets{
+    border-top: 2px solid #003066;
+    /* padding: 15px; */
+}
+
+.contentCard{
+    height: auto;
+    width: 300px;
+    padding: 20px;
+    background: #003066!important;
+    color: white;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.uninformation{
+    justify-content: center;
+    display: flex;
 }

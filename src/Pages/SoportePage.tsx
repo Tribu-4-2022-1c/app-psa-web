@@ -5,6 +5,7 @@ import soporteService from '../Services/soporteService';
 import { VersionesSoporte } from '../Components/Soporte/VersionesSoporte';
 import ProductoSoporte from '../Components/Soporte/ProductoSoporte';
 import { Audio } from 'react-loader-spinner';
+import { LoadComponent } from '../Components/LoadComponent';
 
 const SoportePage = () => {
 
@@ -42,14 +43,7 @@ const SoportePage = () => {
 
   return (
     <div className={soporteCSS.content}>
-      {load&&<div style={{height: winHeight}} className={`${soporteCSS.contentAudio}`}>
-          <Audio
-          height="50"
-          width="50"
-          color='#003066'
-          ariaLabel='loading'
-        />
-        </div>}
+      <LoadComponent load={load} winHeight={winHeight} setload soporteCSS={soporteCSS} />
       {!load&&products.map((product,index) => <div key={index}>
         <ProductoSoporte product={product} />
         <div>

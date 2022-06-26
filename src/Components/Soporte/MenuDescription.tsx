@@ -3,7 +3,7 @@ import ticketsCSS from "../../Styles/Tickets.module.css";
 
 const MenuDescription = (props:any) => {
 
-  const {product,version} = props;
+  const {product,version,flagGenerateTask, functionGenerateTask, flagNuevoTicket} = props;
 
   return (
     <div className={ticketsCSS.contentDetail}>
@@ -18,9 +18,13 @@ const MenuDescription = (props:any) => {
           </div>
         </div>
         <div className={ticketsCSS.contentButton}>
-          <div className={ticketsCSS.button}>
+          {flagNuevoTicket&&<div className={ticketsCSS.button}>
             <p>NUEVO TICKET</p>
-          </div>  
+          </div>}
+          {flagGenerateTask&&<div className={ticketsCSS.button} onClick={() => functionGenerateTask()}>
+          
+            <p>NUEVA TAREA</p>
+          </div>}
         </div>        
       </div>
   )

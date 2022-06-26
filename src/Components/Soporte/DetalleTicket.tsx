@@ -1,13 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { FaCalendar, FaQuestionCircle, FaEdit } from 'react-icons/fa';
+import { FaCalendar, FaQuestionCircle, FaEdit, FaGofore, FaEye } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
-import { Button, Col, Dropdown, DropdownButton, Form, Row } from 'react-bootstrap';
+import { Button, Card, Col, Dropdown, DropdownButton, Form, Row, Table } from 'react-bootstrap';
 import { useLocation,useNavigate } from 'react-router-dom'
 import MenuDescription from './MenuDescription';
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import soporteService from "../../Services/soporteService";
+import CardHeader from "react-bootstrap/esm/CardHeader";
 
 
 export const DetalleTicket = () => {
@@ -35,7 +36,11 @@ export const DetalleTicket = () => {
   const [disabled, setdisabled] = useState(true);
   const [ticketCurrent, setticketCurrent] = useState(initialTicket);
   const [diasRestantes, setdiasRestantes] = useState(0);
-
+  const [headers,setHeaders] = useState([]);
+  const [data,setData] = useState([]);
+  const [task,setTask] = useState([]);
+  const [flagGenerateTask,setflagGenerateTask] = useState(false);
+ 
   const getDiasDeVencimiento = (severity: string, dateCreation: string) => {
     let fecha1 = moment(dateCreation);
     let fecha2 = moment();
@@ -43,7 +48,6 @@ export const DetalleTicket = () => {
     let diffDate = fecha2.diff(fecha1, 'days');
     setdiasRestantes(optionSev.days - diffDate);
   }
-  
 
   const changeStateEdit = (state:boolean) => {
     if(state){
@@ -67,32 +71,38 @@ export const DetalleTicket = () => {
     console.log(response)
   }
 
+  const validateFlagGenerateTask = () => {
+    if(ticket.type!=='CONSULTA'){
+      setflagGenerateTask(true);
+    }
+  }
+
+  const getTicketsTask = async () => {
+    let taskArray:any = await soporteService().getTicketsTask();
+    setTask(taskArray);
+  }
+
   useEffect(() => {
-    return () => {
+    const getData = async () => {
       setticketCurrent({ ...ticket });
       getDiasDeVencimiento(ticket.severity, ticket.creationDate);
+      await getTicketsTask();
+      validateFlagGenerateTask();
     }
+    getData();
   }, [ticket])
 
+  const generateTask = () => {
+    console.log("ss");
+  }
 
   return (
     <div>
-      <MenuDescription version={version} product={product} />
+      <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
       <div>
         <Row className={detalleTicketCSS.contentRow}>
           <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
             <Row>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                <Form.Control
-                  className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                  type="text"
-                  id="responsable"
-                  disabled={disabled}
-                  value={ticketCurrent.client}
-                  onChange={(value) => changeValue('ticketCurrent',value)}
-                />
-              </div>
               <div className={detalleTicketCSS.contentItem}>
                 <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                 <Form.Control
@@ -165,7 +175,7 @@ export const DetalleTicket = () => {
                 <div className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
                   <div className={detalleTicketCSS.contentInput}>
-                    <Form.Select value={ticketCurrent.type} disabled={disabled} className={` 
+                    <Form.Select value={ticketCurrent.type} disabled className={` 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type',value)}>
                       {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                     </Form.Select>
@@ -208,6 +218,33 @@ export const DetalleTicket = () => {
             </Row>
           </Col>
         </Row>
+      </div>
+      <div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length==0)?detalleTicketCSS.uninformation:''}`}>
+       {(task&&task.length>0)&&<Table responsive bordered >
+         <thead>
+            <tr>
+              <td>Ticket</td>
+              <td>Ir a Tarea</td>
+            </tr>
+          </thead>
+          <tbody>
+            {task.map( (task:any,index:number) => <tr key={index}>
+              <td>
+              {task.id.task}
+              </td>
+              <td>
+                <FaEye />
+              </td>
+            </tr>)}
+          </tbody>
+        </Table>}
+        {(task&&task.length==0||!task)&&
+          <Card className={detalleTicketCSS.contentCard}>
+            <CardHeader>
+              No hay Tareas Asociadas a ese Ticket
+            </CardHeader>
+          </Card>
+        }
       </div>
     </div>
   )

@@ -5,7 +5,9 @@ import { Link, useParams } from 'react-router-dom';
 import soporteService from '../../Services/soporteService';
 import ticketsCSS from '../../Styles/Tickets.module.css';
 import versionSoporteStyle from '../../Styles/VersionSoporte.module.css';
+import { LoadComponent } from '../LoadComponent';
 import MenuDescription from './MenuDescription';
+import soporteCSS from '../../Styles/Soporte.module.css';
 
 export const Tickets = (props:any) => {
     const {product} = useParams();
@@ -14,6 +16,8 @@ export const Tickets = (props:any) => {
     const [severities, setseverities] = useState([]);
     const [employees, setemployees] = useState([]);
     const [clients, setclients] = useState([]);
+    const [load, setload] = useState(true);
+    const winHeight =  window.innerHeight*.8;
     const headsTable = [
       {
         id:"Cliente",
@@ -57,6 +61,7 @@ export const Tickets = (props:any) => {
         setseverities(allseverities);
         setemployees(allemployees);
         setclients(allclients);
+        setload(false);
       }
       tickets_();
     },[]);
@@ -74,40 +79,44 @@ export const Tickets = (props:any) => {
     }
   return (
     <div>
-      <MenuDescription version={version} product={product} />
-      <Table responsive bordered >
-        <thead>
-          <tr >
-            {headsTable&&headsTable.map((head,index) => <th key={index}>
-              <div className={ticketsCSS.contentFilter}>
-                <p>{head.id}</p>
-                {index!=(headsTable.length-1)&&
-                <p><FaFilter/></p>}
-              </div>
-            </th>)}
-          </tr>
-        </thead>
-        <tbody>
-          {(tickets)&&tickets.map( (ticket,index) => <tr key={index}>
-            <td>{ticket['client']}</td>
-            <td>{ticket['code']}</td>
-            <td>{ticket['status']}</td>
-            <td>{ticket['title']}</td>
-            <td>{ticket['creationDate']}</td>
-            <td>{ticket['lastUpdated']}</td>
-            <td>{getDays(ticket['severity'],ticket['creationDate'])}</td>
-            <td>{ticket['resolution']}</td>
-            <td className={`${isError(ticket['type'])?ticketsCSS.error:isConsulta(ticket['type'])?ticketsCSS.consulta:ticketsCSS.default}`}>{ticket['type']}</td>
-            <td className={`${ticketsCSS.contentIcon} `}>
-              <Link className={versionSoporteStyle.styleNav} 
-                to={`/soporte/ticket/detalle`} 
-                state={{ ticket,version,product,severities }}>
-                <FaEye />
-              </Link>
-            </td>
-          </tr>)}
-        </tbody>
-      </Table>
+      <LoadComponent load={load} winHeight={winHeight} setload soporteCSS={soporteCSS} />
+      {!load&&<div>
+        <MenuDescription version={version} product={product} />
+        <Table responsive bordered >
+          <thead>
+            <tr >
+              {headsTable&&headsTable.map((head,index) => <th key={index}>
+                <div className={ticketsCSS.contentFilter}>
+                  <p>{head.id}</p>
+                  {index!=(headsTable.length-1)&&
+                  <p><FaFilter/></p>}
+                </div>
+              </th>)}
+            </tr>
+          </thead>
+          <tbody>
+            {(tickets)&&tickets.map( (ticket,index) => <tr key={index}>
+              <td>{ticket['client']}</td>
+              <td>{ticket['code']}</td>
+              <td>{ticket['status']}</td>
+              <td>{ticket['title']}</td>
+              <td>{ticket['creationDate']}</td>
+              <td>{ticket['lastUpdated']}</td>
+              <td>{getDays(ticket['severity'],ticket['creationDate'])}</td>
+              <td>{ticket['resolution']}</td>
+              <td className={`${isError(ticket['type'])?ticketsCSS.error:isConsulta(ticket['type'])?ticketsCSS.consulta:ticketsCSS.default}`}>{ticket['type']}</td>
+              <td className={`${ticketsCSS.contentIcon} `}>
+                <Link className={versionSoporteStyle.styleNav} 
+                  to={`/soporte/ticket/detalle`} 
+                  state={{ ticket,version,product,severities }}>
+                  <FaEye />
+                </Link>
+              </td>
+            </tr>)}
+          </tbody>
+        </Table>
+      </div> } 
     </div>
+    
   )
 }
