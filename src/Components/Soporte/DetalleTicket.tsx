@@ -139,7 +139,7 @@ export const DetalleTicket = () => {
                 <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
               </div>
               <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.label}>Dias de vencimiento:</Form.Label>
+                <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
                 <div className={detalleTicketCSS.contentInput}>
                   <Form.Control
                     className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
@@ -168,7 +168,7 @@ export const DetalleTicket = () => {
                     <Form.Select value={ticketCurrent.severity} disabled={disabled} 
                     className={`${(disabled) ? detalleTicketCSS.disableds : ''} 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => {changeValueSeverities(value); changeValue('severity',value)}}>
-                      {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}</option>)}
+                      {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}-{severitie.days} dias</option>)}
                     </Form.Select>
                   </div>
                 </div>
@@ -219,7 +219,7 @@ export const DetalleTicket = () => {
           </Col>
         </Row>
       </div>
-      <div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length==0)?detalleTicketCSS.uninformation:''}`}>
+      {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length==0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<Table responsive bordered >
          <thead>
             <tr>
@@ -245,7 +245,7 @@ export const DetalleTicket = () => {
             </CardHeader>
           </Card>
         }
-      </div>
+      </div>}
     </div>
   )
 }

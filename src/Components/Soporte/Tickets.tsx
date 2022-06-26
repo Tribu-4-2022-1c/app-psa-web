@@ -53,7 +53,7 @@ export const Tickets = (props:any) => {
 
     useEffect(() => {
       const tickets_ = async () =>{
-        const allTickets:any = await soporteService().getAllTickets();
+        const allTickets:any = await soporteService().getTickets(product+'_'+version);
         const allseverities:any = await soporteService().getSeverities();
         const allemployees:any = await soporteService().getEmployees();
         const allclients :any = await soporteService().getAllClients();
@@ -81,7 +81,7 @@ export const Tickets = (props:any) => {
     <div>
       <LoadComponent load={load} winHeight={winHeight} setload soporteCSS={soporteCSS} />
       {!load&&<div>
-        <MenuDescription version={version} product={product} />
+        <MenuDescription version={version} product={product} flagNuevoTicket={true}/>
         <Table responsive bordered >
           <thead>
             <tr >

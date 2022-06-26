@@ -22,9 +22,26 @@ const soporteService = () => {
       }
     }
   ]
-
-  const getAllTickets = (product:string='',version:string='') => {
+  
+  const getAllTickets = (version:string='') => {
     const url = `https://psa-api-soporte.herokuapp.com/tickets`;
+    return fetch(url)
+    .then( async (response) => {
+      //return tickets;
+      if(response){
+        return response.json();
+      }else{
+        return [];
+      }
+    })
+    .catch( (error) => {
+      console.log(error);
+      return [];
+    })
+  }
+
+  const getTickets = (version:string='') => {
+    const url = `https://psa-api-soporte.herokuapp.com/versions/${version}/tickets`;
     return fetch(url)
     .then( async (response) => {
       //return tickets;
@@ -160,7 +177,8 @@ const soporteService = () => {
     getEmployees,
     getSeverities,
     updateTicket,
-    getTicketsTask
+    getTicketsTask,
+    getTickets
   }
 }
 
