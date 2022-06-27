@@ -8,7 +8,7 @@ export const VersionesSoporte = (props:any) => {
     const [filterVersions, setfilterVersions] = useState([]);
     useEffect(() => {
       const element =  () => {
-        let filterVersions = versions.filter( (version:any) => version.product === product.name);
+        let filterVersions = versions.filter( (version:any) => version['product'] === product['name']);
         console.log(filterVersions);
         setfilterVersions(filterVersions);
       }

@@ -2,27 +2,6 @@ import { Ticket } from "../models/Soporte.models";
 
 const soporteService = () => {
 
-  const tickets = [
-    {
-      "id": {
-        "task": "Mapeo de datos",
-        "ticket": "string"
-      }
-    },
-    {
-      "id": {
-        "task": "Corrección de Bugs",
-        "ticket": "string"
-      }
-    },
-    {
-      "id": {
-        "task": "Correccion de datos",
-        "ticket": "string"
-      }
-    }
-  ]
-
   const getAllTickets = (product:string='',version:string='') => {
     const url = `https://psa-api-soporte.herokuapp.com/tickets`;
     return fetch(url)
