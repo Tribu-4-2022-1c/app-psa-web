@@ -41,7 +41,7 @@ export const DetalleTicket = () => {
   const [task,setTask] = useState([]);
   const [flagGenerateTask,setflagGenerateTask] = useState(false);
  
-  const getDiasDeVencimiento = (severity: string, dateCreation: string) => {
+  const getDiasDeVencimiento =  (severity: string, dateCreation: string) => {
     let fecha1 = moment(dateCreation);
     let fecha2 = moment();
     let optionSev = severities.find((x: any) => x.level === severity);
@@ -219,7 +219,7 @@ export const DetalleTicket = () => {
           </Col>
         </Row>
       </div>
-      {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length==0)?detalleTicketCSS.uninformation:''}`}>
+      {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<Table responsive bordered >
          <thead>
             <tr>
@@ -238,7 +238,7 @@ export const DetalleTicket = () => {
             </tr>)}
           </tbody>
         </Table>}
-        {(task&&task.length==0||!task)&&
+        {( ( task && (task.length===0) ) || !task)&&
           <Card className={detalleTicketCSS.contentCard}>
             <CardHeader>
               No hay Tareas Asociadas a ese Ticket
