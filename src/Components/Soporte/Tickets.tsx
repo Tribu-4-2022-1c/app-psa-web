@@ -88,7 +88,7 @@ export const Tickets = (props:any) => {
               {headsTable&&headsTable.map((head,index) => <th key={index}>
                 <div className={ticketsCSS.contentFilter}>
                   <p>{head.id}</p>
-                  {index!=(headsTable.length-1)&&
+                  {index!==(headsTable.length-1)&&
                   <p><FaFilter/></p>}
                 </div>
               </th>)}
