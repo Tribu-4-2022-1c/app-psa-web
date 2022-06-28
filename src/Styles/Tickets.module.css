@@ -61,6 +61,55 @@
     margin: 0;
 }
 
+.buttonError{
+    color: rgb(255, 255, 255);
+    background-color:rgb(255, 0, 0);
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 15px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #ff0000;
+    cursor: pointer;
+    margin-right: 30px;
+}
+
+.buttonError:hover{
+    background: rgb(206, 0, 0);
+    color: #000000;
+}
+
+.buttonError p{
+    margin: 0;
+}
+
+.buttonConfirm{
+    color: rgb(255, 255, 255);
+    background-color:  rgb(47, 202, 0);
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 15px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #41ce00;
+    cursor: pointer;
+}
+
+.buttonConfirm:hover{
+    background: rgb(36, 156, 0);
+    color: #000000;
+}
+
+.buttonConfirm p{
+    margin: 0;
+}
+
 .detail{
     display: flex;
     background: #003066;
