@@ -7,11 +7,12 @@ import HomePage from '../Pages/HomePage';
 import ProyectosPage from '../Pages/ProyectosPage';
 import RecursosPage from '../Pages/RecursosPage';
 import SoportePage from '../Pages/SoportePage';
+import LogInPage from "../Pages/LogInPage";
 
 const Public = () => {
   return (
     <Routes>
-        <Route path='/' element={<ProyectosPage />} />
+        <Route path='/' element={<LogInPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/recursos/calendario' element={ <Calendario /> }/>
