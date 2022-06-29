@@ -1,0 +1,132 @@
+.col8{
+    position: relative;
+    padding: 15px;
+    border-left: 2px solid #003066;
+}
+
+.editIcon{
+    position: absolute;
+    top: 10px;
+    right: 0;
+    font-size: 30px;
+    color: #003066;
+}
+
+.col4{
+    padding: 15px;
+    border-right: 2px solid #003066;
+}
+
+.contentItem{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.label{
+    font-weight: 700;
+    margin-right: 15px;
+    color:#003066;
+}
+
+.icon{
+    font-size: 25px;
+    margin: 0 15px 0 10px;
+}
+
+.update{
+    color: #51BC7A;
+}
+
+.consulta{
+    color: #EBC05E;
+}
+
+.error{
+    color: #EA6960;
+}
+
+.calendar{
+    color: #003066;
+}
+
+.disabled{
+    background: none!important;
+    border: none!important;
+}
+
+.input{
+    width: 150px!important;
+    text-align: end!important;
+}
+
+.contentInput{
+    display: flex;
+    align-items: center;
+}
+
+.addRight{
+    padding-right: 10px!important;
+}
+
+.addRightSelect{
+    padding-right: 30px!important;
+}
+
+.removeCorner{
+    resize: none;
+}
+
+.content_iconState{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.content_state{
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.iconState{
+    font-size: 100px;
+}
+
+.contentRow{
+    padding: 0 30px;
+    margin: 0;
+}
+
+.iconSave{
+    position: absolute;
+    top: 5px;
+    right: 40px;
+}
+
+.iconClose{
+    color: #EA6960;
+}
+
+.contentTaskTickets{
+    border-top: 2px solid #003066;
+    /* padding: 15px; */
+}
+
+.contentCard{
+    height: auto;
+    width: 300px;
+    padding: 20px;
+    background: #003066!important;
+    color: white;
+    font-weight: 600;
+    margin-top: 15px;
+}
+
+.uninformation{
+    justify-content: center;
+    display: flex;
+}

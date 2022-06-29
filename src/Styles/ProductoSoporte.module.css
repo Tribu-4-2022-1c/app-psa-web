@@ -1,0 +1,36 @@
+.card{
+    padding: 0 40px;
+    background: #003066;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+}
+
+.label{
+    font-weight: 600;
+    margin: 10px;
+}
+
+.contentDescription p{
+    margin: 10px;
+}
+
+.contentIcon{
+    font-size: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.isSelected{
+    background: #0083C61A;
+    border: 1px solid #0083C6;
+}
+
+.contentDescription{
+    display: flex;
+    justify-content: space-between;
+    font-weight: 700;
+    width: 40%;
+}

@@ -1,0 +1,12 @@
+.content{
+    padding-top: 20px;
+    border-bottom: 1px solid black;
+}
+
+.contentAudio{
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
