@@ -12,6 +12,10 @@
     color: #003066;
 }
 
+/*.disabled{
+     background-image: none; 
+}*/
+
 .col4{
     padding: 15px;
     border-right: 2px solid #003066;
@@ -53,12 +57,13 @@
 }
 
 .disabled{
-    background: none!important;
+    background-image: none!important;
     border: none!important;
+    background: none; 
 }
 
 .input{
-    width: 150px!important;
+    /* width: 150px!important; */
     text-align: end!important;
 }
 
@@ -129,4 +134,9 @@
 .uninformation{
     justify-content: center;
     display: flex;
+}
+
+.tdTable{
+    font-weight: 700;
+    color: #003066;
 }

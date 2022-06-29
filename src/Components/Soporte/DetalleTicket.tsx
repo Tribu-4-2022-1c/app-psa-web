@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { FaCalendar, FaQuestionCircle, FaEdit, FaGofore, FaEye } from 'react-icons/fa';
-import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
-import { Button, Card, Col, Dropdown, DropdownButton, Form, Row, Table } from 'react-bootstrap';
+import { FaCalendar, FaQuestionCircle, FaEdit, FaEye } from 'react-icons/fa';
+import { MdOutlineError, MdTipsAndUpdates,MdHighlightOff } from "react-icons/md";
+import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
 import { useLocation,useNavigate } from 'react-router-dom'
 import MenuDescription from './MenuDescription';
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
@@ -9,6 +9,7 @@ import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import soporteService from "../../Services/soporteService";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import { ModalComponent } from "../ModalComponent";
 
 
 export const DetalleTicket = () => {
@@ -27,20 +28,24 @@ export const DetalleTicket = () => {
     closureMotive: null,
     resolution:    ''
   }
+  const statusTickets:any = [
+    'En proceso','Cerrado','Cancelado','Nuevo'
+  ]
   const typesTickets = [
     'CONSULTA', 'ERROR', 'MEJORA'
   ]
   const location = useLocation();
   let navigate = useNavigate();
-  const { ticket, version, product, severities }: any = location.state;
+  const { ticket, version, product, severities, employees }: any = location.state;
   const [disabled, setdisabled] = useState(true);
   const [ticketCurrent, setticketCurrent] = useState(initialTicket);
   const [diasRestantes, setdiasRestantes] = useState(0);
   const [headers,setHeaders] = useState([]);
   const [data,setData] = useState([]);
-  const [task,setTask] = useState([]);
+  const [task,setTask] = useState<any[]>([]);
   const [flagGenerateTask,setflagGenerateTask] = useState(false);
- 
+ const [show, setshow] = useState(false);
+
   const getDiasDeVencimiento =  (severity: string, dateCreation: string) => {
     let fecha1 = moment(dateCreation);
     let fecha2 = moment();
@@ -94,10 +99,21 @@ export const DetalleTicket = () => {
 
   const generateTask = () => {
     console.log("ss");
+    setshow(true);
+  }
+
+  const closeModal = () => {
+    setshow(false);
+  }
+
+  const agregarTarea = (newTask:any) => {
+    task.push(newTask);
+    setshow(false);
   }
 
   return (
     <div>
+      <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
       <div>
         <Row className={detalleTicketCSS.contentRow}>
@@ -114,6 +130,15 @@ export const DetalleTicket = () => {
                   onChange = {(value) => changeValue('client',value)}
                 />
               </div>
+              <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                  <div className={detalleTicketCSS.contentInput}>
+                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                      {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
+                    </Form.Select>
+                  </div>
+                </div>
               <div className={detalleTicketCSS.contentItem}>
                 <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
                 <Form.Control
@@ -166,7 +191,7 @@ export const DetalleTicket = () => {
                   <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
                   <div className={detalleTicketCSS.contentInput}>
                     <Form.Select value={ticketCurrent.severity} disabled={disabled} 
-                    className={`${(disabled) ? detalleTicketCSS.disableds : ''} 
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => {changeValueSeverities(value); changeValue('severity',value)}}>
                       {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}-{severitie.days} dias</option>)}
                     </Form.Select>
@@ -175,9 +200,18 @@ export const DetalleTicket = () => {
                 <div className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
                   <div className={detalleTicketCSS.contentInput}>
-                    <Form.Select value={ticketCurrent.type} disabled className={` 
-                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type',value)}>
+                    <Form.Select value={ticketCurrent.type} disabled className={`
+                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect} ${detalleTicketCSS.disabled}`} onChange={(value) => changeValue('type',value)}>
                       {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                    </Form.Select>
+                  </div>
+                </div>
+                <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                  <div className={detalleTicketCSS.contentInput}>
+                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                      {statusTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                     </Form.Select>
                   </div>
                 </div>
@@ -222,15 +256,21 @@ export const DetalleTicket = () => {
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<Table responsive bordered >
          <thead>
-            <tr>
-              <td>Ticket</td>
+            <tr className={detalleTicketCSS.tdTable}>
+              <td>Tarea</td>
+              <td>Encargado</td>
               <td>Ir a Tarea</td>
             </tr>
           </thead>
           <tbody>
             {task.map( (task:any,index:number) => <tr key={index}>
               <td>
-              {task.id.task}
+              {/* {task.id.task} */}
+              {task.title}
+              </td>
+              <td>
+              {/* {task.id.task} */}
+              {task.employeed}
               </td>
               <td>
                 <FaEye />

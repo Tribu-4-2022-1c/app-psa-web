@@ -108,7 +108,7 @@ export const Tickets = (props:any) => {
               <td className={`${ticketsCSS.contentIcon} `}>
                 <Link className={versionSoporteStyle.styleNav} 
                   to={`/soporte/ticket/detalle`} 
-                  state={{ ticket,version,product,severities }}>
+                  state={{ ticket,version,product,severities,employees }}>
                   <FaEye />
                 </Link>
               </td>
