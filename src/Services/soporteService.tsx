@@ -1,5 +1,5 @@
+import React from 'react';
 import { Ticket } from "../models/Soporte.models";
-
 const soporteService = () => {
 
   const getAllTickets = (product:string='',version:string='') => {

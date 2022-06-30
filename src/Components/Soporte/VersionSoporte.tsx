@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { FaFolderOpen, FaPlusCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import versionSoporteStyle from '../../Styles/VersionSoporte.module.css'//'../../Styles/Soporte/VersionSoporte.module.css';

@@ -1,3 +1,4 @@
+import React from 'react';
 import {Routes,Route} from "react-router-dom";
 import { CrearTicket } from '../Components/Soporte/CrearTicket';
 import { DetalleTicket } from '../Components/Soporte/DetalleTicket';
@@ -10,7 +11,7 @@ import SoportePage from '../Pages/SoportePage';
 const Public = () => {
   return (
     <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route path='/' element={<ProyectosPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />
