@@ -7,10 +7,11 @@ import SoportePage from '../Pages/SoportePage';
 const Public = () => {
   return (
     <Routes>
-        <Route path='/' element={<HomePage />} />
+        <Route path='/' element={<ProyectosPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />
+        <Route path='*' element={ <ProyectosPage /> } />
     </Routes>
   )
 }
