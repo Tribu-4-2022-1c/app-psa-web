@@ -110,10 +110,10 @@ export const DetalleTicket = () => {
 
   return (
     <div>
-      <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
-      <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
+      {/* <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
+      <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/> */}
       <div>
-        {/* <Row className={detalleTicketCSS.contentRow}>
+        <Row className={detalleTicketCSS.contentRow}>
           <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
             <Row>
               <div className={detalleTicketCSS.contentItem}>
@@ -248,9 +248,9 @@ export const DetalleTicket = () => {
               </Col>
             </Row>
           </Col>
-        </Row> */}
+        </Row>
       </div>
-      {/* {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
+      {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<Table responsive bordered >
          <thead>
             <tr className={detalleTicketCSS.tdTable}>
@@ -280,7 +280,7 @@ export const DetalleTicket = () => {
             </CardHeader>
           </Card>
         }
-      </div>} */}
+      </div>}
     </div>
   )
 }
