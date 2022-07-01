@@ -3,7 +3,7 @@ import { Audio } from 'react-loader-spinner'
 
 export const LoadComponent = (props: any) => {
 
-    const { winHeight, soporteCSS, load, setload } = props;
+    const { winHeight, soporteCSS, load } = props;
 
     return (
         <div>

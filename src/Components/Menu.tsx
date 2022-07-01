@@ -2,7 +2,7 @@ import React from 'react';
 
 import menuModuleCSS from '../Styles/Menu.module.css';
 import img from '../assets/psa_icon.png';
-import { Link, NavLink, useLocation } from 'react-router-dom';
+import {  NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 const Menu = () => {
     const routePSA = {

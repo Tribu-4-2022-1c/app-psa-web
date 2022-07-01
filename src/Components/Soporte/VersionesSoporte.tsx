@@ -13,7 +13,7 @@ export const VersionesSoporte = (props:any) => {
         setfilterVersions(filterVersions);
       }
       element();
-    }, [product,versions]);
+    }, []);
     
   return (
     <div>

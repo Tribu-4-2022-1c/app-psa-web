@@ -1,4 +1,3 @@
-import React from 'react';
 import { Ticket } from "../models/Soporte.models";
 const soporteService = () => {
 

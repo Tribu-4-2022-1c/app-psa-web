@@ -40,8 +40,6 @@ export const DetalleTicket = () => {
   const [disabled, setdisabled] = useState(true);
   const [ticketCurrent, setticketCurrent] = useState(initialTicket);
   const [diasRestantes, setdiasRestantes] = useState(0);
-  const [headers,setHeaders] = useState([]);
-  const [data,setData] = useState([]);
   const [task,setTask] = useState<any[]>([]);
   const [flagGenerateTask,setflagGenerateTask] = useState(false);
  const [show, setshow] = useState(false);
@@ -95,10 +93,9 @@ export const DetalleTicket = () => {
       validateFlagGenerateTask();
     }
     getData();
-  }, [ticket])
+  }, [])
 
   const generateTask = () => {
-    console.log("ss");
     setshow(true);
   }
 

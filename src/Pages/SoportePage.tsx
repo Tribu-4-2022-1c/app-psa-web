@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react';
 import soporteService from '../Services/soporteService';
 import { VersionesSoporte } from '../Components/Soporte/VersionesSoporte';
 import ProductoSoporte from '../Components/Soporte/ProductoSoporte';
-import { Audio } from 'react-loader-spinner';
 import { LoadComponent } from '../Components/LoadComponent';
 
 const SoportePage = () => {
@@ -18,6 +17,7 @@ const SoportePage = () => {
   const [currentVersion, setcurrentVersion] = useState(initialStateVersion);
   const [versions, setversions] = useState([]);
   const [load, setload] = useState(true);
+  
 
   useEffect(() => {
     const getProducts = async () => {
