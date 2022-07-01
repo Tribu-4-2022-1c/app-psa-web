@@ -5,6 +5,10 @@ import { Ticket } from '../../models/Soporte.models';
 import { ModalComponent } from '../ModalComponent';
 import MenuDescription from './MenuDescription'
 import soporteService from "../../Services/soporteService";
+import detalleTicketCSS from '../../Styles/Detalle.module.css';
+import { FaEye } from 'react-icons/fa';
+import { Card, Table } from 'react-bootstrap';
+import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 export const TicketDetalle = (props: any) => {
     const location = useLocation();
@@ -26,7 +30,7 @@ export const TicketDetalle = (props: any) => {
         lastUpdated: '',
         closureMotive: null,
         resolution: ''
-      }
+    }
     const [ticketCurrent, setticketCurrent] = useState(initialTicket);
     const generateTask = () => {
         setshow(true);
@@ -34,10 +38,10 @@ export const TicketDetalle = (props: any) => {
 
     const validateFlagGenerateTask = useCallback(() => {
         if (ticket.type !== 'CONSULTA') {
-          setflagGenerateTask(true);
+            setflagGenerateTask(true);
         }
-      }, [ticket])
-      
+    }, [ticket])
+
     const closeModal = () => {
         setshow(false);
     }
@@ -52,27 +56,60 @@ export const TicketDetalle = (props: any) => {
         let optionSev = severities.find((x: any) => x.level === severity);
         let diffDate = fecha2.diff(fecha1, 'days');
         setdiasRestantes(optionSev.days - diffDate);
-      }, [severities])
+    }, [severities])
 
-      const getTicketsTask = async () => {
+    const getTicketsTask = async () => {
         let taskArray: any = await soporteService().getTicketsTask();
         setTask(taskArray);
-      }
+    }
 
     useEffect(() => {
         const getData = async () => {
-          setticketCurrent({ ...ticket });
-          getDiasDeVencimiento(ticket.severity, ticket.creationDate);
-          await getTicketsTask();
-          validateFlagGenerateTask();
+            setticketCurrent({ ...ticket });
+            getDiasDeVencimiento(ticket.severity, ticket.creationDate);
+            await getTicketsTask();
+            validateFlagGenerateTask();
         }
         getData();
-      }, [ticket, getDiasDeVencimiento, validateFlagGenerateTask])
+    }, [ticket, getDiasDeVencimiento, validateFlagGenerateTask])
 
     return (
         <div>
             <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
+            {ticket.type !== 'CONSULTA' && <div className={`${detalleTicketCSS.contentTaskTickets} ${(task && task.length === 0) ? detalleTicketCSS.uninformation : ''}`}>
+                {(task && task.length > 0) && <div><Table responsive bordered >
+                    <thead>
+                        <tr className={detalleTicketCSS.tdTable}>
+                            <td>Tarea</td>
+                            <td>Encargado</td>
+                            <td>Ir a Tarea</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {task.map((task: any, index: number) => <tr key={index}>
+                            <td>
+                                {task.title}
+                            </td>
+                            <td>
+                                {task.employeed}
+                            </td>
+                            <td>
+                                <FaEye />
+                            </td>
+                        </tr>)}
+                    </tbody>
+                </Table></div>}
+                <div>
+                    {(task && (task.length === 0)) &&
+                        <Card className={detalleTicketCSS.contentCard}>
+                            <CardHeader>
+                                No hay Tareas Asociadas a ese Ticket
+                            </CardHeader>
+                        </Card>
+                    }
+                </div>
+            </div>}
         </div>
     )
 }
