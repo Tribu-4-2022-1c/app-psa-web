@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+/*import React, { useEffect, useState } from "react";
 import { FaCalendar, FaQuestionCircle, FaEdit, FaEye } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates,MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
@@ -9,10 +9,18 @@ import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import soporteService from "../../Services/soporteService";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import { ModalComponent } from "../ModalComponent";
+import { ModalComponent } from "../ModalComponent";*/
 
+import React from 'react'
 
 export const DetalleTicket = () => {
+  return (
+    <div>DetalleTicket</div>
+  )
+}
+
+
+/*export const DetalleTicket = () => {
 
   const initialTicket:Ticket = {
     code:          0,
@@ -262,11 +270,9 @@ export const DetalleTicket = () => {
           <tbody>
             {task.map( (task:any,index:number) => <tr key={index}>
               <td>
-              {/* {task.id.task} */}
               {task.title}
               </td>
               <td>
-              {/* {task.id.task} */}
               {task.employeed}
               </td>
               <td>
@@ -285,4 +291,4 @@ export const DetalleTicket = () => {
       </div>}
     </div>
   )
-}
+}*/

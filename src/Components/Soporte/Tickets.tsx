@@ -1,4 +1,12 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
+
+export const Tickets = () => {
+  return (
+    <div>Tickets</div>
+  )
+}
+
+/*import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import { FaFilter, FaEye } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
@@ -120,3 +128,4 @@ export const Tickets = (props:any) => {
     
   )
 }
+*/

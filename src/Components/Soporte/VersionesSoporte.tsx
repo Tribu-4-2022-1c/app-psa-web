@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+/*import React, { useEffect, useState } from 'react'
 import { VersionSoporte } from './VersionSoporte';
 
 export const VersionesSoporte = (props:any) => {
@@ -24,5 +24,12 @@ export const VersionesSoporte = (props:any) => {
       </div>}
        
     </div>
+  )
+}*/
+import React from 'react'
+
+export const VersionesSoporte = (props:any) => {
+  return (
+    <div>VersionesSoporte</div>
   )
 }
