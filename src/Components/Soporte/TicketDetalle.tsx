@@ -108,6 +108,12 @@ export const TicketDetalle = (props: any) => {
         <div>
             <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
+            <Container>
+                <Row className={detalleTicketCSS.contentRow}>
+                    <Col className={detalleTicketCSS.col4}></Col>
+                    <Col className={detalleTicketCSS.col8}></Col>
+                </Row>
+            </Container>
             {/* <Container>
             <Row className={detalleTicketCSS.contentRow}>
         <Col className={detalleTicketCSS.col4} md={6}>
