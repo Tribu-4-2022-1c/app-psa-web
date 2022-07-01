@@ -1,4 +1,4 @@
-/*import React, { useCallback, useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaCalendar, FaQuestionCircle, FaEdit, FaEye } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates,MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
@@ -85,7 +85,7 @@ export const DetalleTicket = () => {
     setTask(taskArray);
   }
 
-  useEffect(() => {
+  /*useEffect(() => {
     const getData = async () => {
       setticketCurrent({ ...ticket });
       getDiasDeVencimiento(ticket.severity, ticket.creationDate);
@@ -93,7 +93,7 @@ export const DetalleTicket = () => {
       validateFlagGenerateTask();
     }
     getData();
-  }, [ticket,getDiasDeVencimiento,validateFlagGenerateTask])
+  }, [ticket,getDiasDeVencimiento,validateFlagGenerateTask])*/
 
   const generateTask = () => {
     setshow(true);
@@ -283,12 +283,4 @@ export const DetalleTicket = () => {
       </div>}
     </div>
   )
-}*/
-import React from 'react'
-
-export const DetalleTicket = () => {
-  return (
-    <div>DetalleTicket</div>
-  )
 }
-
