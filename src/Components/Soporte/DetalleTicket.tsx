@@ -215,13 +215,13 @@ export const DetalleTicket = () => {
           </Row>
         </Col>
         <Col className={detalleTicketCSS.col8} md={6}>
-          {/* {!disabled && <>
+          <div>{!disabled && <>
             <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
             <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
             </>
           }
-          {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />} */}
-
+          {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+          </div>
           {/* <div>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
                   <Form.Control
