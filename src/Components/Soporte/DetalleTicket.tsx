@@ -111,10 +111,10 @@ export const DetalleTicket = () => {
   return (
     <div>
       {/* <div>
-        <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
+        
       </div> */}
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
-      
+      <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       {/* <div>
         <Row className={detalleTicketCSS.contentRow}>
           <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
