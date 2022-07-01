@@ -85,7 +85,7 @@ export const DetalleTicket = () => {
     setTask(taskArray);
   }
 
-  /*useEffect(() => {
+  useEffect(() => {
     const getData = async () => {
       setticketCurrent({ ...ticket });
       getDiasDeVencimiento(ticket.severity, ticket.creationDate);
@@ -93,7 +93,7 @@ export const DetalleTicket = () => {
       validateFlagGenerateTask();
     }
     getData();
-  }, [ticket,getDiasDeVencimiento,validateFlagGenerateTask])*/
+  }, [ticket,getDiasDeVencimiento,validateFlagGenerateTask])
 
   const generateTask = () => {
     setshow(true);
@@ -109,7 +109,8 @@ export const DetalleTicket = () => {
   }
 
   return (
-    <div>
+    <div>sdd</div>
+    /*<div>
       <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
       <div>
@@ -281,6 +282,6 @@ export const DetalleTicket = () => {
           </Card>
         }
       </div>}
-    </div>
+    </div>*/
   )
 }
