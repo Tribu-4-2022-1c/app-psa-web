@@ -272,15 +272,16 @@ export const DetalleTicket = () => {
               </td>
             </tr>)}
           </tbody>
-        </Table>}
-        {( ( task && (task.length===0) ) || !task)&&
+        </Table>} */}
+        <div>
+        {( task && (task.length===0) )&&
           <Card className={detalleTicketCSS.contentCard}>
             <CardHeader>
               No hay Tareas Asociadas a ese Ticket
             </CardHeader>
           </Card>
         }
-      </div> */}
+      </div>
     </div>
   )
 }
