@@ -14,15 +14,23 @@ export interface Tarea {
   }
 
   export interface Proyecto {
-    code:          number;
-    name:         string;
-    description:   string;
-    lead:        string;
-    startDate:  string;
-    type:          string;
-    status:        string;
-    product:    string;
-    version:       string;
-    customization:   string;
+    id:          number;
+    nombre:         string;
+    tipo:   string;
+    cliente:        string;
+    alcance:  string;
+    version:          string;
+    descripcion:        string;
+    tareas:    Array<Tarea>;
+    horaEstimada:       string;
+    fecha_inicio:   string;
+    fecha_fin: string;
+    estado: string;
+    lider: Lider;
 
+  }
+
+  export interface Lider{
+    id: number;
+    name: string;
   }

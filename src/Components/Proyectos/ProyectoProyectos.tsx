@@ -1,25 +1,50 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Card, Col, Form, Row, Table } from 'react-bootstrap';
 import { FaCalendar, FaEye } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import { Proyecto } from "../../models/Proyectos.models";
 import CardHeader from 'react-bootstrap/esm/CardHeader';
+import { useParams } from 'react-router-dom';
+import  ProyectoService  from "../../Services/proyectosService";
+
 export const ProyectoProyectos = (props: any) => {
 
-  const initialProject: Proyecto = {
-    code: 0,
-    name: '',
-    description: '',
-    lead: '',
-    startDate: '',
-    type: '',
-    status: '',
-    product: '',
-    version: '',
-    customization: '',
-  
-  }
+  const {id} = useParams();
+  const [tareas, setTareas] = useState<any[]>([])
+  const [proyecto, setProyecto] = useState<Proyecto  | null>(null)
+
+  useEffect(()=>{
+    const tareas_ = async () =>{
+        const getTareas:any = await ProyectoService().getAllTaksFor(id);
+        setTareas(getTareas);
+    }
+    tareas_();
+  },[]);
+  console.log(tareas)
+  useEffect(()=>{
+    const proyecto_ = async () =>{
+        const getProyecto:any = await ProyectoService().getProyectoFor(id);
+        setProyecto(getProyecto);
+    }
+    proyecto_();
+  },[]);
+  console.log(proyecto);
+  //useEffect (() => {
+  //  fetch(LocalUrl + "/"+id, {
+  //    method: "GET",
+  //    headers:{
+  //      Accept:"application/json",
+  //      "content_type": "application/json"
+  //    },
+  //  })
+  //  .then((res) => res.json())
+  //  .catch((error) => console.error("Error",error))
+  //  .then((response) => {
+  //    setProyecto(response)
+  //  })
+  //})
+
   const typesProject = [
     'IMPLEMENTACION', 'DESARROLLO'
   ]
@@ -28,17 +53,23 @@ export const ProyectoProyectos = (props: any) => {
     'PENDIENTE', 'ASIGNADO', 'FINALIZADO'
   ]
 
-  const [projectCurrent, setprojectCurrent] = useState(initialProject);
+  //const [projectCurrent, setprojectCurrent] = useState(proyecto);
   const [disabled, setdisabled] = useState(false);
-  const { proyecto } = props;
 
   const changeValue = (prop: string, value: any) => {
-    setprojectCurrent({ ...projectCurrent, [prop]: value.target.value });
+    //setprojectCurrent({ ...projectCurrent, [prop]: value.target.value });
   }
 
+  const handelSubmit = (props: any) => {
+    
+  }
+  if (!proyecto){
+    return <></>
+  }
+  console.log(tareas)
   return (
     <div>
-      <MenuDescription proyecto={proyecto} title={"Proyecto"} />
+      <MenuDescription proyecto={proyecto.nombre} title={"Proyecto"} />
       <div>
         <Row className={detalleProjectCSS.contentRow}>
           <Col className={detalleProjectCSS.col4} md={6} lg={6} m={6}>
@@ -49,7 +80,7 @@ export const ProyectoProyectos = (props: any) => {
                 as="textarea"
                 id="name"
                 disabled={disabled}
-                value={" "}
+                defaultValue={proyecto.nombre}
                 onChange={(value) => changeValue('nombre', value)} />
 
               <Form.Label className={detalleProjectCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
@@ -59,7 +90,7 @@ export const ProyectoProyectos = (props: any) => {
                 id="description"
                 rows={8}
                 disabled={disabled}
-                value={" "}
+                defaultValue={proyecto.descripcion}
                 onChange={(value) => changeValue('description', value)} />
             </div>
           </Col>
@@ -71,7 +102,7 @@ export const ProyectoProyectos = (props: any) => {
                 type="text"
                 id="lead"
                 disabled={disabled}
-                value={" "}
+                defaultValue={proyecto.cliente}
                 onChange={(value) => changeValue('client', value)}
               />
             </div>
@@ -84,7 +115,7 @@ export const ProyectoProyectos = (props: any) => {
                 type="text"
                 id="startDate"
                 disabled={disabled}
-                value={" "}
+                defaultValue={proyecto.fecha_inicio}
                 onChange={(value) => changeValue('creationDate', value)}
               />
             </div>
@@ -101,7 +132,7 @@ export const ProyectoProyectos = (props: any) => {
               <Form.Label className={detalleProjectCSS.label}>Estado:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
                 <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} onChange={(value) => changeValue('type', value)}>
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} onSubmit={(value) => changeValue('type', value)}>
                   {typesStatus.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                 </Form.Select>
               </div>
@@ -132,26 +163,27 @@ export const ProyectoProyectos = (props: any) => {
       </div>
       <Row className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
         <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
-          <div className={`${detalleProjectCSS.contentTaskprojects} ${(proyecto && proyecto.length === 0) ? detalleProjectCSS.uninformation : ''}`}>
-            {(proyecto && proyecto.length > 0) && <Table responsive bordered >
+          <div className={`${detalleProjectCSS.contentTaskprojects} ${(proyecto) ? detalleProjectCSS.uninformation : ''}`}>
+            {(proyecto) && <Table responsive bordered >
               <thead>
                 <tr>
                   <td>project</td>
-                  <td>Ir a Tarea</td>
+                  <td>Nombre de tarea</td>
                 </tr>
               </thead>
               <tbody>
-                {proyecto.map((project: any, index: number) => <tr key={index}>
+                {tareas&&tareas.map((tarea: any, index: number) => <tr key={index}>
                   <td>
-                    {project.id.project}
+                    {tarea.nombre}
                   </td>
+                  <td>{tarea.fechaCreacion}</td>
                   <td>
                     <FaEye />
                   </td>
                 </tr>)}
               </tbody>
             </Table>}
-            {((proyecto && (proyecto.length === 0)) || !proyecto) &&
+            {((proyecto) || !proyecto) &&
               <Card className={detalleProjectCSS.contentCard}>
                 <CardHeader>
                   No hay Tareas Asociadas a este Proyecto
@@ -164,5 +196,6 @@ export const ProyectoProyectos = (props: any) => {
     </div>
   )
 }
+
 
 

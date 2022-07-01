@@ -13,7 +13,7 @@ const Public = () => {
     <Routes>
         <Route path='/' element={<ProyectosPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
-        <Route path='/proyectos/proyecto' element={ <ProyectoProyectos /> } />
+        <Route path='/proyectos/:id' element={ <ProyectoProyectos /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />
         <Route path='/soporte/:product/:version' element={ <Tickets /> } />

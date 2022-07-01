@@ -1,61 +1,48 @@
+const HerokuUrl = "https://api-psa-proyectos-squad-12.herokuapp.com/proyectos"
+const LocalUrl = "http://localhost:8080/proyectos"
 
-const proyectosService = () => {
+const URL = HerokuUrl
 
-  const getAllTasks = () => {
-    const url = `https://psa-api-proyectos.herokuapp.com/tareas`;
-    return fetch(url)
-    .then( async (response) => {
-      //return tickets;
-      if(response){
-        return response.json();
-      }else{
-        return [];
-      }
-    })
-    .catch( (error) => {
-      console.log(error);
-      return [];
-    })
+const ProyectoService = () =>{
+    const getAllTaksFor =(id: String = "") =>{
+        return fetch(URL + "/" + id +"/tareas?id="+id,
+        {
+            method: "GET",
+            headers:{
+                Accept:"application/json",
+                "content_type": "application/json"
+              },
+        })
+        .then(async (res) => {
+            if (res){
+                return res.json();}
+            else{
+                return [];
+            }
+            })
+        .catch((error) => console.error("Error",error))
+    }
+    const getProyectoFor = (id: String = "") =>{
+      return fetch(URL + "/" + id,
+      {
+          method: "GET",
+          headers:{
+              Accept:"application/json",
+              "content_type": "application/json"
+            },
+      })
+      .then(async (res) => {
+          if (res){
+              return res.json();}
+          else{
+              return [];
+          }
+          })
+      .catch((error) => console.error("Error",error))
   }
-
-  const getAllProjects = () => {
-    const url = "https://psa-api-proyectos.herokuapp.com/proyectos";
-    return fetch(url).then( async (response) => {
-      if(response){
-        return response.json();
-      }else{
-        return [];
-      }
-    })
-   .catch( error => {
-      console.log(error);
-      return [];
-   })
-  }
-  const updateproject = () => {
-  }
-
-  const getprojectsTask = () => {
-    const url = "https://psa-api-soporte.herokuapp.com/tickettasks";
-    return fetch(url).then( async (response) => {
-      if(response){
-        return response.json();
-      }else{
-        return [];
-      }
-    })
-   .catch( error => {
-      console.log(error);
-      return [];
-   })
-  }
-
-  return {
-    getAllProjects,
-    getAllTasks,
-    updateproject,
-    getprojectsTask,
-  }
+    return{
+        getAllTaksFor,
+        getProyectoFor
+    }
 }
-
-export default proyectosService;
+export default ProyectoService
