@@ -1,12 +1,4 @@
-import React from 'react'
-
-export const Tickets = () => {
-  return (
-    <div>Tickets</div>
-  )
-}
-
-/*import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import { FaFilter, FaEye } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
@@ -60,6 +52,7 @@ export const Tickets = (props:any) => {
     ]
 
     useEffect(() => {
+      console.log("dsd")
       const tickets_ = async () =>{
         const allTickets:any = await soporteService().getTickets(product+'_'+version);
         const allseverities:any = await soporteService().getSeverities();
@@ -72,7 +65,7 @@ export const Tickets = (props:any) => {
         setload(false);
       }
       tickets_();
-    },[]);
+    },[product,version]);
 
     const getDays = (severity:string,fecha:string) => {
       return "6";
@@ -128,4 +121,3 @@ export const Tickets = (props:any) => {
     
   )
 }
-*/
