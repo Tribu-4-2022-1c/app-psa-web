@@ -114,9 +114,9 @@ export const DetalleTicket = () => {
       <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <div>
         
-        <Container>
+        {/*<Container>
           <Row className={detalleTicketCSS.contentRow}>
-            {/* <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
+             <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
               <Row>
                 <div className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
@@ -249,9 +249,9 @@ export const DetalleTicket = () => {
                 </div>
                 </Col>
               </Row>
-            </Col> */}
+            </Col>
           </Row>  
-        </Container>
+        </Container> */}
       </div>
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<div><Table responsive bordered >
