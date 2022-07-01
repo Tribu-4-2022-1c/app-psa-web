@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { FaCalendar, FaQuestionCircle, FaEdit, FaEye } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates,MdHighlightOff } from "react-icons/md";
-import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import { useLocation,useNavigate } from 'react-router-dom'
 import MenuDescription from './MenuDescription';
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
@@ -112,7 +112,7 @@ export const DetalleTicket = () => {
     <div>
       {/* <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>*/}
-      <div>
+      <div><Container>
         <Row className={detalleTicketCSS.contentRow}>
           <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
             <Row>
@@ -248,7 +248,7 @@ export const DetalleTicket = () => {
               </Col>
             </Row>
           </Col>
-        </Row>
+        </Row></Container>
       </div>
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<div><Table responsive bordered >
