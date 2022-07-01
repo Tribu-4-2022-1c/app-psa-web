@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, FloatingLabel, Form, Modal, ModalHeader } from 'react-bootstrap'
+import { Button,Modal} from 'react-bootstrap'
 import { IoCloseCircleSharp } from "react-icons/io5";
 import modalCSS from '../Styles/Modal.module.css';
 
@@ -21,7 +21,20 @@ export const ModalComponent = (props: any) => {
 
     return (
         <div>
-            ss
+            <Modal show={show} onHide={closeModal} centered>
+                <Modal.Header closeButton>
+                    <Modal.Title>Modal heading</Modal.Title>
+                </Modal.Header>
+                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Footer>
+                <Button variant="secondary" onClick={closeModal}>
+                    Close
+                </Button>
+                <Button variant="primary" onClick={agregarTarea}>
+                    Save Changes
+                </Button>
+                </Modal.Footer>
+            </Modal>
         </div>
             // <Modal
             //     show={show}
