@@ -1,4 +1,4 @@
-/*import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { FaCalendar, FaQuestionCircle, FaEdit, FaEye } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates,MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
@@ -9,18 +9,10 @@ import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import soporteService from "../../Services/soporteService";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import { ModalComponent } from "../ModalComponent";*/
+import { ModalComponent } from "../ModalComponent";
 
-import React from 'react'
 
 export const DetalleTicket = () => {
-  return (
-    <div>DetalleTicket</div>
-  )
-}
-
-
-/*export const DetalleTicket = () => {
 
   const initialTicket:Ticket = {
     code:          0,
@@ -52,13 +44,13 @@ export const DetalleTicket = () => {
   const [flagGenerateTask,setflagGenerateTask] = useState(false);
  const [show, setshow] = useState(false);
 
-  const getDiasDeVencimiento =  (severity: string, dateCreation: string) => {
+  const getDiasDeVencimiento =  useCallback((severity: string, dateCreation: string) => {
     let fecha1 = moment(dateCreation);
     let fecha2 = moment();
     let optionSev = severities.find((x: any) => x.level === severity);
     let diffDate = fecha2.diff(fecha1, 'days');
     setdiasRestantes(optionSev.days - diffDate);
-  }
+  },[severities])
 
   const changeStateEdit = (state:boolean) => {
     if(state){
@@ -82,11 +74,11 @@ export const DetalleTicket = () => {
     console.log(response)
   }
 
-  const validateFlagGenerateTask = () => {
+  const validateFlagGenerateTask = useCallback(() => {
     if(ticket.type!=='CONSULTA'){
       setflagGenerateTask(true);
     }
-  }
+  },[ticket])
 
   const getTicketsTask = async () => {
     let taskArray:any = await soporteService().getTicketsTask();
@@ -101,7 +93,7 @@ export const DetalleTicket = () => {
       validateFlagGenerateTask();
     }
     getData();
-  }, [])
+  }, [ticket,getDiasDeVencimiento,validateFlagGenerateTask])
 
   const generateTask = () => {
     setshow(true);
@@ -291,4 +283,4 @@ export const DetalleTicket = () => {
       </div>}
     </div>
   )
-}*/
+}

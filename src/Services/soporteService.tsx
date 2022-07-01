@@ -52,7 +52,7 @@ const soporteService = () => {
   }
 
   const getEmployees = () => {
-    const url = "https://psa-api-soporte.herokuapp.com/soporte/recursos";
+    const url = "https://psa-api-soporte.herokuapp.com/employees";
     return fetch(url).then( async (response) => {
       if(response){
         return response.json();
@@ -67,7 +67,7 @@ const soporteService = () => {
   }
 
   const getAllClients = () => {
-    const url = 'https://psa-api-soporte.herokuapp.com/soporte/clientes';
+    const url = 'https://psa-api-soporte.herokuapp.com/clients';
     return fetch(url).then( async (response) => {
       if(response){
         return response.json();
