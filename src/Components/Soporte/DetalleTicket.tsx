@@ -250,7 +250,7 @@ export const DetalleTicket = () => {
           </Col>
         </Row> */}
       </div>
-      {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
+      {/* {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<Table responsive bordered >
          <thead>
             <tr className={detalleTicketCSS.tdTable}>
@@ -280,7 +280,7 @@ export const DetalleTicket = () => {
             </CardHeader>
           </Card>
         }
-      </div>}
+      </div>} */}
     </div>
   )
 }
