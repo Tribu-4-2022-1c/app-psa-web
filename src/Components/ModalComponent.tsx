@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button,Modal} from 'react-bootstrap'
+import { Button,FloatingLabel,Form,Modal} from 'react-bootstrap'
 import { IoCloseCircleSharp } from "react-icons/io5";
 import modalCSS from '../Styles/Modal.module.css';
 
@@ -23,15 +23,34 @@ export const ModalComponent = (props: any) => {
         <div>
             <Modal show={show} onHide={closeModal} centered>
                 <Modal.Header closeButton>
-                    <Modal.Title>Modal heading</Modal.Title>
+                    <Modal.Title className={modalCSS.titleTarea}>Nueva Tarea</Modal.Title>
                 </Modal.Header>
-                    <Modal.Body>Woohoo, you're reading this text in a modal!</Modal.Body>
+                <Modal.Body>
+                    <FloatingLabel controlId="floatingSelectGrid" label="Sele" className={modalCSS.labelSelect}>
+                         <Form.Select placeholder="Seleccionar Encargado" onChange={(value) => changeState('employeed',value)}>
+                             {employees && employees.length > 0 && employees.map((x: any, index: number) =>
+                                 <option key={x.legajo}>{x.nombre + ' ' + x.apellido}</option>
+                             )}
+                         </Form.Select>
+                     </FloatingLabel>
+
+                     <FloatingLabel controlId="floatingTextarea2" label="Titulo" className={modalCSS.labelSelect}>
+                         <Form.Control
+                             as="textarea"
+                             placeholder="Titulo"
+                             rows={3}
+                             style={{ height: '100px' }}
+                             onChange={(value) => changeState('title',value)}
+                         />
+                     </FloatingLabel>    
+                </Modal.Body>
+                
                 <Modal.Footer>
                 <Button variant="secondary" onClick={closeModal}>
                     Close
                 </Button>
                 <Button variant="primary" onClick={agregarTarea}>
-                    Save Changes
+                    Agregar
                 </Button>
                 </Modal.Footer>
             </Modal>
