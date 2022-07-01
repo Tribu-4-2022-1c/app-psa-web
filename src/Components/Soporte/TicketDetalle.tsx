@@ -1,13 +1,14 @@
 import moment from 'moment';
 import React, { useCallback, useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { Ticket } from '../../models/Soporte.models';
 import { ModalComponent } from '../ModalComponent';
 import MenuDescription from './MenuDescription'
 import soporteService from "../../Services/soporteService";
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
-import { FaEye } from 'react-icons/fa';
-import { Card, Col, Container, Row, Table } from 'react-bootstrap';
+import { FaCalendar, FaEdit, FaEye, FaQuestionCircle } from 'react-icons/fa';
+import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
+import { Button, Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 export const TicketDetalle = (props: any) => {
@@ -16,7 +17,9 @@ export const TicketDetalle = (props: any) => {
     const [flagGenerateTask, setflagGenerateTask] = useState(false);
     const [show, setshow] = useState(false);
     const [task, setTask] = useState<any[]>([]);
+    const [disabled, setdisabled] = useState(true);
     const [diasRestantes, setdiasRestantes] = useState(0);
+    let navigate = useNavigate();
     const initialTicket: Ticket = {
         code: 0,
         title: '',
@@ -31,10 +34,24 @@ export const TicketDetalle = (props: any) => {
         closureMotive: null,
         resolution: ''
     }
+    const statusTickets: any = [
+        'En proceso', 'Cerrado', 'Cancelado', 'Nuevo'
+      ]
+      const typesTickets = [
+        'CONSULTA', 'ERROR', 'MEJORA'
+      ]
     const [ticketCurrent, setticketCurrent] = useState(initialTicket);
     const generateTask = () => {
         setshow(true);
     }
+
+    const changeStateEdit = (state: boolean) => {
+        if (state) {
+          setticketCurrent({ ...ticket });
+          getDiasDeVencimiento(ticket.severity, ticket.creationDate);
+        };
+        setdisabled(state);
+      }
 
     const validateFlagGenerateTask = useCallback(() => {
         if (ticket.type !== 'CONSULTA') {
@@ -63,6 +80,20 @@ export const TicketDetalle = (props: any) => {
         setTask(taskArray);
     }
 
+    const updateData = async () => {
+        const response = await soporteService().updateTicket(ticketCurrent);
+        navigate(`/soporte/${product}/${version}`);
+        console.log(response)
+      }
+
+    const changeValue = (prop: string, value: any) => {
+        setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
+      }
+
+      const changeValueSeverities = (value: any) => {
+        getDiasDeVencimiento(value.target.value, ticket.dateCreation);
+      }
+
     useEffect(() => {
         const getData = async () => {
             setticketCurrent({ ...ticket });
@@ -78,10 +109,142 @@ export const TicketDetalle = (props: any) => {
             <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
             <Container>
-                <Row>
-                    <Col>1 of 1</Col>
-                    <Col>1 of 1</Col>
-                </Row>
+            <Row className={detalleTicketCSS.contentRow}>
+        <Col className={detalleTicketCSS.col4} md={6}>
+           <Row>
+            <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                    type="text"
+                    id="client"
+                    disabled={disabled}
+                    value={ticketCurrent.client}
+                    onChange = {(value) => changeValue('client',value)}
+                  />
+                </div>
+                <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                        {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                    type="text"
+                    id="creationDate"
+                    disabled
+                    value={ticketCurrent.creationDate}
+                    onChange={(value) => changeValue('creationDate',value)}
+                  />
+                  <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                </div>
+                <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                    type="text"
+                    id="resolution"
+                    disabled={disabled}
+                    value={ticketCurrent.resolution}
+                    onChange={(value)=>changeValue('resolution',value)}
+                  />
+                  <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                </div>
+                <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
+                  <div className={detalleTicketCSS.contentInput}>
+                    <Form.Control
+                      className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
+                      type="text"
+                      id="diasRestantes"
+                      disabled
+                      value={diasRestantes}
+                    />
+                  </div>
+                </div> 
+          </Row>
+          <Row>
+           <Col className={`${detalleTicketCSS.content_iconState}`}>
+                  {ticketCurrent.type === 'ERROR' ? <MdOutlineError className={`${detalleTicketCSS.icon} 
+                  ${detalleTicketCSS.error} ${detalleTicketCSS.iconState}`} /> :
+                    ticketCurrent.type === 'CONSULTA' ?
+                      <FaQuestionCircle className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.consulta} 
+                      ${detalleTicketCSS.iconState}`} /> :
+                      <MdTipsAndUpdates className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.update} 
+                      ${detalleTicketCSS.iconState}`} />}
+                </Col>
+                <Col className={`${detalleTicketCSS.content_state}`}>
+                  <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.severity} disabled={disabled} 
+                      className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => {changeValueSeverities(value); changeValue('severity',value)}}>
+                        {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}-{severitie.days} dias</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                  <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.type} disabled className={`
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect} ${detalleTicketCSS.disabled}`} onChange={(value) => changeValue('type',value)}>
+                        {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                  <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                        {statusTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                </Col> 
+          </Row>
+        </Col>
+        <Col className={detalleTicketCSS.col8} md={6}>
+          <Row>{!disabled && <>
+            <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
+            <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
+            </>
+          }
+          {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+          </Row>
+          <div>
+                  <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
+                    as="textarea"
+                    rows={2}
+                    id="title"
+                    disabled={disabled}
+                    value={ticketCurrent.title}
+                    onChange={(value) => changeValue('title',value)}
+                  />
+                </div>
+                <div>
+                  <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
+                    as="textarea"
+                    id="description"
+                    rows={5}
+                    disabled={disabled}
+                    value={ticketCurrent.description}
+                    onChange={(value) => changeValue('description',value)}
+                  />
+                </div>
+        </Col>
+      </Row> 
             </Container>
             {ticket.type !== 'CONSULTA' && <div className={`${detalleTicketCSS.contentTaskTickets} ${(task && task.length === 0) ? detalleTicketCSS.uninformation : ''}`}>
                 {(task && task.length > 0) && <div><Table responsive bordered >
