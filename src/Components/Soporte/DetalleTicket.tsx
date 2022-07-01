@@ -215,7 +215,7 @@ export const DetalleTicket = () => {
               </Row>
             </Col>
             <Col className={detalleTicketCSS.col8} md={6}>
-              {/* {!disabled&&<Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+              {!disabled&&<Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
               {!disabled&&<MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
               {disabled&&<FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
               <Row>
@@ -245,7 +245,7 @@ export const DetalleTicket = () => {
                   />
                 </div>
                 </Col>
-              </Row> */}
+              </Row>
             </Col>
           </Row> 
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
