@@ -7,7 +7,7 @@ import MenuDescription from './MenuDescription'
 import soporteService from "../../Services/soporteService";
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import { FaEye } from 'react-icons/fa';
-import { Card, Table } from 'react-bootstrap';
+import { Card, Col, Container, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 export const TicketDetalle = (props: any) => {
@@ -77,7 +77,12 @@ export const TicketDetalle = (props: any) => {
         <div>
             <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
-            
+            <Container>
+                <Row>
+                    <Col>1 of 1</Col>
+                    <Col>1 of 1</Col>
+                </Row>
+            </Container>
             {ticket.type !== 'CONSULTA' && <div className={`${detalleTicketCSS.contentTaskTickets} ${(task && task.length === 0) ? detalleTicketCSS.uninformation : ''}`}>
                 {(task && task.length > 0) && <div><Table responsive bordered >
                     <thead>
