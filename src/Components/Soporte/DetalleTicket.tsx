@@ -110,9 +110,9 @@ export const DetalleTicket = () => {
 
   return (
     <div>
-      <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
-      <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
-      {/* <div>
+      {/* <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
+      <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>*/}
+      <div>
         <Row className={detalleTicketCSS.contentRow}>
           <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
             <Row>
@@ -249,7 +249,7 @@ export const DetalleTicket = () => {
             </Row>
           </Col>
         </Row>
-      </div> */}
+      </div>
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<div><Table responsive bordered >
          <thead>
