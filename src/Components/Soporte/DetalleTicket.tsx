@@ -114,8 +114,8 @@ export const DetalleTicket = () => {
       {/* <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>   */}
           <Row className={detalleTicketCSS.contentRow}>
              <Col className={detalleTicketCSS.col4} md={6}>
-              {/*<Row>
-                <div className={detalleTicketCSS.contentItem}>
+              <Row>
+                {/* <div className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                   <Form.Control
                     className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
@@ -170,10 +170,10 @@ export const DetalleTicket = () => {
                       value={diasRestantes}
                     />
                   </div>
-                </div>
+                </div> */}
               </Row>
               <Row>
-                <Col className={`${detalleTicketCSS.content_iconState}`}>
+                {/* <Col className={`${detalleTicketCSS.content_iconState}`}>
                   {ticketCurrent.type === 'ERROR' ? <MdOutlineError className={`${detalleTicketCSS.icon} 
                   ${detalleTicketCSS.error} ${detalleTicketCSS.iconState}`} /> :
                     ticketCurrent.type === 'CONSULTA' ?
@@ -211,8 +211,8 @@ export const DetalleTicket = () => {
                       </Form.Select>
                     </div>
                   </div>
-                </Col>
-              </Row>*/}
+                </Col> */}
+              </Row>
             </Col>
             <Col className={detalleTicketCSS.col8} md={6}>
               {/* {!disabled&&<Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
