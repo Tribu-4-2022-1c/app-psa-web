@@ -110,8 +110,34 @@ export const TicketDetalle = (props: any) => {
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
             <Container>
                 <Row className={detalleTicketCSS.contentRow}>
-                    <Col className={detalleTicketCSS.col4}>dd</Col>
-                    <Col className={detalleTicketCSS.col8}>dd</Col>
+                    <Col className={detalleTicketCSS.col4}>
+                        <Form.Group>
+                            <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+                            <Form.Control
+                                className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                type="text"
+                                id="client"
+                                disabled={disabled}
+                                value={ticketCurrent.client}
+                                onChange = {(value) => changeValue('client',value)}
+                            />
+                        </Form.Group>
+                        <Form.Group>
+                        <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                            <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                            <div className={detalleTicketCSS.contentInput}>
+                                <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                                ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                                    {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
+                                </Form.Select>
+                            </div>
+                        </Form.Group>
+                    </Col>
+                    <Col className={detalleTicketCSS.col8}>
+                        <Form.Group>
+
+                        </Form.Group>
+                    </Col>
                 </Row>
             </Container>
             {/* <Container>
