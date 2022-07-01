@@ -31,10 +31,10 @@ export const ProyectosProyectos = (props: any) => {
             id: "Version",
         },
         {
-            id: "Customizacion",
+            id: "Horas Estimadas",
         },
         {
-            id: "Codigo",
+            id: "Mas detalles",
         }
 
     ]
@@ -56,14 +56,13 @@ export const ProyectosProyectos = (props: any) => {
                 <tbody>
                 {(proyecto)&&proyecto.map( (ticket: { [x: string]: string; },index: Key | null | undefined) => <tr key={index}>
                     <td>{ticket['nombre']}</td>
+                    <td>{ticket['descripcion']}</td>
+                    <td>{ticket['fecha_inicio']}</td>
+                    <td>{ticket['estado']}</td>
                     <td>{ticket['tipo']}</td>
-                    <td>{ticket['cliente']}</td>
-                    <td>{ticket['alcance']}</td>
+                    <td>{ticket['producto']}</td>
                     <td>{ticket['version']}</td>
                     <td>{ticket['horaEstimada']}</td>
-                    <td>{ticket['fecha_inicio']}</td>
-                    <td>{ticket["fecha_fin"]}</td>
-                    <td>{ticket["estado"]}</td>
                         <td><Link className={projectsCSS.styleNav} to={'/proyectos/'+ ticket["id"]} state={{ticket}}><FaFolder /></Link></td>
                         <td><Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Are you sure to delete this record?')) { }; }}><FaTrash /></Link></td>
 

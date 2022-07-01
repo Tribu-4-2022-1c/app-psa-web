@@ -1,36 +1,42 @@
 export interface Tarea {
-    code:          number;
-    title:         string;
-    description:   string;
-    type:          string;
-    client:        string;
-    version:       string;
-    severity:      string;
-    status:        string;
-    creationDate:  string;
-    lastUpdated:   string;
-    closureMotive: null;
-    resolution:    string;
+    id: string,
+    horasEstimadas: string,
+    nombre: string,
+    fechaCreacion: string,
+    recursoAsignado: Lider;
+    estado: string,
+    prioridad: string,
+    objetivo: string,
+    recursosAsignados: Array<Lider>,
+    proyectoID: string
   }
 
   export interface Proyecto {
-    id:          number;
-    nombre:         string;
-    tipo:   string;
-    cliente:        string;
-    alcance:  string;
-    version:          string;
-    descripcion:        string;
-    tareas:    Array<Tarea>;
-    horaEstimada:       string;
-    fecha_inicio:   string;
-    fecha_fin: string;
-    estado: string;
-    lider: Lider;
+    id:          string;
+    nombre:      string;
+    tipo:        string;
+    cliente:     string;
+    alcance:     string;
+    version:     string;
+    descripcion: string;
+    tareas:      Array<Tarea>;
+    horaEstimada:number;
+    fecha_inicio:string;
+    fecha_fin:   string;
+    estado:      string;
+    lider:       Lider;
 
   }
 
   export interface Lider{
     id: number;
     name: string;
+  }
+
+  export interface Patch{
+    estado: string,
+    nombre: string,
+    version: string,
+    descripcion: string,
+    tipo: string
   }
