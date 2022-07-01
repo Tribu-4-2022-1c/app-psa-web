@@ -20,7 +20,6 @@ export const ModalComponent = (props: any) => {
     }
 
     return (
-        <div>
             <Modal
                 show={show}
                 aria-labelledby="contained-modal-title-vcenter"
@@ -57,6 +56,5 @@ export const ModalComponent = (props: any) => {
                     </Button>
                 </Modal.Footer>
             </Modal>
-        </div>
     )
 }

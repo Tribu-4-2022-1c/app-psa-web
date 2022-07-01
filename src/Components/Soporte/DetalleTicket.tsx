@@ -111,7 +111,7 @@ export const DetalleTicket = () => {
   return (
     <div>
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
-      {/* <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/> */}
+      <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <div>
         
         {/*<Container>
