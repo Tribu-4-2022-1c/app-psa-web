@@ -108,7 +108,7 @@ export const TicketDetalle = (props: any) => {
         <div>
             <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
-            <Container>
+            {/* <Container>
             <Row className={detalleTicketCSS.contentRow}>
         <Col className={detalleTicketCSS.col4} md={6}>
            <Row>
@@ -245,7 +245,7 @@ export const TicketDetalle = (props: any) => {
                 </div>
         </Col>
       </Row> 
-            </Container>
+            </Container> */}
             {ticket.type !== 'CONSULTA' && <div className={`${detalleTicketCSS.contentTaskTickets} ${(task && task.length === 0) ? detalleTicketCSS.uninformation : ''}`}>
                 {(task && task.length > 0) && <div><Table responsive bordered >
                     <thead>
