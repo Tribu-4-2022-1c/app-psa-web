@@ -219,7 +219,7 @@ export const DetalleTicket = () => {
               {!disabled&&<MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
               {disabled&&<FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
               
-                <div>
+                {/* <div>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
                   <Form.Control
                     className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
@@ -242,7 +242,7 @@ export const DetalleTicket = () => {
                     value={ticketCurrent.description}
                     onChange={(value) => changeValue('description',value)}
                   />
-                </div>
+                </div> */}
             </Col>
           </Row> 
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
