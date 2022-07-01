@@ -1,4 +1,12 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React from 'react'
+
+export const DetalleTicket = () => {
+  return (
+    <div>DetalleTicket</div>
+  )
+}
+
+{/* import React, { useCallback, useEffect, useState } from "react";
 import { FaCalendar, FaQuestionCircle, FaEdit, FaEye } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
@@ -111,11 +119,11 @@ export const DetalleTicket = () => {
   return (
     <>
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
-      {<ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>}
+      <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <Row className={detalleTicketCSS.contentRow}>
         <Col className={detalleTicketCSS.col4} md={6}>
-          <Row>
-            {/* <div className={detalleTicketCSS.contentItem}>
+           <Row>
+            <div className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                   <Form.Control
                     className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
@@ -170,10 +178,10 @@ export const DetalleTicket = () => {
                       value={diasRestantes}
                     />
                   </div>
-                </div> */}
+                </div> 
           </Row>
           <Row>
-            {/* <Col className={`${detalleTicketCSS.content_iconState}`}>
+           <Col className={`${detalleTicketCSS.content_iconState}`}>
                   {ticketCurrent.type === 'ERROR' ? <MdOutlineError className={`${detalleTicketCSS.icon} 
                   ${detalleTicketCSS.error} ${detalleTicketCSS.iconState}`} /> :
                     ticketCurrent.type === 'CONSULTA' ?
@@ -211,7 +219,7 @@ export const DetalleTicket = () => {
                       </Form.Select>
                     </div>
                   </div>
-                </Col> */}
+                </Col> 
           </Row>
         </Col>
         <Col className={detalleTicketCSS.col8} md={6}>
@@ -222,7 +230,7 @@ export const DetalleTicket = () => {
           }
           {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
           </Row>
-          {/* <div>
+          <div>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
                   <Form.Control
                     className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
@@ -245,9 +253,9 @@ export const DetalleTicket = () => {
                     value={ticketCurrent.description}
                     onChange={(value) => changeValue('description',value)}
                   />
-                </div> */}
+                </div>
         </Col>
-      </Row>
+      </Row> 
       {ticket.type !== 'CONSULTA' && <div className={`${detalleTicketCSS.contentTaskTickets} ${(task && task.length === 0) ? detalleTicketCSS.uninformation : ''}`}>
         {(task && task.length > 0) && <div><Table responsive bordered >
           <thead>
@@ -283,4 +291,4 @@ export const DetalleTicket = () => {
       </div>}
     </>
   )
-}
+}*/}

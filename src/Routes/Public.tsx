@@ -1,7 +1,7 @@
 import React from 'react';
 import {Routes,Route} from "react-router-dom";
 import { CrearTicket } from '../Components/Soporte/CrearTicket';
-import { DetalleTicket } from '../Components/Soporte/DetalleTicket';
+import { TicketDetalle } from '../Components/Soporte/TicketDetalle';
 import { Tickets } from '../Components/Soporte/Tickets';
 import HomePage from '../Pages/HomePage';
 import ProyectosPage from '../Pages/ProyectosPage';
@@ -17,7 +17,7 @@ const Public = () => {
         <Route path='/soporte' element={ <SoportePage /> } />
         <Route path='/soporte/:product/:version' element={ <Tickets /> } />
         <Route path='/soporte/:product/:version/crear' element={ <CrearTicket /> } />
-        <Route path='/soporte/ticket/detalle' element={ <DetalleTicket /> } />
+        <Route path='/soporte/ticket/detalle' element={ <TicketDetalle /> } />
         <Route path='*' element={ <HomePage /> } />
     </Routes>
   )
