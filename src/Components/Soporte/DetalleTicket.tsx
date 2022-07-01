@@ -249,7 +249,7 @@ export const DetalleTicket = () => {
             </Row>
           </Col>
         </Row>
-      </div>
+      </div> */}
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<Table responsive bordered >
          <thead>
@@ -272,7 +272,7 @@ export const DetalleTicket = () => {
               </td>
             </tr>)}
           </tbody>
-        </Table>} */}
+        </Table>}
         <div>
         {( task && (task.length===0) )&&
           <Card className={detalleTicketCSS.contentCard}>
@@ -281,7 +281,8 @@ export const DetalleTicket = () => {
             </CardHeader>
           </Card>
         }
-      </div>
+        </div>
+      </div>}
     </div>
   )
 }
