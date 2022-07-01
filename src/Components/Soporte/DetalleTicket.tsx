@@ -113,142 +113,145 @@ export const DetalleTicket = () => {
       <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask}/>
       <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}/>
       <div>
-        <Row className={detalleTicketCSS.contentRow}>
-          {/* <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
-            <Row>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
-                <Form.Control
-                  className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                  type="text"
-                  id="client"
-                  disabled={disabled}
-                  value={ticketCurrent.client}
-                  onChange = {(value) => changeValue('client',value)}
-                />
-              </div>
-              <div className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                  <div className={detalleTicketCSS.contentInput}>
-                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
-                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
-                      {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
-                    </Form.Select>
-                  </div>
-                </div>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
-                <Form.Control
-                  className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                  type="text"
-                  id="creationDate"
-                  disabled
-                  value={ticketCurrent.creationDate}
-                  onChange={(value) => changeValue('creationDate',value)}
-                />
-                <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-              </div>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-                <Form.Control
-                  className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                  type="text"
-                  id="resolution"
-                  disabled={disabled}
-                  value={ticketCurrent.resolution}
-                  onChange={(value)=>changeValue('resolution',value)}
-                />
-                <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-              </div>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
-                <div className={detalleTicketCSS.contentInput}>
+        
+        <Container>
+          <Row className={detalleTicketCSS.contentRow}>
+            {/* <Col className={detalleTicketCSS.col4} md={6} lg={6} m={6}>
+              <Row>
+                <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                   <Form.Control
-                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
                     type="text"
-                    id="diasRestantes"
-                    disabled
-                    value={diasRestantes}
+                    id="client"
+                    disabled={disabled}
+                    value={ticketCurrent.client}
+                    onChange = {(value) => changeValue('client',value)}
                   />
                 </div>
-              </div>
-            </Row>
-            <Row>
-              <Col className={`${detalleTicketCSS.content_iconState}`}>
-                {ticketCurrent.type === 'ERROR' ? <MdOutlineError className={`${detalleTicketCSS.icon} 
-                ${detalleTicketCSS.error} ${detalleTicketCSS.iconState}`} /> :
-                  ticketCurrent.type === 'CONSULTA' ?
-                    <FaQuestionCircle className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.consulta} 
-                    ${detalleTicketCSS.iconState}`} /> :
-                    <MdTipsAndUpdates className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.update} 
-                    ${detalleTicketCSS.iconState}`} />}
-              </Col>
-              <Col className={`${detalleTicketCSS.content_state}`}>
                 <div className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
-                  <div className={detalleTicketCSS.contentInput}>
-                    <Form.Select value={ticketCurrent.severity} disabled={disabled} 
-                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
-                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => {changeValueSeverities(value); changeValue('severity',value)}}>
-                      {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}-{severitie.days} dias</option>)}
-                    </Form.Select>
+                    <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                        {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
+                      </Form.Select>
+                    </div>
                   </div>
+                <div className={detalleTicketCSS.contentItem}>
+                  <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                    type="text"
+                    id="creationDate"
+                    disabled
+                    value={ticketCurrent.creationDate}
+                    onChange={(value) => changeValue('creationDate',value)}
+                  />
+                  <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
                 </div>
                 <div className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
-                  <div className={detalleTicketCSS.contentInput}>
-                    <Form.Select value={ticketCurrent.type} disabled className={`
-                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect} ${detalleTicketCSS.disabled}`} onChange={(value) => changeValue('type',value)}>
-                      {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
-                    </Form.Select>
-                  </div>
+                  <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                    type="text"
+                    id="resolution"
+                    disabled={disabled}
+                    value={ticketCurrent.resolution}
+                    onChange={(value)=>changeValue('resolution',value)}
+                  />
+                  <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
                 </div>
                 <div className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                  <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
                   <div className={detalleTicketCSS.contentInput}>
-                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
-                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
-                      {statusTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
-                    </Form.Select>
+                    <Form.Control
+                      className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
+                      type="text"
+                      id="diasRestantes"
+                      disabled
+                      value={diasRestantes}
+                    />
                   </div>
                 </div>
-              </Col>
-            </Row>
-          </Col> */}
-          <Col className={detalleTicketCSS.col8} md={6} lg={6} m={6}>
-            {!disabled&&<Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
-            {!disabled&&<MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
-            {disabled&&<FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
-            {/* <Row>
-              <Col>
-              <div>
-                <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
-                <Form.Control
-                  className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
-                  as="textarea"
-                  rows={2}
-                  id="title"
-                  disabled={disabled}
-                  value={ticketCurrent.title}
-                  onChange={(value) => changeValue('title',value)}
-                />
-              </div>
-              <div>
-                <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
-                <Form.Control
-                  className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
-                  as="textarea"
-                  id="description"
-                  rows={5}
-                  disabled={disabled}
-                  value={ticketCurrent.description}
-                  onChange={(value) => changeValue('description',value)}
-                />
-              </div>
-              </Col>
-            </Row> */}
-          </Col>
-        </Row>
+              </Row>
+              <Row>
+                <Col className={`${detalleTicketCSS.content_iconState}`}>
+                  {ticketCurrent.type === 'ERROR' ? <MdOutlineError className={`${detalleTicketCSS.icon} 
+                  ${detalleTicketCSS.error} ${detalleTicketCSS.iconState}`} /> :
+                    ticketCurrent.type === 'CONSULTA' ?
+                      <FaQuestionCircle className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.consulta} 
+                      ${detalleTicketCSS.iconState}`} /> :
+                      <MdTipsAndUpdates className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.update} 
+                      ${detalleTicketCSS.iconState}`} />}
+                </Col>
+                <Col className={`${detalleTicketCSS.content_state}`}>
+                  <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.severity} disabled={disabled} 
+                      className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => {changeValueSeverities(value); changeValue('severity',value)}}>
+                        {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}-{severitie.days} dias</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                  <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.type} disabled className={`
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect} ${detalleTicketCSS.disabled}`} onChange={(value) => changeValue('type',value)}>
+                        {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                  <div className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                    <div className={detalleTicketCSS.contentInput}>
+                      <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                        {statusTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      </Form.Select>
+                    </div>
+                  </div>
+                </Col>
+              </Row>
+            </Col> */}
+            <Col className={detalleTicketCSS.col8} md={6} lg={6} m={6}>
+              {!disabled&&<Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+              {!disabled&&<MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
+              {disabled&&<FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+              {/* <Row>
+                <Col>
+                <div>
+                  <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
+                    as="textarea"
+                    rows={2}
+                    id="title"
+                    disabled={disabled}
+                    value={ticketCurrent.title}
+                    onChange={(value) => changeValue('title',value)}
+                  />
+                </div>
+                <div>
+                  <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
+                  <Form.Control
+                    className={`${(disabled) ? (detalleTicketCSS.disabled&&detalleTicketCSS.removeCorner) : ''}`}
+                    as="textarea"
+                    id="description"
+                    rows={5}
+                    disabled={disabled}
+                    value={ticketCurrent.description}
+                    onChange={(value) => changeValue('description',value)}
+                  />
+                </div>
+                </Col>
+              </Row> */}
+            </Col>
+          </Row>  
+        </Container>
       </div>
       {ticket.type!=='CONSULTA'&&<div className={`${detalleTicketCSS.contentTaskTickets} ${(task&&task.length===0)?detalleTicketCSS.uninformation:''}`}>
        {(task&&task.length>0)&&<div><Table responsive bordered >
