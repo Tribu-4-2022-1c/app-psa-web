@@ -6,7 +6,7 @@ const ProyectosPage = () => {
   const [proyectos, setProyectos] = useState([]);
 
   useEffect (() => {
-    fetch(URL, {
+    fetch(HerokuUrl, {
       method: "GET",
       headers:{
         Accept:"application/json",

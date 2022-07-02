@@ -3,7 +3,7 @@ import { Patch } from "../models/Proyectos.models"
 const HerokuUrl = "https://api-psa-proyectos-squad-12.herokuapp.com/proyectos"
 const LocalUrl = "http://localhost:8080/proyectos"
 
-const URL = LocalUrl
+const URL = HerokuUrl
 
 const ProyectoService = () =>{
     const getAllTaksFor =(id: String = "") =>{
