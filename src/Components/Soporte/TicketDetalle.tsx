@@ -141,8 +141,8 @@ export const TicketDetalle = (props: any) => {
                                 value={ticketCurrent.creationDate}
                                 onChange={(value) => changeValue('creationDate', value)}
                             />
-                            <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                        </Form.Group>
+                            
+                        </Form.Group><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
                         <div>
                             <Form.Group className={detalleTicketCSS.contentItem}>
                                 <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
@@ -154,8 +154,7 @@ export const TicketDetalle = (props: any) => {
                                     value={ticketCurrent.resolution}
                                     onChange={(value) => changeValue('resolution', value)}
                                 />
-                                <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                            </Form.Group>
+                            </Form.Group><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
                         </div>
 
                         <Form.Group className={detalleTicketCSS.contentItem}>
