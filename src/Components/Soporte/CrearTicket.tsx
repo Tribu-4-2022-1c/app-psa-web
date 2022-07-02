@@ -124,7 +124,7 @@ export const CrearTicket = (props: any) => {
       <div>
         <Container className={detalleTicketCSS.contentRow}>
           <Row md={12} lg={12} ms={12}>
-            <Col className={detalleTicketCSS.col4} md={4} lg={4} m={4}>
+            <Col className={detalleTicketCSS.col4} md={4} lg={4}>
               <div>
                 <Form.Group>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
@@ -147,7 +147,7 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-            <Col className={detalleTicketCSS.col8} md={4} lg={4} m={4}>
+            <Col className={detalleTicketCSS.col8} md={4} lg={4}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
@@ -179,8 +179,7 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-
-            <Col className={detalleTicketCSS.col2} md={4} lg={4} m={4}>
+            <Col className={detalleTicketCSS.col2} md={4} lg={4}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
