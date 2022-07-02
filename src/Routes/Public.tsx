@@ -1,4 +1,5 @@
 import {Routes,Route} from "react-router-dom";
+import ProyectoCrear from "../Components/Proyectos/ProyectoCrear";
 import { ProyectoProyectos } from "../Components/Proyectos/ProyectoProyectos";
 import { CrearTicket } from '../Components/Soporte/CrearTicket';
 import { DetalleTicket } from '../Components/Soporte/DetalleTicket';
@@ -14,6 +15,7 @@ const Public = () => {
         <Route path='/' element={<ProyectosPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/proyectos/:id' element={ <ProyectoProyectos /> } />
+        <Route path='/proyectos/crear_proyecto' element={ <ProyectoCrear /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />
         <Route path='/soporte/:product/:version' element={ <Tickets /> } />

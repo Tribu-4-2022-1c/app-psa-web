@@ -15,7 +15,7 @@ const MenuDescription = (props: any) => {
         </div>
       </div>
       <div className={tareasCSS.contentButton}>
-        {flagGenerateProyecto && <Link className={tareasCSS.styleNav} to={`/proyectos/proyecto`} state={{}}><div className={tareasCSS.button}>
+        {flagGenerateProyecto && <Link className={tareasCSS.styleNav} to={`/proyectos/crear_proyecto`} state={{}}><div className={tareasCSS.button}>
           <p>NUEVO PROYECTO</p>
         </div></Link>}
         {flagGenerateTask && <Link className={tareasCSS.styleNav} to={`/proyectos/proyecto`} state={{}}><div className={tareasCSS.button}>

@@ -1,4 +1,5 @@
-import { Patch } from "../models/Proyectos.models"
+import { ProyectosProyectos } from "../Components/Proyectos/ProyectosProyectos"
+import { Patch, Proyecto, ProyectoSinLider } from "../models/Proyectos.models"
 
 const HerokuUrl = "https://api-psa-proyectos-squad-12.herokuapp.com/proyectos"
 const LocalUrl = "http://localhost:8080/proyectos"
@@ -56,11 +57,29 @@ const ProyectoService = () =>{
     }).then(() => {
         console.log("Se cambio el proyecto")
     })
-  }
+    }
+
+    const postProyecto = (proyecto: ProyectoSinLider) =>{
+        return fetch(URL,
+            {
+                method: "POST",
+                headers:{
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(proyecto)
+            }).then(() =>{
+                console.log("Se creo correctamente el proyecto")
+            })
+    }
+
+
+
     return{
         getAllTaksFor,
         getProyectoFor,
-        actualizarProyecto
+        actualizarProyecto,
+        postProyecto
     }
 }
 export default ProyectoService
