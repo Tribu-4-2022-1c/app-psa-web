@@ -10,6 +10,7 @@ import { FaCalendar, FaEdit, FaEye, FaQuestionCircle,FaProductHunt } from 'react
 import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Container, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
+import { IoCloseCircle,IoPencilSharp  } from "react-icons/io5";
 
 export const TicketDetalle = (props: any) => {
     const location = useLocation();
@@ -184,8 +185,12 @@ export const TicketDetalle = (props: any) => {
                         {/* <FaEdit/> */}
                         {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
                         {!disabled &&  <Button className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)}>
-                            <FaProductHunt />
+                            <IoCloseCircle />
                         </Button>}
+                        {disabled && 
+                            <IoPencilSharp className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(false)} />
+                       } 
+                       {/* <Button> </Button> */}
                         {/* <MdHighlightOff /> */}
                         {/* {disabled && <div><FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} /></div>}
 
