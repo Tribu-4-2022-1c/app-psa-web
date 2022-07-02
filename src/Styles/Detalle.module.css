@@ -19,11 +19,21 @@
 
 .col2{
     padding: 15px;
+    border-left: 4px solid #003066;
+
 }
 
 .contentItem{
     display: flex;
     margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contentItemCreate{
+    display: flex;
+    margin-bottom: 100px;
     align-items: center;
     justify-content: space-between;
     width: 100%;
@@ -37,9 +47,8 @@
 
 .labelCreate{
     font-weight: 700;
-    margin-right: 15px;
-    margin-top: 130px;
-    margin-bottom: 130px;
+    margin-right: 40px;
+    margin-top: 50px;
     color:#003066;
 }
 

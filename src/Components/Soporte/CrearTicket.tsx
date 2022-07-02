@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { FaFilter, FaEye } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
+import { FaCalendar, FaQuestionCircle, FaEdit, FaGofore} from 'react-icons/fa';
 import soporteService from '../../Services/soporteService';
 import ticketsCSS from '../../Styles/Tickets.module.css';
 import versionSoporteStyle from '../../Styles/VersionSoporte.module.css';
@@ -14,6 +15,7 @@ import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import DatePicker from "react-datepicker";
 
 export const CrearTicket = (props:any) => {
   const initialTicket:Ticket = {
@@ -36,7 +38,11 @@ export const CrearTicket = (props:any) => {
   ]
 
   const severities = [
-    'S1 - 24 horas', 'S2 - 72 horas', 'S3 - 7 dias', 'S4 - 30 dias', 'S5 - 90 dias'
+    'S1 - 1 DIA', 'S2 - 3 DIAS', 'S3 - 7 DIAS', 'S4 - 30 DIAS', 'S5 - 90 DIAS'
+  ]
+
+  const states = [
+    'PENDIENTE', 'EN DESARROLLO', 'ESPERANDO INFORMACION DE CLIENTE', 'BLOQUEADO', 'CERRADO', 'CANCELADO'
   ]
 
   const clients = [
@@ -95,7 +101,7 @@ return (
               />
             </div>
             <div>
-              <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
+              <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Descripción:</Form.Label>
               <Form.Control
                   as="textarea"
                   id="description"
@@ -109,37 +115,57 @@ return (
           </Col>
           <Col className={detalleTicketCSS.col8} md={3} lg={3} m={3}>
             <Row>
-              <div className={detalleTicketCSS.contentItem}>
+              <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
-                <Form.Select value={ticketCurrent.type} className={` 
+                <Form.Select value={ticketCurrent.client} className={` 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client',value)}>
-                      {clients.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      {clients.map((client: any, index: number) => <option key={index} value={client}>{client}</option>)}
                 </Form.Select>
               </div>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.labelCreate}>Tipo:</Form.Label>
+              <div className={detalleTicketCSS.contentItemCreate}>
+                <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
                 <Form.Select value={ticketCurrent.type} className={` 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type',value)}>
                       {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                 </Form.Select>
               </div>
+              <div className={detalleTicketCSS.contentItemCreate}>
+                <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                <Form.Select value={ticketCurrent.status} className={` 
+                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                      {states.map((status: any, index: number) => <option key={index} value={status}>{status}</option>)}
+                </Form.Select>
+              </div>
             </Row>
           </Col>
+          
           <Col className={detalleTicketCSS.col2} md={3} lg={3} m={3}>
             <Row>
-              <div className={detalleTicketCSS.contentItem}>
+              <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
                 <Form.Select value={ticketCurrent.type} className={` 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsable',value)}>
                       {responsables.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                 </Form.Select>
               </div>
-              <div className={detalleTicketCSS.contentItem}>
-                <Form.Label className={detalleTicketCSS.labelCreate}>Severidad:</Form.Label>
-                <Form.Select value={ticketCurrent.type} className={` 
+              <div className={detalleTicketCSS.contentItemCreate}>
+                <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
+                <Form.Select value={ticketCurrent.severity} className={` 
                     ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('severity',value)}>
-                      {severities.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      {severities.map((severity: any, index: number) => <option key={index} value={severity}>{severity}</option>)}
                 </Form.Select>
+              </div>
+              <div className={detalleTicketCSS.contentItemCreate}>
+                <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+
+                  <Form.Control
+                    className={`${detalleTicketCSS.input}`}
+                    type="text"
+                    id="resolution"
+                    value={ticketCurrent.resolution}
+                    onChange={(value)=>changeValue('resolution',value)}
+                  />
+                <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
               </div>
             </Row>
           </Col>
