@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { Button,FloatingLabel,Form,Modal} from 'react-bootstrap'
-import { IoCloseCircleSharp } from "react-icons/io5";
 import modalCSS from '../Styles/Modal.module.css';
 
 export const ModalComponent = (props: any) => {
