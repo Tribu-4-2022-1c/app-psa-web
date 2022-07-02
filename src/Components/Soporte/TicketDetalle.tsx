@@ -36,10 +36,10 @@ export const TicketDetalle = (props: any) => {
     }
     const statusTickets: any = [
         'En proceso', 'Cerrado', 'Cancelado', 'Nuevo'
-      ]
-      const typesTickets = [
+    ]
+    const typesTickets = [
         'CONSULTA', 'ERROR', 'MEJORA'
-      ]
+    ]
     const [ticketCurrent, setticketCurrent] = useState(initialTicket);
     const generateTask = () => {
         setshow(true);
@@ -47,11 +47,11 @@ export const TicketDetalle = (props: any) => {
 
     const changeStateEdit = (state: boolean) => {
         if (state) {
-          setticketCurrent({ ...ticket });
-          getDiasDeVencimiento(ticket.severity, ticket.creationDate);
+            setticketCurrent({ ...ticket });
+            getDiasDeVencimiento(ticket.severity, ticket.creationDate);
         };
         setdisabled(state);
-      }
+    }
 
     const validateFlagGenerateTask = useCallback(() => {
         if (ticket.type !== 'CONSULTA') {
@@ -84,15 +84,15 @@ export const TicketDetalle = (props: any) => {
         const response = await soporteService().updateTicket(ticketCurrent);
         navigate(`/soporte/${product}/${version}`);
         console.log(response)
-      }
+    }
 
     const changeValue = (prop: string, value: any) => {
         setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
-      }
+    }
 
-      const changeValueSeverities = (value: any) => {
+    const changeValueSeverities = (value: any) => {
         getDiasDeVencimiento(value.target.value, ticket.dateCreation);
-      }
+    }
 
     useEffect(() => {
         const getData = async () => {
@@ -111,7 +111,7 @@ export const TicketDetalle = (props: any) => {
             <Container>
                 <Row className={detalleTicketCSS.contentRow}>
                     <Col className={detalleTicketCSS.col4}>
-                        <Form.Group>
+                        <Form.Group className={detalleTicketCSS.contentItem}>
                             <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                             <Form.Control
                                 className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
@@ -119,17 +119,52 @@ export const TicketDetalle = (props: any) => {
                                 id="client"
                                 disabled={disabled}
                                 value={ticketCurrent.client}
-                                onChange = {(value) => changeValue('client',value)}
+                                onChange={(value) => changeValue('client', value)}
                             />
                         </Form.Group>
-                        <Form.Group>
-                        <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                        <Form.Group className={detalleTicketCSS.contentItem}>
                             <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
                             <div className={detalleTicketCSS.contentInput}>
                                 <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
-                                ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status',value)}>
+                                ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
                                     {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
                                 </Form.Select>
+                            </div>
+                        </Form.Group>
+                        <Form.Group className={detalleTicketCSS.contentItem}>
+                            <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
+                            <Form.Control
+                                className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                type="text"
+                                id="creationDate"
+                                disabled
+                                value={ticketCurrent.creationDate}
+                                onChange={(value) => changeValue('creationDate', value)}
+                            />
+                            <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                        </Form.Group>
+                        <Form.Group className={detalleTicketCSS.contentItem}>
+                            <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                            <Form.Control
+                                className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                type="text"
+                                id="resolution"
+                                disabled={disabled}
+                                value={ticketCurrent.resolution}
+                                onChange={(value) => changeValue('resolution', value)}
+                            />
+                            <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                        </Form.Group>
+                        <Form.Group className={detalleTicketCSS.contentItem}>
+                            <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
+                            <div className={detalleTicketCSS.contentInput}>
+                                <Form.Control
+                                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
+                                    type="text"
+                                    id="diasRestantes"
+                                    disabled
+                                    value={diasRestantes}
+                                />
                             </div>
                         </Form.Group>
                     </Col>
