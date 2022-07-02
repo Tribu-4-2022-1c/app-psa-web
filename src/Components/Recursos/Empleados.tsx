@@ -37,21 +37,6 @@ export const Empleados = (props:any) => {
     recursos_();
   },[]);
 
-  const getDays = (severity:string,fecha:string) => {
-    return "6";
-  }
-
-  const isConsulta = (typeTicket:string) =>{
-    return typeTicket==='CONSULTA';
-  }
-
-  const isError = (typeTicket:string) => {
-    return typeTicket==='ERROR';
-  }
-
-
-  const goCalendario = () => {
-  }
 
   return (
       <div>
@@ -61,16 +46,7 @@ export const Empleados = (props:any) => {
               <p className={empleadosCSS.label}>Recursos</p>
             </div>
           </div>
-          <div className={empleadosCSS.contentButton} >
-            <NavLink
-                to={'/recursos/calendario'}
-                className={versionSoporteStyle.styleNav}
-            >
-              <div className={empleadosCSS.button} onClick={() => {goCalendario()}} >
-                <p>CALENDARIO</p>
-              </div>
-            </NavLink>
-          </div>
+
         </div>
         <Table responsive bordered >
           <thead>

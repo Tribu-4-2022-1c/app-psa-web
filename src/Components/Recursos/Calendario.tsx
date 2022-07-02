@@ -1,40 +1,82 @@
 import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap';
-import { FaSortAmountDown, FaEye } from 'react-icons/fa';
-import { Link, NavLink, useParams } from 'react-router-dom';
-import recursosService from '../../Services/recursosService';
-import empleadosCSS from "../../Styles/Empleados.module.css";
+
+import soporteCSS from "../../Styles/Soporte.module.css";
+import {Audio} from "react-loader-spinner";
+import CalendarioDias from "../Recursos/CalendarioDias";
+import {VersionesSoporte} from "../Soporte/VersionesSoporte";
+
+import soporteService from "../../Services/soporteService";
+import recursosCSS from "../../Styles/Recursos/Recursos.module.css";
+import {NavLink} from "react-router-dom";
 import versionSoporteStyle from "../../Styles/VersionSoporte.module.css";
-import LoginButton from "./LoginButton";
-import loginButton from "./LoginButton";
 
 
 export const Calendario = (props:any) => {
-    const {product} = useParams();
-    const {version} = useParams();
-    const [nombre, setnombre] = useState([]);
-    const [apellido, setapellido] = useState([]);
-    const [legajo, setlegajo] = useState([]);
-    
+
+    const dia = [
+        {
+            dia:"Lunes",
+        },
+        {
+            dia:"Martes",
+        },
+        {
+            dia:"Miercoles",
+        },
+        {
+            dia:"Jueves",
+        },
+        {
+            dia:"Viernes",
+        }
+
+    ]
+    const winHeight =  window.innerHeight*.8;
+
+    const [dias, setdias] = useState(dia);
+    const [load, setload] = useState(true);
 
     useEffect(() => {
-        const recursos_ = async () =>{
-            const allNombres:any = await recursosService().getNombres();
-            const allApellidos:any = await recursosService().getApellidos();
-            const allLegajos:any = await recursosService().getLegajos();
-            setnombre(allNombres);
-            /*setapellido(allApellidos)
-            setlegajo(allLegajos)*/
+        const getDias = async () => {
+            let listDias = dias;
+            setdias(dias);
+            setload(false);
         }
-        recursos_();
-    },[]);
+        getDias();
 
-   
+    }, []);
+
+
+    function goEmpleados() {
+
+    }
 
     return (
         <div>
             <div >
-                <LoginButton loginButton={loginButton} />
+                <div className={soporteCSS.content}>
+                    {load&&<div style={{height: winHeight}} className={`${soporteCSS.contentAudio}`}>
+                        <Audio
+                            height="50"
+                            width="50"
+                            color='#003066'
+                            ariaLabel='loading'
+                        />
+                    </div>}
+                    <div className={recursosCSS.contentButton} >
+                        <NavLink
+                            to={'/recursos'}
+                            className={versionSoporteStyle.styleNav}
+                        >
+                            <div className={recursosCSS.button} onClick={() => {goEmpleados()}} >
+                                <p>EMPLEADOS</p>
+                            </div>
+                        </NavLink>
+                    </div>
+                    {!load&&dias.map((dias,index) => <div key={index}>
+                        <CalendarioDias dia={dias} />
+                    </div>)}
+                </div >
             </div>
         </div>
     )

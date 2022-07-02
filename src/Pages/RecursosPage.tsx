@@ -6,12 +6,9 @@ import {Empleados} from "../Components/Recursos/Empleados";
 import recursosCSS from '../Styles/Recursos/Recursos.module.css';
 import empleadosCSS from '../Styles/Recursos/Empleados.module.css';
 import { useEffect, useState } from 'react';
-import soporteService from '../Services/soporteService';
-import { VersionesSoporte } from '../Components/Soporte/VersionesSoporte';
-import ProductoSoporte from '../Components/Soporte/ProductoSoporte';
-import LoginButton from '../Components/Recursos/LoginButton';
 import { Audio } from 'react-loader-spinner';
-import loginButton from "../Components/Recursos/LoginButton";
+import {NavLink} from "react-router-dom";
+import versionSoporteStyle from "../Styles/VersionSoporte.module.css";
 
 const RecursosPage = () => {
 
@@ -36,6 +33,10 @@ const RecursosPage = () => {
   }
 
 
+  function goCalendario() {
+
+  }
+
   return (
     <div className={recursosCSS.content}>
       {load&&<div style={{height: winHeight}} className={`${recursosCSS.contentAudio}`}>
@@ -47,6 +48,16 @@ const RecursosPage = () => {
         />
 
         </div>}
+      <div className={recursosCSS.contentButton} >
+        <NavLink
+            to={'/recursos/calendario'}
+            className={versionSoporteStyle.styleNav}
+        >
+          <div className={recursosCSS.button} onClick={() => {goCalendario()}} >
+            <p>CALENDARIO</p>
+          </div>
+        </NavLink>
+      </div>
       {!load &&
           <div className={`${Empleados}`}>
             <Empleados employee={nombres} />
