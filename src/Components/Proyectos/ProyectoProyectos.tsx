@@ -85,6 +85,7 @@ export const ProyectoProyectos = (props: any) => {
   }
   
   console.log(proyectoActual)
+ 
   return (
     <div>
       <MenuDescription proyecto={proyectoActual.nombre} title={"Proyecto"} />
@@ -207,6 +208,7 @@ export const ProyectoProyectos = (props: any) => {
       </Row>
     </div>
   )
+  
 }
 
 
