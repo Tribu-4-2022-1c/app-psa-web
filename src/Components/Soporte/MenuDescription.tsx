@@ -21,8 +21,7 @@ const MenuDescription = (props:any) => {
           {flagNuevoTicket&&<div className={ticketsCSS.button}>
             <p>NUEVO TICKET</p>
           </div>}
-          {flagGenerateTask&&<div className={ticketsCSS.button} onClick={() => functionGenerateTask()}>
-          
+          {flagGenerateTask&&<div className={ticketsCSS.button} onClick={functionGenerateTask}>
             <p>NUEVA TAREA</p>
           </div>}
         </div>        
