@@ -15,7 +15,6 @@ import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import CardHeader from "react-bootstrap/esm/CardHeader";
-import DatePicker from "react-datepicker";
 
 export const CrearTicket = (props: any) => {
   const initialTicket: Ticket = {
