@@ -6,7 +6,7 @@ import { ModalComponent } from '../ModalComponent';
 import MenuDescription from './MenuDescription'
 import soporteService from "../../Services/soporteService";
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
-import { FaCalendar, FaEdit, FaEye, FaQuestionCircle } from 'react-icons/fa';
+import { FaCalendar, FaEdit, FaEye, FaQuestionCircle,FaProductHunt } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Container, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
@@ -184,7 +184,7 @@ export const TicketDetalle = (props: any) => {
                         {/* <FaEdit/> */}
                         {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
                         {!disabled &&  <Button className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)}>
-                            <MdHighlightOff />
+                            <FaProductHunt />
                         </Button>}
                         {/* <MdHighlightOff /> */}
                         {/* {disabled && <div><FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} /></div>}
