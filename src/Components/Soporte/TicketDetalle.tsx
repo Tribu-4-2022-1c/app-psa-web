@@ -185,10 +185,10 @@ export const TicketDetalle = (props: any) => {
                         {/* <FaEdit/> */}
                         {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
                         {!disabled &&  <Button className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)}>
-                            <IoCloseCircle />
+                            <FaProductHunt />
                         </Button>}
                         {disabled && 
-                            <IoPencilSharp className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(false)} />
+                            <FaProductHunt className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(false)} />
                        } 
                        {/* <Button> </Button> */}
                         {/* <MdHighlightOff /> */}
