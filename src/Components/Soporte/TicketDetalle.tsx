@@ -8,7 +8,7 @@ import soporteService from "../../Services/soporteService";
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import { FaCalendar, FaEdit, FaEye, FaQuestionCircle } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
-import { Button, Card, Col, Container, Form, Row, Table } from 'react-bootstrap';
+import { Button, Card, Col, Container, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 
 export const TicketDetalle = (props: any) => {
@@ -133,32 +133,32 @@ export const TicketDetalle = (props: any) => {
                         </Form.Group>
                         <Form.Group className={detalleTicketCSS.contentItem}>
                             <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
-                            <Form.Control
-                                className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                                type="text"
-                                id="creationDate"
-                                disabled
-                                value={ticketCurrent.creationDate}
-                                onChange={(value) => changeValue('creationDate', value)}
-                            />
-                            <Form.Switch>
-                                <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                            </Form.Switch>
+                            <InputGroup className="mb-2">
+                                <Form.Control
+                                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                    type="text"
+                                    id="creationDate"
+                                    disabled
+                                    value={ticketCurrent.creationDate}
+                                    onChange={(value) => changeValue('creationDate', value)}
+                                />
+                                <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
+                            </InputGroup>
                         </Form.Group>
                         <div>
                             <Form.Group className={detalleTicketCSS.contentItem}>
                                 <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-                                <Form.Control
-                                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                                    type="text"
-                                    id="resolution"
-                                    disabled={disabled}
-                                    value={ticketCurrent.resolution}
-                                    onChange={(value) => changeValue('resolution', value)}
-                                />
-                                <Form.Switch>
-                                    <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                                </Form.Switch>
+                                <InputGroup className="mb-2">
+                                    <Form.Control
+                                        className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                        type="text"
+                                        id="resolution"
+                                        disabled={disabled}
+                                        value={ticketCurrent.resolution}
+                                        onChange={(value) => changeValue('resolution', value)}
+                                    />
+                                    <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
+                                </InputGroup>
                             </Form.Group>
                         </div>
 
@@ -206,7 +206,6 @@ export const TicketDetalle = (props: any) => {
                                 onChange={(value) => changeValue('description', value)}
                             />
                         </Form.Group>
-
                     </Col>
                 </Row>
             </Container>
