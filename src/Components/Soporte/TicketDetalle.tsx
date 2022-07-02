@@ -187,6 +187,9 @@ export const TicketDetalle = (props: any) => {
                         {!disabled &&  <Button className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)}>
                             <FaProductHunt />
                         </Button>}
+                        {!disabled && 
+                            <FaProductHunt className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
+                       } 
                         {disabled && 
                             <FaEdit className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(false)} />
                        } 
