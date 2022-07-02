@@ -108,9 +108,9 @@ export const TicketDetalle = (props: any) => {
         <div>
             <MenuDescription version={version} product={product} flagGenerateTask={flagGenerateTask} functionGenerateTask={generateTask} />
             <ModalComponent show={show} employees={employees} closeModal={closeModal} agregarTarea={agregarTarea}></ModalComponent>
-            <Container>
-                <Row className={detalleTicketCSS.contentRow}>
-                    <Col className={detalleTicketCSS.col4}>
+            <Container className={detalleTicketCSS.contentRow}>
+                <Row md={12}>
+                    <Col className={detalleTicketCSS.col4} md={6}>
                         <Form.Group className={detalleTicketCSS.contentItem}>
                             <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                             <Form.Control
@@ -141,9 +141,9 @@ export const TicketDetalle = (props: any) => {
                                 value={ticketCurrent.creationDate}
                                 onChange={(value) => changeValue('creationDate', value)}
                             />
-                            <Form.Control.Feedback>
+                            <Form.Switch>
                                 <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                            </Form.Control.Feedback>
+                            </Form.Switch>
                         </Form.Group>
                         <div>
                             <Form.Group className={detalleTicketCSS.contentItem}>
@@ -156,9 +156,9 @@ export const TicketDetalle = (props: any) => {
                                     value={ticketCurrent.resolution}
                                     onChange={(value) => changeValue('resolution', value)}
                                 />
-                                <Form.Control.Feedback>
+                                <Form.Switch>
                                     <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                                </Form.Control.Feedback>
+                                </Form.Switch>
                             </Form.Group>
                         </div>
 
@@ -175,44 +175,38 @@ export const TicketDetalle = (props: any) => {
                             </div>
                         </Form.Group>
                     </Col>
-                    <Col className={detalleTicketCSS.col8}>
-                       {/*  <Row>{!disabled && <>
+                    <Col className={detalleTicketCSS.col8} md={6}>
+                        {!disabled && <>
                             <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
                             <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
                         </>
                         }
-                            {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
-                        </Row>
+                        {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+                        <Form.Group className={detalleTicketCSS.contentItem}>
+                            <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
+                            <Form.Control
+                                className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
+                                as="textarea"
+                                rows={2}
+                                id="title"
+                                disabled={disabled}
+                                value={ticketCurrent.title}
+                                onChange={(value) => changeValue('title', value)}
+                            />
+                        </Form.Group>
+                        <Form.Group className={detalleTicketCSS.contentItem}>
+                            <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
+                            <Form.Control
+                                className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
+                                as="textarea"
+                                id="description"
+                                rows={5}
+                                disabled={disabled}
+                                value={ticketCurrent.description}
+                                onChange={(value) => changeValue('description', value)}
+                            />
+                        </Form.Group>
 
-                        <div>
-                            <Form.Group className={detalleTicketCSS.contentItem}>
-                                <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
-                                <Form.Control
-                                    className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
-                                    as="textarea"
-                                    rows={2}
-                                    id="title"
-                                    disabled={disabled}
-                                    value={ticketCurrent.title}
-                                    onChange={(value) => changeValue('title', value)}
-                                />    
-                            </Form.Group>
-                        </div>
-                        <div>
-                            <Form.Group className={detalleTicketCSS.contentItem}>
-                                <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
-                                <Form.Control
-                                    className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
-                                    as="textarea"
-                                    id="description"
-                                    rows={5}
-                                    disabled={disabled}
-                                    value={ticketCurrent.description}
-                                    onChange={(value) => changeValue('description', value)}
-                                />
-                            </Form.Group>    
-                        </div> */}
-                        
                     </Col>
                 </Row>
             </Container>

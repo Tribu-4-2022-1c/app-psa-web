@@ -1,6 +1,7 @@
 .col8{
     position: relative;
     padding: 15px;
+    padding-top: 50px;
     border-left: 2px solid #003066;
 }
 
@@ -102,7 +103,8 @@
 }
 
 .contentRow{
-    padding: 0 30px;
+    /* padding: 0 30px; */
+    padding: 0!important;
     margin: 0;
 }
 
