@@ -143,7 +143,7 @@ export const TicketDetalle = (props: any) => {
                             />
                             <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
                         </Form.Group>
-                        <Form.Group className={detalleTicketCSS.contentItem}>
+                        {/* <Form.Group className={detalleTicketCSS.contentItem}>
                             <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
                             <Form.Control
                                 className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
@@ -166,7 +166,7 @@ export const TicketDetalle = (props: any) => {
                                     value={diasRestantes}
                                 />
                             </div>
-                        </Form.Group>
+                        </Form.Group> */}
                     </Col>
                     <Col className={detalleTicketCSS.col8}>
                         <Form.Group>
