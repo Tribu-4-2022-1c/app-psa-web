@@ -176,7 +176,7 @@ export const TicketDetalle = (props: any) => {
                         </Form.Group>
                     </Col>
                     <Col className={detalleTicketCSS.col8} md={6}>
-                        {!disabled && <>
+                        {/* {!disabled && <>
                             <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
                             <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
                         </>
@@ -205,7 +205,7 @@ export const TicketDetalle = (props: any) => {
                                 value={ticketCurrent.description}
                                 onChange={(value) => changeValue('description', value)}
                             />
-                        </Form.Group>
+                        </Form.Group> */}
                     </Col>
                 </Row>
             </Container>
