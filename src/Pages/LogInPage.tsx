@@ -9,10 +9,20 @@ const LogInPage = () => {
 
 
     return (
-        <div >
-            <LoginButton loginButton={loginButton}  >
-                </LoginButton>
-        </div>
+        <div>
+        <form>
+        <label>
+          Usuario:
+        </label>
+      </form>
+      <input type="text" name="name" />
+      <form>
+        <label>
+          Contraseña:
+        </label>
+      </form>
+      <input type="text" name="name" />
+      </div>
     )
 }
 
