@@ -6,7 +6,8 @@ const Menu = () => {
     const routePSA = {
         proyectos: '/proyectos',
         recursos: '/recursos',
-        soporte: '/soporte'
+        soporte: '/soporte',
+        login: '/login'
     };
     const intialStatePageSelected = {
         nameRoute: '/proyectos',
@@ -47,6 +48,11 @@ const Menu = () => {
                 <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.recursos?menuModuleCSS.addMarker:''}`}>
                     <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.recursos} onClick={() => changePage(routePSA.recursos)}>
                         RECURSOS
+                    </NavLink>
+                </div>
+                <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
+                    <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
+                        Login
                     </NavLink>
                 </div>
             </div>

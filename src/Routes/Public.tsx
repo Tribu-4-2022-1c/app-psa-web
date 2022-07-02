@@ -12,7 +12,7 @@ import LogInPage from "../Pages/LogInPage";
 const Public = () => {
   return (
     <Routes>
-        <Route path='/' element={<LogInPage />} />
+        <Route path='/login' element={<LogInPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/recursos/calendario' element={ <Calendario /> }/>
