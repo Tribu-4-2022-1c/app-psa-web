@@ -123,8 +123,8 @@ export const CrearTicket = (props: any) => {
 
       <div>
         <Container className={detalleTicketCSS.contentRow}>
-          <Row md={12} lg={12} ms={12}>
-            <Col className={detalleTicketCSS.col4} md={4} lg={4}>
+          <Row md={12}>
+            <Col className={detalleTicketCSS.col4} md={4}>
               <div>
                 <Form.Group>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
@@ -147,7 +147,7 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-            <Col className={detalleTicketCSS.col8} md={4} lg={4}>
+            <Col className={detalleTicketCSS.col8} md={4}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
@@ -179,7 +179,7 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-            <Col className={detalleTicketCSS.col2} md={4} lg={4}>
+            <Col className={detalleTicketCSS.col2} md={4}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
@@ -203,6 +203,8 @@ export const CrearTicket = (props: any) => {
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                  
+                  <InputGroup.Text>
                   <Form.Control
                     className={`${detalleTicketCSS.input}`}
                     type="text"
@@ -210,7 +212,8 @@ export const CrearTicket = (props: any) => {
                     value={ticketCurrent.resolution}
                     onChange={(value) => changeValue('resolution', value)}
                   />
-                  <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
+                  <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                  </InputGroup.Text>
                 </Form.Group >
 
 
