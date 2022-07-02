@@ -27,6 +27,8 @@ const Menu = () => {
         changePage(path);
     },[]);
 
+    let logged = false;
+
     return (
         <div className={menuModuleCSS.contentMenu}>
             <div className={menuModuleCSS.contentDescription}>
@@ -50,11 +52,19 @@ const Menu = () => {
                         RECURSOS
                     </NavLink>
                 </div>
+                {logged === false ? (
                 <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
                     <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
-                        Login
+                        Log in
                     </NavLink>
                 </div>
+                ) : (
+                    <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
+                    <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
+                        Already Logged
+                    </NavLink>
+                </div>
+                )}
             </div>
         </div>
     )
