@@ -180,8 +180,8 @@ export const TicketDetalle = (props: any) => {
                             <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
                             <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
                         </>
-                        } */}
-                        {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+                        }
+                        {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />} */}
                         <Form.Group className={detalleTicketCSS.contentItem}>
                             <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
                             <Form.Control
