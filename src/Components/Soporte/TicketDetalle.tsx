@@ -183,7 +183,9 @@ export const TicketDetalle = (props: any) => {
                         }</div> */}
                         {/* <FaEdit/> */}
                         {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
-                        {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+                        {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">
+                            <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
+                        </Button>}
                         {/* <MdHighlightOff /> */}
                         {/* {disabled && <div><FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} /></div>}
 
