@@ -172,13 +172,13 @@ export const TicketDetalle = (props: any) => {
                         </Form.Group>
                     </Col>
                     <Col className={detalleTicketCSS.col8}>
-                        {/* <Row>{!disabled && <>
+                       {/*  <Row>{!disabled && <>
                             <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
                             <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
                         </>
                         }
                             {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
-                        </Row> */}
+                        </Row>
 
                         <div>
                             <Form.Group className={detalleTicketCSS.contentItem}>
@@ -207,7 +207,7 @@ export const TicketDetalle = (props: any) => {
                                     onChange={(value) => changeValue('description', value)}
                                 />
                             </Form.Group>    
-                        </div>
+                        </div> */}
                         
                     </Col>
                 </Row>
