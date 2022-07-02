@@ -172,37 +172,43 @@ export const TicketDetalle = (props: any) => {
                         </Form.Group>
                     </Col>
                     <Col className={detalleTicketCSS.col8}>
-                        <Row>{!disabled && <>
+                        {/* <Row>{!disabled && <>
                             <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>
                             <MdHighlightOff className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
                         </>
                         }
                             {disabled && <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
-                        </Row>
-                        <Form.Group className={detalleTicketCSS.contentItem}>
-                            <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
-                            <Form.Control
-                                className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
-                                as="textarea"
-                                rows={2}
-                                id="title"
-                                disabled={disabled}
-                                value={ticketCurrent.title}
-                                onChange={(value) => changeValue('title', value)}
-                            />    
-                        </Form.Group>
-                        <Form.Group className={detalleTicketCSS.contentItem}>
-                            <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
-                            <Form.Control
-                                className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
-                                as="textarea"
-                                id="description"
-                                rows={5}
-                                disabled={disabled}
-                                value={ticketCurrent.description}
-                                onChange={(value) => changeValue('description', value)}
-                            />
-                        </Form.Group>
+                        </Row> */}
+
+                        <div>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
+                                <Form.Control
+                                    className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
+                                    as="textarea"
+                                    rows={2}
+                                    id="title"
+                                    disabled={disabled}
+                                    value={ticketCurrent.title}
+                                    onChange={(value) => changeValue('title', value)}
+                                />    
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
+                                <Form.Control
+                                    className={`${(disabled) ? (detalleTicketCSS.disabled && detalleTicketCSS.removeCorner) : ''}`}
+                                    as="textarea"
+                                    id="description"
+                                    rows={5}
+                                    disabled={disabled}
+                                    value={ticketCurrent.description}
+                                    onChange={(value) => changeValue('description', value)}
+                                />
+                            </Form.Group>    
+                        </div>
+                        
                     </Col>
                 </Row>
             </Container>
