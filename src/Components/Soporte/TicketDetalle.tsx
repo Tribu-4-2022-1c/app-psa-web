@@ -113,69 +113,74 @@ export const TicketDetalle = (props: any) => {
             <Container className={detalleTicketCSS.contentRow}>
                 <Row md={12}>
                     <Col className={detalleTicketCSS.col4} md={6}>
-                        <Form.Group className={detalleTicketCSS.contentItem}>
-                            <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
-                            <Form.Control
-                                className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                                type="text"
-                                id="client"
-                                disabled={disabled}
-                                value={ticketCurrent.client}
-                                onChange={(value) => changeValue('client', value)}
-                            />
-                        </Form.Group>
-                        <Form.Group className={detalleTicketCSS.contentItem}>
-                            <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                            <div className={detalleTicketCSS.contentInput}>
-                                <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
-                                ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
-                                    {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
-                                </Form.Select>
-                            </div>
-                        </Form.Group>
-                        <Form.Group className={detalleTicketCSS.contentItem}>
-                            <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
-                            <InputGroup className="mb-2">
+                        <Row>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                                 <Form.Control
                                     className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
                                     type="text"
-                                    id="creationDate"
-                                    disabled
-                                    value={ticketCurrent.creationDate}
-                                    onChange={(value) => changeValue('creationDate', value)}
+                                    id="client"
+                                    disabled={disabled}
+                                    value={ticketCurrent.client}
+                                    onChange={(value) => changeValue('client', value)}
                                 />
-                                <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
-                            </InputGroup>
-                        </Form.Group>
-                        <div>
+                            </Form.Group>
                             <Form.Group className={detalleTicketCSS.contentItem}>
-                                <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                                <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                                    ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
+                                        {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
+                                    </Form.Select>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
                                 <InputGroup className="mb-2">
                                     <Form.Control
                                         className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
                                         type="text"
-                                        id="resolution"
-                                        disabled={disabled}
-                                        value={ticketCurrent.resolution}
-                                        onChange={(value) => changeValue('resolution', value)}
+                                        id="creationDate"
+                                        disabled
+                                        value={ticketCurrent.creationDate}
+                                        onChange={(value) => changeValue('creationDate', value)}
                                     />
                                     <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
                                 </InputGroup>
                             </Form.Group>
-                        </div>
-
-                        <Form.Group className={detalleTicketCSS.contentItem}>
-                            <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
-                            <div className={detalleTicketCSS.contentInput}>
-                                <Form.Control
-                                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
-                                    type="text"
-                                    id="diasRestantes"
-                                    disabled
-                                    value={diasRestantes}
-                                />
+                            <div>
+                                <Form.Group className={detalleTicketCSS.contentItem}>
+                                    <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                                    <InputGroup className="mb-2">
+                                        <Form.Control
+                                            className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                            type="text"
+                                            id="resolution"
+                                            disabled={disabled}
+                                            value={ticketCurrent.resolution}
+                                            onChange={(value) => changeValue('resolution', value)}
+                                        />
+                                        <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
+                                    </InputGroup>
+                                </Form.Group>
                             </div>
-                        </Form.Group>
+
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Control
+                                        className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
+                                        type="text"
+                                        id="diasRestantes"
+                                        disabled
+                                        value={diasRestantes}
+                                    />
+                                </div>
+                            </Form.Group>    
+                        </Row>
+                        <Row>
+                            
+                        </Row>
                     </Col>
                     <Col className={detalleTicketCSS.col8} md={6}>
                         {/* <div>{!disabled && (<>
