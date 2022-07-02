@@ -153,9 +153,11 @@ export const TicketDetalle = (props: any) => {
                                 disabled={disabled}
                                 value={ticketCurrent.resolution}
                                 onChange={(value) => changeValue('resolution', value)}
-                            />    </Form.Group>
-                            
+                            />    
                             <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /> 
+                        </Form.Group>
+                            
+                            
                         </div>
                         
                             {/* */}
