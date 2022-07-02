@@ -11,7 +11,7 @@ import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md
 import { Button, Card, Col, Container, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { IoCloseCircle,IoPencilSharp  } from "react-icons/io5";
-import { AiFillCloseCircle } from "react-icons/ai";
+import { IoIosClose } from "react-icons/io";
 
 export const TicketDetalle = (props: any) => {
     const location = useLocation();
@@ -189,10 +189,10 @@ export const TicketDetalle = (props: any) => {
                             <FaProductHunt />
                         </Button>} */}
                         {!disabled && 
-                            <AiFillCloseCircle className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
+                            <IoIosClose className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
                        } 
                         {disabled && 
-                            <FaEdit className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(false)} />
+                            <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />
                        } 
                        {/* <Button> </Button> */}
                         {/* <MdHighlightOff /> */}
