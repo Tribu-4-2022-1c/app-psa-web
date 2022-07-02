@@ -47,21 +47,6 @@ const RecursosPage = () => {
         />
 
         </div>}
-        {!load &&
-
-      <div >
-         <LoginButton loginButton={loginButton} />
-      </div>
-
-      }
-
-        {!load &&
-
-            <div className={`${recursosCSS.titulo}`}>
-              Listado de Recursos
-            </div>
-
-        }
       {!load &&
           <div className={`${Empleados}`}>
             <Empleados employee={nombres} />
