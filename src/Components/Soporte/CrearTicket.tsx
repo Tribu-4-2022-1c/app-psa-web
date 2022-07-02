@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, Component } from 'react'
 import { FaFilter, FaEye } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
 import { FaCalendar, FaQuestionCircle, FaEdit, FaGofore} from 'react-icons/fa';
@@ -66,7 +66,20 @@ export const CrearTicket = (props:any) => {
     setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
   }
 
-  
+  //Esto es lo que copie que seria para poder hacer click y seleccionar una fecha
+  //La forma de usarlo seria pegar esto en la linea 171
+  // <DatePicker selected={this.state.fecha} onChange={this.onChange}/>
+  /*
+  class App extends Component {
+    state={
+      fecha: new Date("2022", "07", "04")
+    }
+  }
+
+  onChange=fecha=>{
+    this.setState({fecha: fecha});
+  }
+  */
 
   useEffect(() => {
     const tickets_ = async () =>{
@@ -157,7 +170,6 @@ return (
               </div>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-
                   <Form.Control
                     className={`${detalleTicketCSS.input}`}
                     type="text"
