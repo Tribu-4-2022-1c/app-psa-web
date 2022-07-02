@@ -1,6 +1,11 @@
 import { Ticket } from "../models/Soporte.models";
 const soporteService = () => {
-
+  const states = [
+    'PENDIENTE', 'EN DESARROLLO', 'ESPERANDO INFORMACION DE CLIENTE', 'BLOQUEADO', 'CERRADO', 'CANCELADO'
+  ]
+  const typesTickets = [
+    'CONSULTA', 'ERROR', 'MEJORA'
+  ]
   const getAllTickets = (product:string='',version:string='') => {
     const url = `https://psa-api-soporte.herokuapp.com/tickets`;
     return fetch(url)
@@ -16,6 +21,14 @@ const soporteService = () => {
       console.log(error);
       return [];
     })
+  }
+
+  const getStates = () => {
+    return states;
+  }
+
+  const getTypesTickets = () => {
+    return typesTickets;
   }
 
   const getTickets = (version:string='') => {
@@ -147,6 +160,27 @@ const soporteService = () => {
     })
   }
 
+  const postTicket = (body:Ticket) => {
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(body)
+    }
+    const url = `https://psa-api-soporte.herokuapp.com/tickets`;
+    return fetch(url,requestOptions).then( async (response) => {
+      if(response){
+        response.json();
+      }
+      else{
+        return false;
+      }
+    })
+    .catch( (error) => {
+      console.log(error);
+      return false;
+    })
+  }
+
   return {
     getProducts,
     getAllVersiones,
@@ -156,7 +190,10 @@ const soporteService = () => {
     getSeverities,
     updateTicket,
     getTicketsTask,
-    getTickets
+    getTickets,
+    postTicket,
+    getStates,
+    getTypesTickets
   }
 }
 

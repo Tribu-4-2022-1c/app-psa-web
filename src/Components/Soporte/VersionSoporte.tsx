@@ -3,10 +3,13 @@ import React from 'react';
 import { FaFolderOpen, FaPlusCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import versionSoporteStyle from '../../Styles/VersionSoporte.module.css'//'../../Styles/Soporte/VersionSoporte.module.css';
+import { useNavigate } from 'react-router-dom';
+
 export const VersionSoporte = (props:any) => {
     const {version} = props;
     const {currentVersion} = props;
     const {setcurrentVersion} = props;
+    let navigate = useNavigate();
 
     const selectVersion = () => {
       setcurrentVersion(version);
@@ -17,7 +20,7 @@ export const VersionSoporte = (props:any) => {
     }
 
     const getOpcion = () => {
-
+      navigate(`/soporte/${version.product}/${getVersion(version.id)}/crear`);
     }
 
     const getVersion = (nameVersion:any) => {
