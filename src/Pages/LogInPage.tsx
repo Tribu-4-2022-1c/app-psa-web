@@ -7,6 +7,9 @@ import {link} from "fs";
 
 const LogInPage = () => {
 
+    function goProyectos(){
+
+    }
 
     return (
         <div>
@@ -21,7 +24,13 @@ const LogInPage = () => {
           Contraseña:
         </label>
       </form>
-      <input type="text" name="name" />
+      <input type="password" name="name" />
+      <form>
+        <NavLink end  to={'/proyectos'} onClick={() => goProyectos()}>
+                        Login
+        </NavLink>
+      </form>
+      
       </div>
     )
 }
