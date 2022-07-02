@@ -1,0 +1,15 @@
+.titleTarea{
+    font-weight: 700;
+    color: #003066;
+}
+
+.labelSelect{
+    margin-bottom: 15px!important;
+    font-weight: 700;
+    color: #003066;
+}
+
+.iconClose{
+    color: #003066;
+    font-size: 30px;
+}

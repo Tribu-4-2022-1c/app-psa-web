@@ -52,6 +52,7 @@ export const Tickets = (props:any) => {
     ]
 
     useEffect(() => {
+      console.log("dsd")
       const tickets_ = async () =>{
         const allTickets:any = await soporteService().getTickets(product+'_'+version);
         const allseverities:any = await soporteService().getSeverities();
@@ -64,7 +65,7 @@ export const Tickets = (props:any) => {
         setload(false);
       }
       tickets_();
-    },[]);
+    },[product,version]);
 
     const getDays = (severity:string,fecha:string) => {
       return "6";
@@ -108,7 +109,7 @@ export const Tickets = (props:any) => {
               <td className={`${ticketsCSS.contentIcon} `}>
                 <Link className={versionSoporteStyle.styleNav} 
                   to={`/soporte/ticket/detalle`} 
-                  state={{ ticket,version,product,severities }}>
+                  state={{ ticket,version,product,severities,employees }}>
                   <FaEye />
                 </Link>
               </td>

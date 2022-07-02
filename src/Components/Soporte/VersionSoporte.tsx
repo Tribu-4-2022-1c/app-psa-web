@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { FaFolderOpen, FaPlusCircle } from 'react-icons/fa';
 import { NavLink } from 'react-router-dom';
 import versionSoporteStyle from '../../Styles/VersionSoporte.module.css'//'../../Styles/Soporte/VersionSoporte.module.css';
@@ -25,12 +27,17 @@ export const VersionSoporte = (props:any) => {
   return (
     <div onClick={() => selectVersion()} className={`${versionSoporteStyle.card} 
       ${(currentVersion && currentVersion.id === version.id)?versionSoporteStyle.isSelected:''}`}>
+          <NavLink
+            to={`/soporte/${version.product}/${getVersion(version.id)}`}
+            className={versionSoporteStyle.styleNav}
+          >
           <div className={versionSoporteStyle.contentDescription}>
+            
             <p className={versionSoporteStyle.label}>Número de Versión:</p>
             <p className={versionSoporteStyle.descItem}>{getVersion(version.id)}</p>
             <p className={versionSoporteStyle.label}>Fecha de release:</p>
             <p className={versionSoporteStyle.descItem}>{version.release}</p>
-          </div>
+          </div></NavLink>
           <div className={versionSoporteStyle.contentIcon} >
           <NavLink
             to={`/soporte/${version.product}/${getVersion(version.id)}`}
@@ -38,12 +45,12 @@ export const VersionSoporte = (props:any) => {
           >
             <FaFolderOpen onClick={() => {goDetailTickes()}} />
           </NavLink>
-          <NavLink
+          {/* <NavLink
             to={`/soporte/${version.product}/${getVersion(version.id)}/crear`}
             className={versionSoporteStyle.styleNav}
-          >
+          > */}
             <FaPlusCircle onClick={() => {getOpcion()}}  />
-          </NavLink>  
+          {/* </NavLink>   */}
             
           </div>
         </div>

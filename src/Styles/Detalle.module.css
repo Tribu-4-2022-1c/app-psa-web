@@ -1,6 +1,7 @@
 .col8{
     position: relative;
     padding: 15px;
+    padding-top: 50px;
     border-left: 2px solid #003066;
 }
 
@@ -11,6 +12,10 @@
     font-size: 30px;
     color: #003066;
 }
+
+/*.disabled{
+     background-image: none; 
+}*/
 
 .col4{
     padding: 15px;
@@ -74,12 +79,13 @@
 }
 
 .disabled{
-    background: none!important;
+    background-image: none!important;
     border: none!important;
+    background: none; 
 }
 
 .input{
-    width: 150px!important;
+    /* width: 150px!important; */
     text-align: end!important;
 }
 
@@ -118,7 +124,8 @@
 }
 
 .contentRow{
-    padding: 0 30px;
+    /* padding: 0 30px; */
+    padding: 0!important;
     margin: 0;
 }
 
@@ -150,4 +157,9 @@
 .uninformation{
     justify-content: center;
     display: flex;
+}
+
+.tdTable{
+    font-weight: 700;
+    color: #003066;
 }

@@ -48,8 +48,9 @@
 .styleNav{
     text-decoration: none;
     color: #003066;
-    font-size: 25px;
+    /* font-size: 25px; */
     display: flex;
+    width: 80%;
 }
 
 .styleNav:hover{
