@@ -6,11 +6,11 @@ import { ModalComponent } from '../ModalComponent';
 import MenuDescription from './MenuDescription'
 import soporteService from "../../Services/soporteService";
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
-import { FaCalendar, FaEdit, FaEye, FaQuestionCircle,FaProductHunt } from 'react-icons/fa';
+import { FaCalendar, FaEdit, FaEye, FaQuestionCircle, FaProductHunt } from 'react-icons/fa';
 import { MdOutlineError, MdTipsAndUpdates, MdHighlightOff } from "react-icons/md";
 import { Button, Card, Col, Container, Form, InputGroup, Row, Table } from 'react-bootstrap';
 import CardHeader from 'react-bootstrap/esm/CardHeader';
-import { IoCloseCircle,IoPencilSharp  } from "react-icons/io5";
+import { IoCloseCircle, IoPencilSharp } from "react-icons/io5";
 import { IoIosClose } from "react-icons/io";
 
 export const TicketDetalle = (props: any) => {
@@ -113,77 +113,101 @@ export const TicketDetalle = (props: any) => {
             <Container className={detalleTicketCSS.contentRow}>
                 <Row md={12}>
                     <Col className={detalleTicketCSS.col4} md={6}>
-                        <Row>
-                            <Col>
-                                <Form.Group className={detalleTicketCSS.contentItem}>
-                                    <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+                        <div>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+                                <Form.Control
+                                    className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
+                                    type="text"
+                                    id="client"
+                                    disabled={disabled}
+                                    value={ticketCurrent.client}
+                                    onChange={(value) => changeValue('client', value)}
+                                />
+                            </Form.Group>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
+                                        {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
+                                    </Form.Select>
+                                </div>
+                            </Form.Group>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
+                                <InputGroup className="mb-2">
                                     <Form.Control
                                         className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
                                         type="text"
-                                        id="client"
-                                        disabled={disabled}
-                                        value={ticketCurrent.client}
-                                        onChange={(value) => changeValue('client', value)}
+                                        id="creationDate"
+                                        disabled
+                                        value={ticketCurrent.creationDate}
+                                        onChange={(value) => changeValue('creationDate', value)}
                                     />
-                                </Form.Group>
+                                    <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
+                                </InputGroup>
+                            </Form.Group>
+                            <div>
                                 <Form.Group className={detalleTicketCSS.contentItem}>
-                                    <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                                    <div className={detalleTicketCSS.contentInput}>
-                                        <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
-                                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
-                                            {employees.map((type: any, index: number) => <option key={type.legajo} value={type}>{type.nombre}  {type.apellido}</option>)}
-                                        </Form.Select>
-                                    </div>
-                                </Form.Group>
-                                <Form.Group className={detalleTicketCSS.contentItem}>
-                                    <Form.Label className={detalleTicketCSS.label}>Fecha de creación:</Form.Label>
+                                    <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
                                     <InputGroup className="mb-2">
                                         <Form.Control
                                             className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
                                             type="text"
-                                            id="creationDate"
-                                            disabled
-                                            value={ticketCurrent.creationDate}
-                                            onChange={(value) => changeValue('creationDate', value)}
+                                            id="resolution"
+                                            disabled={disabled}
+                                            value={ticketCurrent.resolution}
+                                            onChange={(value) => changeValue('resolution', value)}
                                         />
                                         <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
                                     </InputGroup>
                                 </Form.Group>
-                                <div>
-                                    <Form.Group className={detalleTicketCSS.contentItem}>
-                                        <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-                                        <InputGroup className="mb-2">
-                                            <Form.Control
-                                                className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input}`}
-                                                type="text"
-                                                id="resolution"
-                                                disabled={disabled}
-                                                value={ticketCurrent.resolution}
-                                                onChange={(value) => changeValue('resolution', value)}
-                                            />
-                                            <InputGroup.Text><FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} /></InputGroup.Text>
-                                        </InputGroup>
-                                    </Form.Group>
-                                </div>
+                            </div>
 
-                                <Form.Group className={detalleTicketCSS.contentItem}>
-                                    <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
-                                    <div className={detalleTicketCSS.contentInput}>
-                                        <Form.Control
-                                            className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
-                                            type="text"
-                                            id="diasRestantes"
-                                            disabled
-                                            value={diasRestantes}
-                                        />
-                                    </div>
-                                </Form.Group>    
-                            </Col>
-                            
-                        </Row>
-                        <Row>
-                            <Col>dsfes</Col>
-                        </Row>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Dias de faltantes:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Control
+                                        className={`${(disabled) ? detalleTicketCSS.disabled : ''} ${detalleTicketCSS.input} ${detalleTicketCSS.addRight}`}
+                                        type="text"
+                                        id="diasRestantes"
+                                        disabled
+                                        value={diasRestantes}
+                                    />
+                                </div>
+                            </Form.Group>
+                        </div>
+                        <div>
+                            <Form.Group className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Select value={ticketCurrent.severity} disabled={disabled}
+                                        className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => { changeValueSeverities(value); changeValue('severity', value) }}>
+                                        {severities.map((severitie: any, index: number) => <option key={index} value={severitie.level}>{severitie.level}-{severitie.days} dias</option>)}
+                                    </Form.Select>
+                                </div>
+                            </Form.Group>
+                            <Form.Group  className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Select value={ticketCurrent.type} disabled className={`
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect} ${detalleTicketCSS.disabled}`} onChange={(value) => changeValue('type', value)}>
+                                        {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                                    </Form.Select>
+                                </div>
+                            </Form.Group >
+                            <Form.Group  className={detalleTicketCSS.contentItem}>
+                                <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                                <div className={detalleTicketCSS.contentInput}>
+                                    <Form.Select value={ticketCurrent.status} disabled={disabled} className={`${(disabled) ? detalleTicketCSS.disabled : ''} 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
+                                        {statusTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                                    </Form.Select>
+                                </div>
+                            </Form.Group >
+                        </div>
                     </Col>
                     <Col className={detalleTicketCSS.col8} md={6}>
                         {/* <div>{!disabled && (<>
@@ -192,17 +216,17 @@ export const TicketDetalle = (props: any) => {
                         </>)
                         }</div> */}
                         {/* <FaEdit/> */}
-                        {!disabled &&  <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+                        {!disabled && <Button className={detalleTicketCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
                         {/* {!disabled &&  <Button className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)}>
                             <FaProductHunt />
                         </Button>} */}
-                        {!disabled && 
+                        {!disabled &&
                             <IoIosClose className={`${detalleTicketCSS.editIcon} ${detalleTicketCSS.iconClose}`} onClick={() => changeStateEdit(true)} />
-                       } 
-                        {disabled && 
+                        }
+                        {disabled &&
                             <FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} />
-                       } 
-                       {/* <Button> </Button> */}
+                        }
+                        {/* <Button> </Button> */}
                         {/* <MdHighlightOff /> */}
                         {/* {disabled && <div><FaEdit className={`${detalleTicketCSS.editIcon}`} onClick={() => changeStateEdit(false)} /></div>}
 
