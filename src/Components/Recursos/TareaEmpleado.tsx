@@ -16,14 +16,14 @@ export const TareaEmpleado = (props:any) => {
 
 
     function diafecha(fecha:any) {
-        let numero_dia = new Date(fecha["date"]).getDay();
+        let numero_dia = new Date(fecha[0].date).getDay();
         return diasSemana[numero_dia];
     }
 
     return (
        <div >
            {diafecha(fecha) == diaActual?
-               <TareasEmpleados fecha={fecha["date"]} horas={horas["number_hours"]} id={"1"}/>              :null}
+               <TareasEmpleados fecha={fecha[0].date} horas={horas[0].number_hours} id={"1"}/>              :null}
         </div>
     )
 

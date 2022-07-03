@@ -12,7 +12,7 @@ const CalendarioDias = (props:any) => {
     const [allhoras, sethoras] = useState([]);
     useEffect(() => {
         const tasks_ = async () =>{
-            let allhoras:any = await recursosService().getHoursBetween(1, "2022-07-03", "2022-07-09");
+            let allhoras:any = recursosService.getHoursBetween(1,"2022-07-03","2022-07-09");
             sethoras(allhoras);
         }
         tasks_();
@@ -26,7 +26,7 @@ const CalendarioDias = (props:any) => {
             code_task: 0,
             code_project: 0,
             code_employee: 0
-        }]
+        },]
 
 
 
@@ -54,18 +54,5 @@ const CalendarioDias = (props:any) => {
         </div>
     )
 }
-
-const horas = [
-    {
-        code: 0,
-        number_hours: 0,
-        date: "2022-07-03",
-        code_task: 0,
-        code_project: 0,
-        code_employee: 0
-    },
-
-
-]
 
 export default CalendarioDias;

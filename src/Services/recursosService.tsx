@@ -38,37 +38,6 @@ const soporteService = () => {
             })
     }
 
-    const getApellidos = () => {
-        const url = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos/apellido";
-        return fetch(url).then( async (response) => {
-            if(response){
-                return response.json();
-            }else{
-                return [];
-
-            }
-        })
-            .catch( error => {
-                console.log(error);
-                return employees;
-            })
-    }
-
-    const getLegajos = () => {
-        const url = "https://anypoint.mulesoft.com/mocking/api/v1/sources/exchange/assets/754f50e8-20d8-4223-bbdc-56d50131d0ae/recursos-psa/1.0.0/m/api/recursos/legajo";
-        return fetch(url).then( async (response) => {
-            if(response){
-                return response.json();
-            }else{
-                return [];
-            }
-        })
-            .catch( error => {
-                console.log(error);
-                return employees;
-            })
-    }
-
     const loadHours = (hours: Hours) =>{
         return fetch(URL + "/load",
             {
@@ -127,7 +96,8 @@ const soporteService = () => {
     }
 
     const getHoursBetween = (legajo: number, startDate: string, endDate: string) =>{
-        fetch(URL + "/find/?codeEmployee=" + legajo + "&startDate=" + startDate + "&endDate=" + endDate,
+        console.log("res")
+        return fetch(URL + "/find/between/?codeEmployee=" + legajo + "&startDate=" + startDate + "&endDate=" + endDate,
             {
                 method: "GET",
                 headers:{
@@ -137,10 +107,11 @@ const soporteService = () => {
             })
             .then(async (res) => {
                 if (res){
-                    /*console.log("response json: ", res.json())
-                    return res.json();*/return horas}
+                   
+                    return res.json();
+                }
                 else{
-                    return [];
+                    return horas;
                 }
             })
             .catch((error) => console.error("Error",error))
@@ -161,8 +132,6 @@ const soporteService = () => {
 
     return {
         getNombres,
-        getApellidos,
-        getLegajos,
         loadHours,
         modifyHours,
         getHoursByEmployeeAndTask,
