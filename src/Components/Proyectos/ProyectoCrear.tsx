@@ -1,6 +1,6 @@
 
 import { useState } from 'react';
-import { Col, Form, Row } from 'react-bootstrap';
+import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Patch, Proyecto, ProyectoSinLider } from '../../models/Proyectos.models';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import tareasCSS from "../../Styles/Proyectos/TareasProyectos.module.css";
