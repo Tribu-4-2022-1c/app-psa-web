@@ -13,9 +13,17 @@
     color: #003066;
 }
 
-/*.disabled{
-     background-image: none; 
-}*/
+.content_principal{
+    margin: 30px!important;
+    border: 5px solid #003066;
+    border-radius: 10px;
+}
+
+.h3{
+    color: #003066;
+    font-weight: 700;
+    padding-bottom: 15px;
+}
 
 .col4{
     padding: 15px;
@@ -162,4 +170,15 @@
 .tdTable{
     font-weight: 700;
     color: #003066;
+}
+
+.invalidData{
+    border: 2px solid #EA6960!important;
+    /* box-shadow: 1px 3px 1px#EA6960!important; */
+
+}
+
+.invalidDataOnfocus{
+    border: 2px solid #EA6960!important;
+    box-shadow: 0px 0px 11px #EA6960!important;
 }

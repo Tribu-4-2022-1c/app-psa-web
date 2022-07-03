@@ -13,7 +13,7 @@ import { Button, Card, Col, Container, Dropdown, DropdownButton, Form, InputGrou
 import { useLocation, useNavigate } from 'react-router-dom'
 import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import moment from "moment";
-import { Ticket } from "../../models/Soporte.models";
+import { Status, StatusTicket, Ticket } from "../../models/Soporte.models";
 import CardHeader from "react-bootstrap/esm/CardHeader";
 import ProductoSoporte from './ProductoSoporte';
 
@@ -29,14 +29,84 @@ export const CrearTicket = (props: any) => {
     status: '',
     creationDate: '',
     lastUpdated: '',
-    closureMotive: null,
+    closureMotive: '',
     resolution: '',
-    responsible:''
+    responsible: ''
   }
 
+  const stateValue:Status = {
+    isValid:false,
+    wasOnFocus:false,
+    onFocus:false
+  }
+
+  /*const initialStatus: StatusTicket = {
+    code: stateValue,
+    title: stateValue,
+    description: stateValue,
+    type: stateValue,
+    client: stateValue,
+    version: stateValue,
+    severity: stateValue,
+    status: stateValue,
+    creationDate: stateValue,
+    lastUpdated: stateValue,
+    closureMotive: stateValue,
+    resolution: stateValue,
+    responsible: stateValue
+  }*/
+//  Array(8).fill(stateValue);
+  const initialStatus:Status[] =[
+    {
+      isValid:true,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:true,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:false,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:true,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:true,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:true,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:false,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:false,
+      wasOnFocus:false,
+      onFocus:false
+    },
+    {
+      isValid:false,
+      wasOnFocus:false,
+      onFocus:false
+    }
+  ]
   const { product } = useParams();
   const { version } = useParams();
-  const [disabled, setdisabled] = useState(true);
+  const [statusForm, setstatusForm] = useState(false);
+  const [statusValue,setStatusValue] = useState<Status[]>(initialStatus);
   const [tickets, settickets] = useState([]);
   const [employees, setemployees] = useState([]);
   const [load, setload] = useState(true);
@@ -48,25 +118,62 @@ export const CrearTicket = (props: any) => {
   const [statesTickets, setstatesTickets] = useState([])
   let navigate = useNavigate();
 
-  const changeValue = (prop: string, value: any) => {
-    console.log(value.target.value)
+  const changeValue = (prop: string, value: any, indexStatus:number) => {
+    console.log("changeValue")
+    let newStatusArray = [...statusValue];
+    let newStatus:Status = {
+      isValid:(value.target.value!='')?true:false,
+      wasOnFocus:true,
+      onFocus:statusValue[indexStatus].onFocus
+    }
+    newStatusArray[indexStatus] = newStatus;
+    setStatusValue(newStatusArray);
+    console.log(newStatusArray)
     setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
+  }
+
+  const onFocusInput = (state:boolean,indexStatus:number) => {
+    console.log("onFocusInput")
+    let newStatusArray = [...statusValue];
+    let newStatus:Status = {
+      isValid:statusValue[indexStatus].isValid,
+      wasOnFocus:true,
+      onFocus:state
+    }
+    newStatusArray[indexStatus] = newStatus;
+    setStatusValue(newStatusArray);
+    console.log(statusValue)
+  }
+
+  const validateForm = () => {
+    setstatusForm(true);
+    let index_:number = (ticketCurrent.status!='Cancelado')?7:8;
+    console.log(statusValue)
+    let invalidData = statusValue.find( (x:Status,index:number) => {
+      if(!x.isValid&&index<=index_){
+        return x
+      }
+    });
+    if(invalidData!=null) return false;
+    return true;
   }
 
   const agregarTicket = () => {
     console.log(ticketCurrent)
-    let response =  soporteService().postTicket(ticketCurrent);
+    let status = validateForm();
+    if(!status) return;
+    console.log("se envia form")
+   /* let response = soporteService().postTicket(ticketCurrent);
     console.log(response)
     if (response != null) {
       navigate(`/soporte/${product}/${version}`);
-    }
+    }*/
   }
 
-  const inicializarTicket = (allclients:any,typesTicket:any,statesTickets:any,allemployees:any,allseverities:any) => {
-    if(allclients.length==0) return;
-    console.log(allclients[0]['razon_social'])
-    const version_:string = product+'_'+version;
-    let initialTicket:Ticket = {
+  const inicializarTicket = (allclients: any, typesTicket: any, statesTickets: any, allemployees: any, allseverities: any) => {
+    if (allclients.length == 0) return;
+    const version_: string = product + '_' + version;
+    let initialTicket: Ticket = {
       code: 0,
       title: '',
       description: '',
@@ -77,12 +184,11 @@ export const CrearTicket = (props: any) => {
       status: statesTickets[0]['value'],
       creationDate: '',
       lastUpdated: '',
-      closureMotive: null,
+      closureMotive: '',
       resolution: '',
-      responsible:allemployees[0]['legajo']
+      responsible: allemployees[0]['legajo']
     }
     setticketCurrent(initialTicket);
-    console.log(initialTicket);
   }
 
   //Esto es lo que copie que seria para poder hacer click y seleccionar una fecha
@@ -108,7 +214,7 @@ export const CrearTicket = (props: any) => {
       const allclients: any = await soporteService().getAllClients();
       const typesTicket: any = await soporteService().getTypesTickets();
       const statesTickets: any = await soporteService().getStates();
-      inicializarTicket(allclients,typesTicket,statesTickets,allemployees,allseverities);
+      inicializarTicket(allclients, typesTicket, statesTickets, allemployees, allseverities);
       settickets(allTickets);
       setseverities(allseverities);
       setemployees(allemployees);
@@ -116,7 +222,6 @@ export const CrearTicket = (props: any) => {
       setstatesTickets(statesTickets);
       settypesTickets(typesTicket);
       setload(false);
-      
     }
     tickets_();
   }, [product, version]);
@@ -125,112 +230,121 @@ export const CrearTicket = (props: any) => {
 
   return (
     <div>
+      
       <LoadComponent load={load} winHeight={winHeight} setload soporteCSS={soporteCSS} />
       {!load && <div>
         <MenuDescription version={version} product={product} cancelTicket={true} confirmTicket={true} createTicket={agregarTicket} />
       </div>}
-      <Container>
-          <Row md={12}>
-              <Col className={detalleTicketCSS.col4} md={6}>
-                <div>
-                  <Form.Group>
-                    <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
-                    <Form.Control
-                    as="textarea"
-                    id="title"
-                    rows={3}
-                    value={ticketCurrent.title}
-                    onChange={(value) => changeValue('title', value)}
-                    />
-                  </Form.Group >
-
-                </div>
-                <div>
-                  <Form.Group>
-                    <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Descripción:</Form.Label>
-                    <Form.Control
-                      as="textarea"
-                      id="description"
-                      rows={5}
-                      value={ticketCurrent.description}
-                      onChange={(value) => changeValue('description', value)}
-                    />
-                  </Form.Group >
-
-                </div>
-              </Col>
-              <Col className={detalleTicketCSS.col8} md={6}>werew
-                   <Form.Group className={detalleTicketCSS.contentItem}>
-                    <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
-                    <div>
-                    <Form.Select value={ticketCurrent.client} className={` 
-                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client', value)}>
-                      {clients.map((client: any, index: number) => <option key={index} value={client.razon_social}>{client.razon_social}</option>)}
-                    </Form.Select>   
-                    </div>
-                   
-                  </Form.Group >
-                  <Form.Group className={detalleTicketCSS.contentItem}>
-                    <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
-                    <div>
-                      <Form.Select value={ticketCurrent.type} className={` 
-                          ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type', value)}>
-                        {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
-                      </Form.Select>  
-                    </div>
-                  </Form.Group >
-                  <Form.Group className={detalleTicketCSS.contentItem}>
-                    <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
-                    <div>
-                      <Form.Select value={ticketCurrent.status} className={` 
-                          ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
-                        {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
-                      </Form.Select> 
-                    </div>
-                  </Form.Group >
-              </Col>
-              <Col className={detalleTicketCSS.col2}>
-                <div className={detalleTicketCSS.contentItemCreate}>
-                  <Form.Group className={detalleTicketCSS.contentItem}>
-                    <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                    <Form.Select value={ticketCurrent.responsible} placeholder="Elegir Responsable" className={` 
-                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsible', value)}>
-                      {employees.map((employee: any, index: number) => <option key={index} value={employee.legajo}>{employee.nombre} {employee.apellido}</option>)}
-                    </Form.Select>
-                  </Form.Group >
-
-                </div>
-                <div className={detalleTicketCSS.contentItemCreate}>
-                  <Form.Group className={detalleTicketCSS.contentItem}>
-                    <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
-                    <Form.Select value={ticketCurrent.severity} className={` 
-                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('severity', value)}>
-                      {severities.map((severity: any, index: number) => <option key={index} value={severity.level}>{severity.level}-{severity.days}</option>)}
-                    </Form.Select>
-                  </Form.Group >
-
-                </div>
-                <div className={detalleTicketCSS.contentItemCreate}>
-                  <Form.Group className={detalleTicketCSS.contentItem}>
-                    <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-                    <InputGroup.Text>
-                      <Form.Control
-                        className={`${detalleTicketCSS.input}`}
-                        type="text"
-                        id="resolution"
-                        value={ticketCurrent.resolution}
-                        onChange={(value) => changeValue('resolution', value)}
-                      />
-                      <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                    </InputGroup.Text>
-                  </Form.Group >
-                </div>
-              </Col>
-            </Row>
-      </Container>
-          
-
+        {!load&&<Row md={12} className={detalleTicketCSS.content_principal}>
+          <Col className={detalleTicketCSS.col4} md={6}>
+            <h3 className={detalleTicketCSS.h3}>CREAR TICKET</h3>
+            <Form.Group className={`${detalleTicketCSS.contentItem}`}>
+              <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+              <div>
+                <Form.Select value={ticketCurrent.client} className={`${(!statusValue[0].isValid&&statusValue[0].wasOnFocus)?detalleTicketCSS.invalidData:''}
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client', value,0)}>
+                  {clients.map((client: any, index: number) => <option key={index} value={client.razon_social}>{client.razon_social}</option>)}
+                </Form.Select>
+              </div>
+            </Form.Group >
+              <Form.Group className={detalleTicketCSS.contentItem}>
+                <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                <Form.Select value={ticketCurrent.responsible} placeholder="Elegir Responsable" className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsible', value, 1)}>
+                  {employees.map((employee: any, index: number) => <option key={index} value={employee.legajo}>{employee.nombre} {employee.apellido}</option>)}
+                </Form.Select>
+              </Form.Group >
+              <Form.Group className={detalleTicketCSS.contentItem}>
+                <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                <Form.Control
+                  className={`${detalleTicketCSS.input} ${(!statusValue[2].isValid&&statusValue[2].wasOnFocus||!statusValue[2].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                  ${(!statusValue[2].isValid&&statusValue[2].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
+                  onFocus={() => onFocusInput(true,2)}
+                  onBlur={() => onFocusInput(false,2)}
+                  type="text"
+                  id="resolution"
+                  value={ticketCurrent.resolution}
+                  onChange={(value) => changeValue('resolution', value, 2)}
+                />
+                <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+              </Form.Group >
+              <Form.Group className={detalleTicketCSS.contentItem}>
+                <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
+                <Form.Select value={ticketCurrent.severity} className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('severity', value, 3)}>
+                  {severities.map((severity: any, index: number) => <option key={index} value={severity.level}>{severity.level}-{severity.days} {severity.days==1?'dia':'dias'}</option>)}
+                </Form.Select>
+              </Form.Group >
+            <Form.Group className={detalleTicketCSS.contentItem}>
+              <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
+              <div>
+                <Form.Select value={ticketCurrent.type} className={` 
+                          ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type', value, 4)}>
+                  {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                </Form.Select>
+              </div>
+            </Form.Group >
+            <Form.Group className={detalleTicketCSS.contentItem}>
+              <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+              <div>
+                <Form.Select value={ticketCurrent.status} className={` 
+                          ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value, 5)}>
+                  {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
+                </Form.Select>
+              </div>
+            </Form.Group >
+          </Col>
+          <Col className={detalleTicketCSS.col8} md={6}>
+            <div>
+              <Form.Group>
+                <Form.Label className={` ${detalleTicketCSS.label}`} htmlFor="title">Título:</Form.Label>
+                <Form.Control
+                  className={ `${(!statusValue[6].isValid&&statusValue[6].wasOnFocus||!statusValue[6].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                  ${(!statusValue[6].isValid&&statusValue[6].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
+                  as="textarea"
+                  onFocus={() => onFocusInput(true,6)}
+                  onBlur={() => onFocusInput(false,6)}
+                  id="title"
+                  rows={3}
+                  value={ticketCurrent.title}
+                  onChange={(value) => changeValue('title', value, 6)}
+                />
+              </Form.Group >
+            </div>
+            <div>
+              <Form.Group>
+                <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Descripción:</Form.Label>
+                <Form.Control
+                  className={ `${(!statusValue[7].isValid&&statusValue[7].wasOnFocus||!statusValue[7].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                  ${(!statusValue[7].isValid&&statusValue[7].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
+                  as="textarea"
+                  id="description"
+                  onFocus={() => onFocusInput(true,7)}
+                  onBlur={() => onFocusInput(false,7)}
+                  rows={5}
+                  value={ticketCurrent.description}
+                  onChange={(value) => changeValue('description', value, 7)}
+                />
+              </Form.Group >
+            </div>
+            {(ticketCurrent.status=='Cancelado')&&<div>
+              <Form.Group>
+                <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Motivo de Cancelación:</Form.Label>
+                <Form.Control
+                className={ `${(!statusValue[8].isValid&&statusValue[8].wasOnFocus||!statusValue[8].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                ${(!statusValue[8].isValid&&statusValue[8].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
+                onFocus={() => onFocusInput(true,8)}
+                onBlur={() => onFocusInput(false,8)}
+                  as="textarea"
+                  id="closureMotive"
+                  rows={5}
+                  value={ticketCurrent.closureMotive}
+                  onChange={(value) => changeValue('closureMotive', value, 8)}
+                />
+              </Form.Group >
+            </div>}
+          </Col>
+        </Row>}
     </div>
-
   )
 }

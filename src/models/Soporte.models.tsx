@@ -9,7 +9,29 @@ export interface Ticket {
     status:        string;
     creationDate:  string;
     lastUpdated:   string;
-    closureMotive: null;
+    closureMotive: string;
     resolution:    string;
     responsible: string,
+  }
+
+  export interface StatusTicket {
+    code:          Status;
+    title:         Status;
+    description:   Status;
+    type:          Status;
+    client:        Status;
+    version:       Status;
+    severity:      Status;
+    status:        Status;
+    creationDate:  Status;
+    lastUpdated:   Status;
+    closureMotive: Status;
+    resolution:    Status;
+    responsible: Status,
+  }
+
+  export interface Status {
+    isValid:boolean,
+    wasOnFocus:boolean,
+    onFocus:boolean
   }

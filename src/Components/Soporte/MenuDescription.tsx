@@ -1,10 +1,13 @@
 import React from 'react'
+import { useNavigate } from 'react-router-dom';
 import ticketsCSS from "../../Styles/Tickets.module.css";
 
 const MenuDescription = (props:any) => {
-
+  let navigate = useNavigate();
   const {product,version,flagGenerateTask, functionGenerateTask, flagNuevoTicket, cancelTicket, confirmTicket, createTicket} = props;
-
+  const goToPage = () => {
+    navigate(`/soporte/${product}/${version}/crear`);
+  }
   return (
     <div className={ticketsCSS.contentDetail}>
         <div className={ticketsCSS.contenDescription}>
@@ -18,7 +21,7 @@ const MenuDescription = (props:any) => {
           </div>
         </div>
         <div className={ticketsCSS.contentButton}>
-          {flagNuevoTicket&&<div className={ticketsCSS.button}>
+          {flagNuevoTicket&&<div className={ticketsCSS.button} onClick={goToPage}>
             <p>NUEVO TICKET</p>
           </div>}
           {flagGenerateTask&&<div className={ticketsCSS.button} onClick={functionGenerateTask}>

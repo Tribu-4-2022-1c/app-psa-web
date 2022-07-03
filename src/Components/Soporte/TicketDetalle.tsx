@@ -31,7 +31,7 @@ export const TicketDetalle = (props: any) => {
         status: '',
         creationDate: '',
         lastUpdated: '',
-        closureMotive: null,
+        closureMotive: '',
         resolution: '',
         responsible:''
     }
