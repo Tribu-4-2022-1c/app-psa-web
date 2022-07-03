@@ -171,21 +171,21 @@ export const ProyectoProyectos = (props: any) => {
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Producto:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select >
+                <Form.Select value={detalleProjectCSS.type} disabled={disabled} >
                 </Form.Select>
               </div>
             </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Version:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select >
+                <Form.Select value={detalleProjectCSS.type} disabled={disabled} >
                 </Form.Select>
               </div>
             </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Customizacion:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select >
+                <Form.Select value={detalleProjectCSS.type} disabled={disabled} >
                 </Form.Select>
               </div>
             </div>
