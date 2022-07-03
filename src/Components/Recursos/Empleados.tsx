@@ -28,8 +28,6 @@ export const Empleados = (props:any) => {
   useEffect(() => {
     const recursos_ = async () =>{
       const allNombres:any = await recursosService().getNombres();
-      const allApellidos:any = await recursosService().getApellidos();
-      const allLegajos:any = await recursosService().getLegajos();
       setnombre(allNombres);
       /*setapellido(allApellidos)
       setlegajo(allLegajos)*/
