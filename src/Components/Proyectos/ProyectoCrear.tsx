@@ -44,6 +44,11 @@ const ProyectoCrear = (props: any) =>{
             }
         }
       }
+      
+    const updateData = async () => {
+    const response = await ProyectoService().actualizarProyecto(proyectoActual);
+    console.log(response)
+  }    
 
   const typesProject = [
     'IMPLEMENTACION', 'DESARROLLO'
@@ -100,6 +105,16 @@ const ProyectoCrear = (props: any) =>{
             </div>
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
+          <div className={detalleProjectCSS.contentItem}>
+                {<Button className={detalleProjectCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+                
+              </div>
+              <div className={detalleProjectCSS.contentItem}>
+              
+              </div>
+              <div className={detalleProjectCSS.contentItem}>
+              
+              </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Fecha de inicio de Proyecto:</Form.Label>
               <Form.Control
@@ -163,7 +178,7 @@ const ProyectoCrear = (props: any) =>{
             }
           </Col>
         </Row>
-        <button className={detalleProjectCSS.button}>Guardar informacion</button>
+
         {elementosVacios &&
           <div>
             Hay elementos vacios
