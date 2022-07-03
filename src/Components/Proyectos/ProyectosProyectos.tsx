@@ -47,7 +47,7 @@ export const ProyectosProyectos = (props: any) => {
                         {headsTable && headsTable.map((head, index) => <th key={index}>
                             <div className={projectsCSS.contentFilter}>
                                 <p>{head.id}</p>
-                                {index !== (headsTable.length) &&
+                                {index !== (headsTable.length-1) &&
                                     <p><FaFilter /></p>}
                             </div>
                         </th>)}
