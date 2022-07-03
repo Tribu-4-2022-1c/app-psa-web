@@ -160,7 +160,6 @@ export const CrearTicket = (props: any) => {
                 </div>
               </Col>
               <Col className={detalleTicketCSS.col8} md={6}>
-                <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                     <div>
@@ -171,8 +170,6 @@ export const CrearTicket = (props: any) => {
                     </div>
                    
                   </Form.Group >
-                </div>
-                <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
                     <div>
@@ -182,8 +179,6 @@ export const CrearTicket = (props: any) => {
                       </Form.Select>  
                     </div>
                   </Form.Group >
-                </div>
-                <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
                     <div>
@@ -193,7 +188,6 @@ export const CrearTicket = (props: any) => {
                       </Form.Select> 
                     </div>
                   </Form.Group >
-                </div>
               </Col>
               {/* <Col className={detalleTicketCSS.col2}>
                 <div className={detalleTicketCSS.contentItemCreate}>
