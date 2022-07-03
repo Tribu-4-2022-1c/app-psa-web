@@ -1,6 +1,7 @@
 import React from 'react'
 import ProductoSoporteCSS from  '../../Styles/ProductoSoporte.module.css'//'../ Soporte/'
 import { FaPlusCircle } from 'react-icons/fa'
+import { TareasEmpleados } from './TareasEmpleados'; 
 const CalendarioDias = (props:any) => {
     const {dia} = props;
     const {diaSelect} = props;
@@ -18,7 +19,7 @@ const CalendarioDias = (props:any) => {
                 </div>
             </div>
             <div>
-                Tareas del Día. 
+                <TareasEmpleados />
             </div>
         </div>
     )
