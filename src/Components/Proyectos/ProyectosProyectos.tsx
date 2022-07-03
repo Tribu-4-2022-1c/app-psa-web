@@ -4,10 +4,19 @@ import { FaFilter, FaFolder, FaPlusCircle, FaTrash } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import projectsCSS from '../../Styles/Proyectos/ProyectoProyectos.module.css';
 import { Link } from 'react-router-dom';
+import { ModalComponentDelete } from './ModalDeleteProyecto';
 
 export const ProyectosProyectos = (props: any) => {
     const { proyecto } = props;
-
+ const [show, setshow] = useState(false);
+ 
+ const deleteProject = () => {
+    console.log("ss");
+    setshow(true);
+  }
+ const closeModal = () => {
+    setshow(false);
+  }
     const headsTable = [
         {
             id: "Nombre",
@@ -66,7 +75,8 @@ export const ProyectosProyectos = (props: any) => {
 			<td>
 			    <div className={projectsCSS.contentItem}>
 			        <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>
-			        <Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Are you sure to delete this record?')) { }; }}><FaTrash /></Link>
+                    <ModalComponentDelete show={show} closeModal={closeModal} />
+			        <div className={projectsCSS.styleNav} onClick={() =>deleteProject()}><FaTrash /></div>
 			    </div>
 			</td>
 
@@ -76,3 +86,4 @@ export const ProyectosProyectos = (props: any) => {
         </div>
     )
 }
+
