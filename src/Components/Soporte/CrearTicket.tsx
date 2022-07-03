@@ -101,7 +101,7 @@ export const CrearTicket = (props: any) => {
         <MenuDescription version={version} product={product} cancelTicket={true} confirmTicket={true} createTicket={agregarTicket} />
       </div>}
 
-        {/* <Container className={detalleTicketCSS.contentRow}>
+        <Container className={detalleTicketCSS.contentRow}>
           <Row md={12}>
             <Col className={detalleTicketCSS.col4}>
               <div>
@@ -126,7 +126,7 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-            <Col className={detalleTicketCSS.col8}>
+            {/* <Col className={detalleTicketCSS.col8}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
@@ -194,9 +194,9 @@ export const CrearTicket = (props: any) => {
                   </InputGroup.Text>
                 </Form.Group >
               </div>
-            </Col>
+            </Col> */}
           </Row>
-        </Container> */}
+        </Container>
 
     </div>
 
