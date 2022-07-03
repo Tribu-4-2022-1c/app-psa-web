@@ -159,7 +159,7 @@ export const CrearTicket = (props: any) => {
 
                 </div>
               </Col>
-              <Col className={detalleTicketCSS.col8} md={6}>
+              <Col className={detalleTicketCSS.col8} md={6}>werew
                   {/* <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                     <div>
