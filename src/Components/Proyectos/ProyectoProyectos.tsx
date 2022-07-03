@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Col, Form, Row, Table } from 'react-bootstrap';
-import { FaCalendar, FaEye } from 'react-icons/fa';
+import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
+import { FaCalendar, FaEdit, FaEye } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import { Patch, Proyecto, Tarea } from "../../models/Proyectos.models";
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Navigate, useParams } from 'react-router-dom';
 import  ProyectoService  from "../../Services/proyectosService";
+import { MdHighlightOff } from 'react-icons/md';
 
 export const ProyectoProyectos = (props: any) => {
 
@@ -48,6 +49,18 @@ export const ProyectoProyectos = (props: any) => {
 
   const changeValue = (prop: string, value: any) => {
     setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
+  }
+
+  const updateData = async () => {
+    const response = await ProyectoService().actualizarProyecto(proyectoActual);
+    console.log(response)
+  }
+
+  const changeStateEdit = (state:boolean) => {
+    if(state){
+     
+    };
+    setdisabled(state);
   }
 
   useEffect(()=>{
@@ -114,6 +127,9 @@ export const ProyectoProyectos = (props: any) => {
             </div>
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
+          {!disabled&&<Button className={detalleProjectCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+            {!disabled&&<MdHighlightOff className={`${detalleProjectCSS.editIcon} ${detalleProjectCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
+            {disabled&&<FaEdit className={`${detalleProjectCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Fecha de inicio de Proyecto:</Form.Label>
               <Form.Control
@@ -209,6 +225,7 @@ export const ProyectoProyectos = (props: any) => {
   )
   
 }
+
 
 
 
