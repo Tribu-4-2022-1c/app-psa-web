@@ -101,7 +101,6 @@ export const CrearTicket = (props: any) => {
         <MenuDescription version={version} product={product} cancelTicket={true} confirmTicket={true} createTicket={agregarTicket} />
       </div>}
 
-        <Container className={detalleTicketCSS.contentRow}>
           <Row md={12}>
             <Col className={detalleTicketCSS.col4}>
               <div>
@@ -196,7 +195,6 @@ export const CrearTicket = (props: any) => {
               </div>
             </Col> */}
           </Row>
-        </Container>
 
     </div>
 
