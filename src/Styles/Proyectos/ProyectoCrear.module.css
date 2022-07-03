@@ -1,0 +1,14 @@
+.contentItem{
+    padding-top: 10px;
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.contentRow{
+    padding: 10px 500px;
+    margin: 0;
+    align-items: center;
+}
