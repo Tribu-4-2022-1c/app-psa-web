@@ -5,15 +5,20 @@ const CalendarioDias = (props:any) => {
     const {dia} = props;
     const {diaSelect} = props;
     return (
-        <div
-            className={`${ProductoSoporteCSS.card} 
-      ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
-            <div className={ProductoSoporteCSS.contentDescription}>
-                <p>{dia['dia']} </p>
-            </div>
-            <div className={ProductoSoporteCSS.contentIcon} /*onClick={}*/>
+        <div>
+            <div
+                className={`${ProductoSoporteCSS.card} 
+        ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
+                <div className={ProductoSoporteCSS.contentDescription}>
+                    <p>{dia['dia']} </p>
+                </div>
+                <div className={ProductoSoporteCSS.contentIcon} /*onClick={}*/>
 
-                <FaPlusCircle  />
+                    <FaPlusCircle  />
+                </div>
+            </div>
+            <div>
+                Tareas del Día. 
             </div>
         </div>
     )
