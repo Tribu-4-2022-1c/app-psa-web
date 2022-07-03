@@ -189,7 +189,7 @@ export const CrearTicket = (props: any) => {
                     </div>
                   </Form.Group >
               </Col>
-              {/* <Col className={detalleTicketCSS.col2}>
+              <Col className={detalleTicketCSS.col2}>
                 <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
@@ -225,7 +225,7 @@ export const CrearTicket = (props: any) => {
                     </InputGroup.Text>
                   </Form.Group >
                 </div>
-              </Col> */}
+              </Col>
             </Row>
       </Container>
           
