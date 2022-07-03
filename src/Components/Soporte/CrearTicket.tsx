@@ -160,7 +160,7 @@ export const CrearTicket = (props: any) => {
                 </div>
               </Col>
               <Col className={detalleTicketCSS.col8} md={6}>
-                  <Form.Group className={detalleTicketCSS.contentItem}>
+                  {/* <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                     <div>
                     <Form.Select value={ticketCurrent.client} className={` 
@@ -187,7 +187,7 @@ export const CrearTicket = (props: any) => {
                         {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
                       </Form.Select> 
                     </div>
-                  </Form.Group >
+                  </Form.Group > */}
               </Col>
               {/* <Col className={detalleTicketCSS.col2}>
                 <div className={detalleTicketCSS.contentItemCreate}>
