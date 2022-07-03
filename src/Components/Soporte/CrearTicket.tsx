@@ -32,26 +32,6 @@ export const CrearTicket = (props: any) => {
     resolution: ''
   }
 
-  /*const typesTickets = [
-    'CONSULTA', 'ERROR', 'MEJORA'
-  ]*/
-
-  /*const severities = [
-    'S1 - 1 DIA', 'S2 - 3 DIAS', 'S3 - 7 DIAS', 'S4 - 30 DIAS', 'S5 - 90 DIAS'
-  ]*/
-
-  /*const states = [
-    'PENDIENTE', 'EN DESARROLLO', 'ESPERANDO INFORMACION DE CLIENTE', 'BLOQUEADO', 'CERRADO', 'CANCELADO'
-  ]*/
-
-  /*const clients = [
-    ' '
-  ]*/
-
-  const responsables = [
-    ' '
-  ]
-
   const { product } = useParams();
   const { version } = useParams();
   const [disabled, setdisabled] = useState(true);
@@ -69,11 +49,11 @@ export const CrearTicket = (props: any) => {
     setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
   }
 
-  const agregarTicket= () => {
+  const agregarTicket = () => {
     console.log(ticketCurrent)
     let response = soporteService().postTicket(ticketCurrent);
     console.log(response)
-    if(response!=null){
+    if (response != null) {
       navigate(`/soporte/${product}/${version}`);
     }
   }
@@ -110,7 +90,7 @@ export const CrearTicket = (props: any) => {
       setload(false);
     }
     tickets_();
-  }, []);
+  }, [product, version]);
 
 
 
@@ -118,13 +98,12 @@ export const CrearTicket = (props: any) => {
     <div>
       <LoadComponent load={load} winHeight={winHeight} setload soporteCSS={soporteCSS} />
       {!load && <div>
-        <MenuDescription version={version} product={product} cancelTicket={true} confirmTicket={true} createTicket={agregarTicket}/>
+        <MenuDescription version={version} product={product} cancelTicket={true} confirmTicket={true} createTicket={agregarTicket} />
       </div>}
 
-      <div>
-        <Container className={detalleTicketCSS.contentRow}>
+        {/* <Container className={detalleTicketCSS.contentRow}>
           <Row md={12}>
-            <Col className={detalleTicketCSS.col4} md={4}>
+            <Col className={detalleTicketCSS.col4}>
               <div>
                 <Form.Group>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
@@ -147,7 +126,7 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-            <Col className={detalleTicketCSS.col8} md={4}>
+            <Col className={detalleTicketCSS.col8}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
@@ -179,13 +158,13 @@ export const CrearTicket = (props: any) => {
 
               </div>
             </Col>
-            <Col className={detalleTicketCSS.col2} md={4}>
+            <Col className={detalleTicketCSS.col2}>
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
                   <Form.Select value={ticketCurrent.type} placeholder="Elegir Responsable" className={` 
                       ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsable', value)}>
-                    {employees.map((type: any, index: number) => <option key={index} value={type.legajo}>{type.nombre} {type.apellido}</option>)}
+                    {employees.map((employee: any, index: number) => <option key={index} value={employee.legajo}>{employee.nombre} {employee.apellido}</option>)}
                   </Form.Select>
                 </Form.Group >
 
@@ -203,26 +182,21 @@ export const CrearTicket = (props: any) => {
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-                  
                   <InputGroup.Text>
-                  <Form.Control
-                    className={`${detalleTicketCSS.input}`}
-                    type="text"
-                    id="resolution"
-                    value={ticketCurrent.resolution}
-                    onChange={(value) => changeValue('resolution', value)}
-                  />
-                  <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                    <Form.Control
+                      className={`${detalleTicketCSS.input}`}
+                      type="text"
+                      id="resolution"
+                      value={ticketCurrent.resolution}
+                      onChange={(value) => changeValue('resolution', value)}
+                    />
+                    <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
                   </InputGroup.Text>
                 </Form.Group >
-
-
               </div>
             </Col>
-          </Row>  
-        </Container>
-        
-      </div>
+          </Row>
+        </Container> */}
 
     </div>
 
