@@ -191,7 +191,7 @@ export const ProyectoProyectos = (props: any) => {
             </div>
           </Col>
         </Row>
-        <button className={detalleProjectCSS.button}>Guardar informacion</button>
+
         </form>
       </div>
       <Row className={detalleProjectCSS.col8} md={40} lg={40} m={40}>
