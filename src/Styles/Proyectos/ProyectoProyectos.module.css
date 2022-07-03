@@ -115,3 +115,11 @@
 .styleNav:hover{
     opacity: 0.8;
 }
+
+.contentItem{
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+    justify-content: space-between;
+    width: 50%;
+}

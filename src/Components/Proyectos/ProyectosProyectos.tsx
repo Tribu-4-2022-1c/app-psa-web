@@ -63,8 +63,12 @@ export const ProyectosProyectos = (props: any) => {
                     <td>{ticket['producto']}</td>
                     <td>{ticket['version']}</td>
                     <td>{ticket['horaEstimada']}</td>
-                        <td><Link className={projectsCSS.styleNav} to={'/proyectos/'+ ticket["id"]} state={{ticket}}><FaFolder /></Link></td>
-                        <td><Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Are you sure to delete this record?')) { }; }}><FaTrash /></Link></td>
+			<td>
+			    <div className={projectsCSS.contentItem}>
+			        <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>
+			        <Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Are you sure to delete this record?')) { }; }}><FaTrash /></Link>
+			    </div>
+			</td>
 
                     </tr>)}
                 </tbody>
