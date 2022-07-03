@@ -11,4 +11,5 @@ export interface Ticket {
     lastUpdated:   string;
     closureMotive: null;
     resolution:    string;
+    responsible: string,
   }

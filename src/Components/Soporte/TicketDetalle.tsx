@@ -32,7 +32,8 @@ export const TicketDetalle = (props: any) => {
         creationDate: '',
         lastUpdated: '',
         closureMotive: null,
-        resolution: ''
+        resolution: '',
+        responsible:''
     }
     const statusTickets: any = [
         'En proceso', 'Cerrado', 'Cancelado', 'Nuevo'

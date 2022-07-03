@@ -1,7 +1,12 @@
 import { Ticket } from "../models/Soporte.models";
 const soporteService = () => {
   const states = [
-    'PENDIENTE', 'EN DESARROLLO', 'ESPERANDO INFORMACION DE CLIENTE', 'BLOQUEADO', 'CERRADO', 'CANCELADO'
+   { id:'Pendiente',value:'Pendiente'},
+    { id:'En_desarrollo',value:'En desarrollo'},
+    { id:'Esperando_info_en_cliente',value:'Esperando info en cliente'},
+    { id:'Bloqueado',value:'Bloqueado'},
+    { id:'Cerrado',value:'Cerrado'},
+    { id:'Cancelado',value:'Cancelado'}
   ]
   const typesTickets = [
     'CONSULTA', 'ERROR', 'MEJORA'

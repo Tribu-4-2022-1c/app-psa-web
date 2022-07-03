@@ -15,6 +15,7 @@ import detalleTicketCSS from '../../Styles/Detalle.module.css';
 import moment from "moment";
 import { Ticket } from "../../models/Soporte.models";
 import CardHeader from "react-bootstrap/esm/CardHeader";
+import ProductoSoporte from './ProductoSoporte';
 
 export const CrearTicket = (props: any) => {
   const initialTicket: Ticket = {
@@ -29,7 +30,8 @@ export const CrearTicket = (props: any) => {
     creationDate: '',
     lastUpdated: '',
     closureMotive: null,
-    resolution: ''
+    resolution: '',
+    responsible:''
   }
 
   const { product } = useParams();
@@ -45,17 +47,42 @@ export const CrearTicket = (props: any) => {
   const [typesTickets, settypesTickets] = useState([])
   const [statesTickets, setstatesTickets] = useState([])
   let navigate = useNavigate();
+
   const changeValue = (prop: string, value: any) => {
+    console.log(value.target.value)
     setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
   }
 
   const agregarTicket = () => {
     console.log(ticketCurrent)
-    let response = soporteService().postTicket(ticketCurrent);
+    let response =  soporteService().postTicket(ticketCurrent);
     console.log(response)
     if (response != null) {
       navigate(`/soporte/${product}/${version}`);
     }
+  }
+
+  const inicializarTicket = (allclients:any,typesTicket:any,statesTickets:any,allemployees:any,allseverities:any) => {
+    if(allclients.length==0) return;
+    console.log(allclients[0]['razon_social'])
+    const version_:string = product+'_'+version;
+    let initialTicket:Ticket = {
+      code: 0,
+      title: '',
+      description: '',
+      type: typesTicket[0],
+      client: allclients[0]['razon_social'],
+      version: version_,
+      severity: allseverities[0]['level'],
+      status: statesTickets[0]['value'],
+      creationDate: '',
+      lastUpdated: '',
+      closureMotive: null,
+      resolution: '',
+      responsible:allemployees[0]['legajo']
+    }
+    setticketCurrent(initialTicket);
+    console.log(initialTicket);
   }
 
   //Esto es lo que copie que seria para poder hacer click y seleccionar una fecha
@@ -81,6 +108,7 @@ export const CrearTicket = (props: any) => {
       const allclients: any = await soporteService().getAllClients();
       const typesTicket: any = await soporteService().getTypesTickets();
       const statesTickets: any = await soporteService().getStates();
+      inicializarTicket(allclients,typesTicket,statesTickets,allemployees,allseverities);
       settickets(allTickets);
       setseverities(allseverities);
       setemployees(allemployees);
@@ -88,6 +116,7 @@ export const CrearTicket = (props: any) => {
       setstatesTickets(statesTickets);
       settypesTickets(typesTicket);
       setload(false);
+      
     }
     tickets_();
   }, [product, version]);
@@ -106,6 +135,11 @@ export const CrearTicket = (props: any) => {
                 <Form.Group>
                   <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
                   <Form.Control
+                   as="textarea"
+                   id="title"
+                   rows={3}
+                   value={ticketCurrent.title}
+                   onChange={(value) => changeValue('title', value)}
                   />
                 </Form.Group >
 
@@ -130,7 +164,7 @@ export const CrearTicket = (props: any) => {
                   <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
                   <Form.Select value={ticketCurrent.client} className={` 
                       ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client', value)}>
-                    {clients.map((client: any, index: number) => <option key={index} value={client.id}>{client.razon_social}</option>)}
+                    {clients.map((client: any, index: number) => <option key={index} value={client.razon_social}>{client.razon_social}</option>)}
                   </Form.Select>
                 </Form.Group >
 
@@ -150,7 +184,7 @@ export const CrearTicket = (props: any) => {
                   <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
                   <Form.Select value={ticketCurrent.status} className={` 
                       ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
-                    {statesTickets.map((status: any, index: number) => <option key={index} value={status}>{status}</option>)}
+                    {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
                   </Form.Select>
                 </Form.Group >
 
@@ -160,8 +194,8 @@ export const CrearTicket = (props: any) => {
               <div className={detalleTicketCSS.contentItemCreate}>
                 <Form.Group className={detalleTicketCSS.contentItem}>
                   <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                  <Form.Select value={ticketCurrent.type} placeholder="Elegir Responsable" className={` 
-                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsable', value)}>
+                  <Form.Select value={ticketCurrent.responsible} placeholder="Elegir Responsable" className={` 
+                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsible', value)}>
                     {employees.map((employee: any, index: number) => <option key={index} value={employee.legajo}>{employee.nombre} {employee.apellido}</option>)}
                   </Form.Select>
                 </Form.Group >
