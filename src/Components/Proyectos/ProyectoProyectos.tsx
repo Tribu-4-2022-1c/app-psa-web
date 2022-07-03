@@ -45,7 +45,7 @@ export const ProyectoProyectos = (props: any) => {
   ]
 
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);
-  const [disabled, setdisabled] = useState(false);
+  const [disabled, setdisabled] = useState(true);
 
   const changeValue = (prop: string, value: any) => {
     setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
@@ -127,9 +127,17 @@ export const ProyectoProyectos = (props: any) => {
             </div>
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
-          {!disabled&&<Button className={detalleProjectCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
-            {!disabled&&<MdHighlightOff className={`${detalleProjectCSS.editIcon} ${detalleProjectCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
-            {disabled&&<FaEdit className={`${detalleProjectCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+           <div className={detalleProjectCSS.contentItem}>
+                {!disabled && <Button className={detalleProjectCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+                {!disabled && <MdHighlightOff className={`${detalleProjectCSS.editIcon} ${detalleProjectCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
+                {disabled && <FaEdit className={`${detalleProjectCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
+              </div>
+              <div className={detalleProjectCSS.contentItem}>
+              
+              </div>
+              <div className={detalleProjectCSS.contentItem}>
+              
+              </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Fecha de inicio de Proyecto:</Form.Label>
               <Form.Control
