@@ -129,105 +129,108 @@ export const CrearTicket = (props: any) => {
       {!load && <div>
         <MenuDescription version={version} product={product} cancelTicket={true} confirmTicket={true} createTicket={agregarTicket} />
       </div>}
+      <Container>
           <Row md={12}>
-            <Col className={detalleTicketCSS.col4}>
-              <div>
-                <Form.Group>
-                  <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
-                  <Form.Control
-                   as="textarea"
-                   id="title"
-                   rows={3}
-                   value={ticketCurrent.title}
-                   onChange={(value) => changeValue('title', value)}
-                  />
-                </Form.Group >
-
-              </div>
-              <div>
-                <Form.Group>
-                  <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Descripción:</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    id="description"
-                    rows={5}
-                    value={ticketCurrent.description}
-                    onChange={(value) => changeValue('description', value)}
-                  />
-                </Form.Group >
-
-              </div>
-            </Col>
-            {/* <Col className={detalleTicketCSS.col8}>
-              <div className={detalleTicketCSS.contentItemCreate}>
-                <Form.Group className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
-                  <Form.Select value={ticketCurrent.client} className={` 
-                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client', value)}>
-                    {clients.map((client: any, index: number) => <option key={index} value={client.razon_social}>{client.razon_social}</option>)}
-                  </Form.Select>
-                </Form.Group >
-
-              </div>
-              <div className={detalleTicketCSS.contentItemCreate}>
-                <Form.Group className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
-                  <Form.Select value={ticketCurrent.type} className={` 
-                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type', value)}>
-                    {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
-                  </Form.Select>
-                </Form.Group >
-
-              </div>
-              <div className={detalleTicketCSS.contentItemCreate}>
-                <Form.Group className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
-                  <Form.Select value={ticketCurrent.status} className={` 
-                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
-                    {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
-                  </Form.Select>
-                </Form.Group >
-
-              </div>
-            </Col>
-            <Col className={detalleTicketCSS.col2}>
-              <div className={detalleTicketCSS.contentItemCreate}>
-                <Form.Group className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
-                  <Form.Select value={ticketCurrent.responsible} placeholder="Elegir Responsable" className={` 
-                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsible', value)}>
-                    {employees.map((employee: any, index: number) => <option key={index} value={employee.legajo}>{employee.nombre} {employee.apellido}</option>)}
-                  </Form.Select>
-                </Form.Group >
-
-              </div>
-              <div className={detalleTicketCSS.contentItemCreate}>
-                <Form.Group className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
-                  <Form.Select value={ticketCurrent.severity} className={` 
-                      ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('severity', value)}>
-                    {severities.map((severity: any, index: number) => <option key={index} value={severity.level}>{severity.level}-{severity.days}</option>)}
-                  </Form.Select>
-                </Form.Group >
-
-              </div>
-              <div className={detalleTicketCSS.contentItemCreate}>
-                <Form.Group className={detalleTicketCSS.contentItem}>
-                  <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
-                  <InputGroup.Text>
+              <Col className={detalleTicketCSS.col4}>
+                <div>
+                  <Form.Group>
+                    <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
                     <Form.Control
-                      className={`${detalleTicketCSS.input}`}
-                      type="text"
-                      id="resolution"
-                      value={ticketCurrent.resolution}
-                      onChange={(value) => changeValue('resolution', value)}
+                    as="textarea"
+                    id="title"
+                    rows={3}
+                    value={ticketCurrent.title}
+                    onChange={(value) => changeValue('title', value)}
                     />
-                    <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
-                  </InputGroup.Text>
-                </Form.Group >
-              </div>
-            </Col> */}
-          </Row>
+                  </Form.Group >
+
+                </div>
+                <div>
+                  <Form.Group>
+                    <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Descripción:</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      id="description"
+                      rows={5}
+                      value={ticketCurrent.description}
+                      onChange={(value) => changeValue('description', value)}
+                    />
+                  </Form.Group >
+
+                </div>
+              </Col>
+              {/* <Col className={detalleTicketCSS.col8}>
+                <div className={detalleTicketCSS.contentItemCreate}>
+                  <Form.Group className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+                    <Form.Select value={ticketCurrent.client} className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client', value)}>
+                      {clients.map((client: any, index: number) => <option key={index} value={client.razon_social}>{client.razon_social}</option>)}
+                    </Form.Select>
+                  </Form.Group >
+
+                </div>
+                <div className={detalleTicketCSS.contentItemCreate}>
+                  <Form.Group className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
+                    <Form.Select value={ticketCurrent.type} className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type', value)}>
+                      {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                    </Form.Select>
+                  </Form.Group >
+
+                </div>
+                <div className={detalleTicketCSS.contentItemCreate}>
+                  <Form.Group className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
+                    <Form.Select value={ticketCurrent.status} className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
+                      {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
+                    </Form.Select>
+                  </Form.Group >
+
+                </div>
+              </Col>
+              <Col className={detalleTicketCSS.col2}>
+                <div className={detalleTicketCSS.contentItemCreate}>
+                  <Form.Group className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
+                    <Form.Select value={ticketCurrent.responsible} placeholder="Elegir Responsable" className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('responsible', value)}>
+                      {employees.map((employee: any, index: number) => <option key={index} value={employee.legajo}>{employee.nombre} {employee.apellido}</option>)}
+                    </Form.Select>
+                  </Form.Group >
+
+                </div>
+                <div className={detalleTicketCSS.contentItemCreate}>
+                  <Form.Group className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
+                    <Form.Select value={ticketCurrent.severity} className={` 
+                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('severity', value)}>
+                      {severities.map((severity: any, index: number) => <option key={index} value={severity.level}>{severity.level}-{severity.days}</option>)}
+                    </Form.Select>
+                  </Form.Group >
+
+                </div>
+                <div className={detalleTicketCSS.contentItemCreate}>
+                  <Form.Group className={detalleTicketCSS.contentItem}>
+                    <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
+                    <InputGroup.Text>
+                      <Form.Control
+                        className={`${detalleTicketCSS.input}`}
+                        type="text"
+                        id="resolution"
+                        value={ticketCurrent.resolution}
+                        onChange={(value) => changeValue('resolution', value)}
+                      />
+                      <FaCalendar className={`${detalleTicketCSS.icon}  ${detalleTicketCSS.calendar}`} />
+                    </InputGroup.Text>
+                  </Form.Group >
+                </div>
+              </Col> */}
+            </Row>
+      </Container>
+          
 
     </div>
 
