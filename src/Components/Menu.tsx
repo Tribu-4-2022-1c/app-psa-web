@@ -8,7 +8,8 @@ const Menu = () => {
     const routePSA = {
         proyectos: '/proyectos',
         recursos: '/recursos',
-        soporte: '/soporte'
+        soporte: '/soporte',
+        login: '/login'
     };
     const intialStatePageSelected = {
         nameRoute: '/proyectos',
@@ -27,6 +28,8 @@ const Menu = () => {
         console.log(path);
         changePage(path);
     },[]);
+
+    let logged = false;
 
     return (
         <div className={menuModuleCSS.contentMenu}>
@@ -51,6 +54,19 @@ const Menu = () => {
                         RECURSOS
                     </NavLink>
                 </div>
+                {logged === false ? (
+                <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
+                    <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
+                        Log in
+                    </NavLink>
+                </div>
+                ) : (
+                    <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
+                    <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
+                        Already Logged
+                    </NavLink>
+                </div>
+                )}
             </div>
         </div>
     )

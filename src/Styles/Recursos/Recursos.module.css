@@ -1,0 +1,50 @@
+.content{
+    padding-top: 20px;
+    border-bottom: 1px solid black;
+}
+
+.contentAudio{
+    height: 100%;
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.titulo{
+    color: rgb(0, 4, 255);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: large;
+    padding-bottom: 1%;
+   
+}
+
+.contentButton{
+    display: flex;
+    width: 20%;
+    justify-content: flex-end;
+    align-items: center;
+    padding-right: 20px;
+}
+
+.button{
+    color: white;
+    background:#003066;
+    font-weight: 700;
+    border-radius: 5px;
+    padding: 15px;
+    font-size: 15px;
+    height: 26px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 3px solid #003066;
+    cursor: pointer;
+}
+
+.button:hover{
+    background: white;
+    color: #003066;
+}
