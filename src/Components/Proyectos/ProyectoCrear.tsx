@@ -102,8 +102,6 @@ const ProyectoCrear = (props: any) =>{
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Fecha de inicio de Proyecto:</Form.Label>
-
-              <FaCalendar className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
               <Form.Control
                 className={`${(disabled) ? detalleProjectCSS.disabled : ''} ${detalleProjectCSS.input}`}
                 type="text"
@@ -112,6 +110,7 @@ const ProyectoCrear = (props: any) =>{
                 defaultValue={proyectoActual.fecha_inicio}
                 onChange={(value) => changeValue('creationDate', value)}
               />
+              <FaCalendar className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
             </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Tipo:</Form.Label>
