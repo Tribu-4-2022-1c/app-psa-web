@@ -149,8 +149,8 @@ export const CrearTicket = (props: any) => {
         return x
       }
     });
-    if(invalidData!==null) return false;
-    return true;
+    if(invalidData===null || invalidData===undefined) return true;
+    return false;
   }
 
   const agregarTicket = () => {
