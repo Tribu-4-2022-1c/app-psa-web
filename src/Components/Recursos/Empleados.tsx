@@ -62,9 +62,9 @@ export const Empleados = (props:any) => {
           </thead>
           <tbody>
           {(nombre)&&nombre.map( (empleado, index) => <tr key={index}>
-            <td>{empleado['legajo']}</td>
-            <td>{empleado['Nombre']}</td>
-            <td>{empleado['Apellido']}</td>
+            <td>{empleado['file']}</td>
+            <td>{empleado['name']}</td>
+            <td>{empleado['lastname']}</td>
           </tr>)}
           </tbody>
         </Table>
