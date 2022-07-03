@@ -159,7 +159,7 @@ export const CrearTicket = (props: any) => {
 
                 </div>
               </Col>
-              {/* <Col className={detalleTicketCSS.col8}>
+              <Col className={detalleTicketCSS.col8}>
                 <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
@@ -191,7 +191,7 @@ export const CrearTicket = (props: any) => {
 
                 </div>
               </Col>
-              <Col className={detalleTicketCSS.col2}>
+              {/* <Col className={detalleTicketCSS.col2}>
                 <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Responsable:</Form.Label>
