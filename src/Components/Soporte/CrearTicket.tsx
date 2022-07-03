@@ -131,7 +131,7 @@ export const CrearTicket = (props: any) => {
       </div>}
       <Container>
           <Row md={12}>
-              <Col className={detalleTicketCSS.col4}>
+              <Col className={detalleTicketCSS.col4} md={6}>
                 <div>
                   <Form.Group>
                     <Form.Label className={detalleTicketCSS.label} htmlFor="title">Título:</Form.Label>
@@ -159,36 +159,40 @@ export const CrearTicket = (props: any) => {
 
                 </div>
               </Col>
-              <Col className={detalleTicketCSS.col8}>
+              <Col className={detalleTicketCSS.col8} md={6}>
                 <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Cliente:</Form.Label>
+                    <div>
                     <Form.Select value={ticketCurrent.client} className={` 
                         ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('client', value)}>
                       {clients.map((client: any, index: number) => <option key={index} value={client.razon_social}>{client.razon_social}</option>)}
-                    </Form.Select>
+                    </Form.Select>   
+                    </div>
+                   
                   </Form.Group >
-
                 </div>
                 <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Tipo:</Form.Label>
-                    <Form.Select value={ticketCurrent.type} className={` 
-                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type', value)}>
-                      {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
-                    </Form.Select>
+                    <div>
+                      <Form.Select value={ticketCurrent.type} className={` 
+                          ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('type', value)}>
+                        {typesTickets.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
+                      </Form.Select>  
+                    </div>
                   </Form.Group >
-
                 </div>
                 <div className={detalleTicketCSS.contentItemCreate}>
                   <Form.Group className={detalleTicketCSS.contentItem}>
                     <Form.Label className={detalleTicketCSS.label}>Estado:</Form.Label>
-                    <Form.Select value={ticketCurrent.status} className={` 
-                        ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
-                      {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
-                    </Form.Select>
+                    <div>
+                      <Form.Select value={ticketCurrent.status} className={` 
+                          ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('status', value)}>
+                        {statesTickets.map((status: any, index: number) => <option key={index} value={status.id}>{status.value}</option>)}
+                      </Form.Select> 
+                    </div>
                   </Form.Group >
-
                 </div>
               </Col>
               {/* <Col className={detalleTicketCSS.col2}>
