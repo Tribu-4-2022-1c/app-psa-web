@@ -96,6 +96,15 @@ const soporteService = () => {
             console.log("Se han cargado correctamente las horas")
         })
     }
+    const horas = [
+        {
+            code: 0,
+            number_hours: 0,
+            date: "2022-07-03",
+            code_task: 0,
+            code_project: 0,
+            code_employee: 0
+        }]
 
     const getHoursByEmployeeAndTask = (legajo: number, codeTask: number) =>{
         fetch(URL + "/find/?codeEmployee=" + legajo + "&codeTask=" + codeTask,
@@ -128,8 +137,8 @@ const soporteService = () => {
             })
             .then(async (res) => {
                 if (res){
-                    console.log("response json: ", res.json())
-                    return res.json();}
+                    /*console.log("response json: ", res.json())
+                    return res.json();*/return horas}
                 else{
                     return [];
                 }
@@ -157,6 +166,7 @@ const soporteService = () => {
         loadHours,
         modifyHours,
         getHoursByEmployeeAndTask,
+        getHoursBetween
     }
 }
 
