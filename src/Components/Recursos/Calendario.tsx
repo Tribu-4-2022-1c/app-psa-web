@@ -46,9 +46,7 @@ export const Calendario = (props:any) => {
 
     }, []);
 
-
     function goEmpleados() {
-
     }
 
     return (
