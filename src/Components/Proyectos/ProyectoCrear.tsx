@@ -106,6 +106,7 @@ const ProyectoCrear = (props: any) =>{
                 className={`${(disabled) ? detalleProjectCSS.disabled : ''} ${detalleProjectCSS.input}`}
                 type="text"
                 id="startDate"
+                disabled={disabled}
                 defaultValue={proyectoActual.fecha_inicio}
                 onChange={(value) => changeValue('creationDate', value)}
               />
