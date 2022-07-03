@@ -119,21 +119,18 @@ export const CrearTicket = (props: any) => {
   let navigate = useNavigate();
 
   const changeValue = (prop: string, value: any, indexStatus:number) => {
-    console.log("changeValue")
     let newStatusArray = [...statusValue];
     let newStatus:Status = {
-      isValid:(value.target.value!='')?true:false,
+      isValid:(value.target.value!=='')?true:false,
       wasOnFocus:true,
       onFocus:statusValue[indexStatus].onFocus
     }
     newStatusArray[indexStatus] = newStatus;
     setStatusValue(newStatusArray);
-    console.log(newStatusArray)
     setticketCurrent({ ...ticketCurrent, [prop]: value.target.value });
   }
 
   const onFocusInput = (state:boolean,indexStatus:number) => {
-    console.log("onFocusInput")
     let newStatusArray = [...statusValue];
     let newStatus:Status = {
       isValid:statusValue[indexStatus].isValid,
@@ -142,36 +139,31 @@ export const CrearTicket = (props: any) => {
     }
     newStatusArray[indexStatus] = newStatus;
     setStatusValue(newStatusArray);
-    console.log(statusValue)
   }
 
   const validateForm = () => {
     setstatusForm(true);
-    let index_:number = (ticketCurrent.status!='Cancelado')?7:8;
-    console.log(statusValue)
+    let index_:number = (ticketCurrent.status!=='Cancelado')?7:8;
     let invalidData = statusValue.find( (x:Status,index:number) => {
       if(!x.isValid&&index<=index_){
         return x
       }
     });
-    if(invalidData!=null) return false;
+    if(invalidData!==null) return false;
     return true;
   }
 
   const agregarTicket = () => {
-    console.log(ticketCurrent)
     let status = validateForm();
-    if(!status) return;
-    console.log("se envia form")
-   /* let response = soporteService().postTicket(ticketCurrent);
-    console.log(response)
+    if(!status) return; 
+    let response = soporteService().postTicket(ticketCurrent);
     if (response != null) {
       navigate(`/soporte/${product}/${version}`);
-    }*/
+    }
   }
 
   const inicializarTicket = (allclients: any, typesTicket: any, statesTickets: any, allemployees: any, allseverities: any) => {
-    if (allclients.length == 0) return;
+    if (allclients.length === 0) return;
     const version_: string = product + '_' + version;
     let initialTicket: Ticket = {
       code: 0,
@@ -257,7 +249,7 @@ export const CrearTicket = (props: any) => {
               <Form.Group className={detalleTicketCSS.contentItem}>
                 <Form.Label className={detalleTicketCSS.label}>Fecha de Resolución:</Form.Label>
                 <Form.Control
-                  className={`${detalleTicketCSS.input} ${(!statusValue[2].isValid&&statusValue[2].wasOnFocus||!statusValue[2].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                  className={`${detalleTicketCSS.input} ${((!statusValue[2].isValid&&statusValue[2].wasOnFocus)||(!statusValue[2].isValid&&statusForm))?detalleTicketCSS.invalidData:''}
                   ${(!statusValue[2].isValid&&statusValue[2].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
                   onFocus={() => onFocusInput(true,2)}
                   onBlur={() => onFocusInput(false,2)}
@@ -272,7 +264,7 @@ export const CrearTicket = (props: any) => {
                 <Form.Label className={detalleTicketCSS.label}>Severidad:</Form.Label>
                 <Form.Select value={ticketCurrent.severity} className={` 
                         ${detalleTicketCSS.input} ${detalleTicketCSS.addRightSelect}`} onChange={(value) => changeValue('severity', value, 3)}>
-                  {severities.map((severity: any, index: number) => <option key={index} value={severity.level}>{severity.level}-{severity.days} {severity.days==1?'dia':'dias'}</option>)}
+                  {severities.map((severity: any, index: number) => <option key={index} value={severity.level}>{severity.level}-{severity.days} {severity.days===1?'dia':'dias'}</option>)}
                 </Form.Select>
               </Form.Group >
             <Form.Group className={detalleTicketCSS.contentItem}>
@@ -299,7 +291,7 @@ export const CrearTicket = (props: any) => {
               <Form.Group>
                 <Form.Label className={` ${detalleTicketCSS.label}`} htmlFor="title">Título:</Form.Label>
                 <Form.Control
-                  className={ `${(!statusValue[6].isValid&&statusValue[6].wasOnFocus||!statusValue[6].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                  className={ `${((!statusValue[6].isValid&&statusValue[6].wasOnFocus)||(!statusValue[6].isValid&&statusForm))?detalleTicketCSS.invalidData:''}
                   ${(!statusValue[6].isValid&&statusValue[6].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
                   as="textarea"
                   onFocus={() => onFocusInput(true,6)}
@@ -315,7 +307,7 @@ export const CrearTicket = (props: any) => {
               <Form.Group>
                 <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Descripción:</Form.Label>
                 <Form.Control
-                  className={ `${(!statusValue[7].isValid&&statusValue[7].wasOnFocus||!statusValue[7].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                  className={ `${((!statusValue[7].isValid&&statusValue[7].wasOnFocus)||(!statusValue[7].isValid&&statusForm))?detalleTicketCSS.invalidData:''}
                   ${(!statusValue[7].isValid&&statusValue[7].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
                   as="textarea"
                   id="description"
@@ -327,11 +319,11 @@ export const CrearTicket = (props: any) => {
                 />
               </Form.Group >
             </div>
-            {(ticketCurrent.status=='Cancelado')&&<div>
+            {(ticketCurrent.status==='Cancelado')&&<div>
               <Form.Group>
                 <Form.Label className={detalleTicketCSS.labelCreate} htmlFor="inputPassword5">Motivo de Cancelación:</Form.Label>
                 <Form.Control
-                className={ `${(!statusValue[8].isValid&&statusValue[8].wasOnFocus||!statusValue[8].isValid&&statusForm)?detalleTicketCSS.invalidData:''}
+                className={ `${((!statusValue[8].isValid&&statusValue[8].wasOnFocus)||(!statusValue[8].isValid&&statusForm))?detalleTicketCSS.invalidData:''}
                 ${(!statusValue[8].isValid&&statusValue[8].onFocus)?detalleTicketCSS.invalidDataOnfocus:''}`}
                 onFocus={() => onFocusInput(true,8)}
                 onBlur={() => onFocusInput(false,8)}
