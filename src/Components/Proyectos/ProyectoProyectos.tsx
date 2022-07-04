@@ -136,7 +136,7 @@ export const ProyectoProyectos = (props: any) => {
   return (
     <div>
       
-      <MenuDescription proyecto={proyectoActual.nombre} flagGenerateTask={true} title={"Proyecto"} id_proyecto ={id}/>
+      <MenuDescription proyecto={proyectoActual.nombre} flagGenerateTask={false} title={"Proyecto"} id_proyecto ={id}/>
       <div>
         <form onSubmit={handelSubmit}>
         <Row className={detalleProjectCSS.contentRow}>
@@ -234,7 +234,7 @@ export const ProyectoProyectos = (props: any) => {
       <Row className={detalleProjectCSS.col8} md={40} lg={40} m={40}>
 
         <Col className={detalleProjectCSS.col8} md={20} lg={20} m={20}>
-         <Link className={detalleProjectCSS.styleNav} to={"/proyectos/crear_tarea/"+id+"/"} state={{}}><div className={detalleProjectCSS.button}>
+         <Link className={detalleProjectCSS.styleNavButton} to={"/proyectos/crear_tarea/"+id+"/"} state={{}}><div className={detalleProjectCSS.button}>
           <p>NUEVA TAREA</p>
         </div></Link>
           <div className={`${detalleProjectCSS.contentTaskprojects} ${(proyecto) ? detalleProjectCSS.uninformation : ''}`}/>
