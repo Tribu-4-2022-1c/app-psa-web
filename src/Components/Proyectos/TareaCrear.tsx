@@ -27,8 +27,8 @@ export const TareaCrear = (props:any) => {
       id_recurso: 0,
       name: ""
     },
-    estado: "",
-    prioridad: "",
+    estado: "Pendiente",
+    prioridad: "Baja",
     recursosAsignados: [],
     proyectoID: proyecto_id,
     objetivo: ''
@@ -36,7 +36,7 @@ export const TareaCrear = (props:any) => {
   
 
   const typesPrioridad = [
-    'Alta', 'Mdia','Baja'
+    'Alta', 'Media','Baja'
   ]
 
   const typesStatus = [
@@ -91,7 +91,7 @@ export const TareaCrear = (props:any) => {
     console.log(answer)
   }
   
- 
+  console.log(tareaActual)
   return (
     <div>
       <MenuDescription proyecto={tareaActual.nombre} title={"Crear Tarea:"} />
