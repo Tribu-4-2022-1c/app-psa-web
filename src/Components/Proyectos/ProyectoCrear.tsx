@@ -57,17 +57,18 @@ const ProyectoCrear = (props: any) =>{
   const typesStatus = [
     'PENDIENTE', 'ASIGNADO'
   ]
-  function clickGuardar() {
-    return <input type="submit" value="Guardar" />;
+  function clickGuardar(e: { preventDefault: () => void; }) {
+    e.preventDefault()
+    console.log(proyectoActual)
+    if (proyectoActual.nombre ==="" || proyectoActual.descripcion === ""){
+        setElementosVacios(true)
+        return false;
+    }
+    
+    ProyectoService().postProyecto(proyectoActual)
   }
     const handelSubmit = (e: { preventDefault: () => void; }) =>{
-        e.preventDefault()
-        if (proyectoActual.nombre ==="" || proyectoActual.descripcion === ""){
-            setElementosVacios(true)
-            return false;
-        }
-        console.log(proyectoActual)
-        ProyectoService().postProyecto(proyectoActual)
+
     }
 
     return( 
@@ -108,7 +109,7 @@ const ProyectoCrear = (props: any) =>{
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
           <div className={detalleProjectCSS.contentItem}>
-                {<Button  type="submit" className={detalleProjectCSS.iconSave} onClick={() => clickGuardar()} variant="success">Guardar</Button>}
+                {<Button  type="submit" className={detalleProjectCSS.iconSave} onClick={(e) => clickGuardar(e)} variant="success">Guardar</Button>}
                 
               </div>
               <div className={detalleProjectCSS.contentItem}>

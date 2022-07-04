@@ -3,9 +3,8 @@ import tareasCSS from "../../Styles/Proyectos/TareasProyectos.module.css";
 
 
 const MenuDescription = (props: any) => {
-
-  const { proyecto, title, flagGenerateProyecto, flagGenerateTask } = props;
-
+  
+  const { proyecto, title, flagGenerateProyecto, flagGenerateTask} = props;
   return (
     <div className={tareasCSS.contentDetail}>
       <div className={tareasCSS.contenDescription}>

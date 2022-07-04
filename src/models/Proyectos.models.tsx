@@ -1,6 +1,6 @@
 export interface Tarea {
-    id: string,
-    horasEstimadas: string,
+    id: number,
+    horasEstimadas: number,
     nombre: string,
     fechaCreacion: string,
     recursoAsignado: Lider;
@@ -8,7 +8,7 @@ export interface Tarea {
     prioridad: string,
     objetivo: string,
     recursosAsignados: Array<Lider>,
-    proyectoID: string
+    proyectoID: number
   }
 
   export interface Proyecto {

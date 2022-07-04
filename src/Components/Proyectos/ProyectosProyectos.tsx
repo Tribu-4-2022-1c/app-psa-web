@@ -73,7 +73,7 @@ export const ProyectosProyectos = (props: any) => {
                     <td>{ticket['tipo']}</td>
                     <td>{ticket['producto']}</td>
                     <td>{ticket['version']}</td>
-                    <td>{ticket['horaEstimada']}</td>
+                    <td>{ticket['horaestimada']}</td>
 			<td>
 			    <div className={projectsCSS.contentItem}>
 			        <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>

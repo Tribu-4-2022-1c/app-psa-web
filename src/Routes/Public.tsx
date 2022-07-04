@@ -19,7 +19,7 @@ const Public = () => {
         <Route path='/proyectos/:id' element={ <ProyectoProyectos /> } />
         <Route path='/proyectos/tarea/:id' element={ <TareaProyectos /> } />
         <Route path='/proyectos/crear_proyecto' element={ <ProyectoCrear /> } />
-        <Route path='/proyectos/crear_tarea' element={ <TareaCrear /> } />
+        <Route path='/proyectos/crear_tarea/:idProyecto/' element={ <TareaCrear /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />
         <Route path='/soporte/:product/:version' element={ <Tickets /> } />
