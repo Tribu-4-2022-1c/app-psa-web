@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import { Table } from 'react-bootstrap';
 import { FaFilter, FaEye } from 'react-icons/fa';
 import { Link, useParams } from 'react-router-dom';
@@ -8,6 +8,7 @@ import versionSoporteStyle from '../../Styles/VersionSoporte.module.css';
 import { LoadComponent } from '../LoadComponent';
 import MenuDescription from './MenuDescription';
 import soporteCSS from '../../Styles/Soporte.module.css';
+import moment from 'moment';
 
 export const Tickets = (props:any) => {
     const {product} = useParams();
@@ -67,9 +68,15 @@ export const Tickets = (props:any) => {
       tickets_();
     },[product,version]);
 
-    const getDays = (severity:string,fecha:string) => {
-      return "6";
-    }
+    const getDiasDeVencimiento = useCallback((severity: string, dateCreation: string) => {
+      let fecha1 = moment(dateCreation);
+      let fecha2 = moment();
+      let optionSev:any = severities.find((x: any) => x.level === severity);
+      let diffDate:any = fecha2.diff(fecha1, 'days');
+      //setdiasRestantes(optionSev.days - diffDate);
+      let result:any = optionSev.days - diffDate ;
+      return (result>0)?result:'Vencido'
+  }, [severities])
 
     const isConsulta = (typeTicket:string) =>{
       return typeTicket==='CONSULTA';
@@ -103,7 +110,7 @@ export const Tickets = (props:any) => {
               <td>{ticket['title']}</td>
               <td>{ticket['creationDate']}</td>
               <td>{ticket['lastUpdated']}</td>
-              <td>{getDays(ticket['severity'],ticket['creationDate'])}</td>
+              <td>{getDiasDeVencimiento(ticket['severity'],ticket['creationDate'])}</td>
               <td>{ticket['resolution']}</td>
               <td className={`${isError(ticket['type'])?ticketsCSS.error:isConsulta(ticket['type'])?ticketsCSS.consulta:ticketsCSS.default}`}>{ticket['type']}</td>
               <td className={`${ticketsCSS.contentIcon} `}>

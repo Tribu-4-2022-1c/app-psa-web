@@ -8,7 +8,7 @@
 .editIcon{
     position: absolute;
     top: 10px;
-    right: 0;
+    right: 15px;
     font-size: 30px;
     color: #003066;
 }
@@ -26,12 +26,12 @@
 }
 
 .col4{
-    padding: 15px;
+    padding: 20px;
     border-right: 2px solid #003066;
 }
 
 .col2{
-    padding: 15px;
+    padding: 20px;
     border-left: 4px solid #003066;
 
 }
@@ -93,7 +93,6 @@
 }
 
 .input{
-    /* width: 150px!important; */
     text-align: end!important;
 }
 
@@ -116,7 +115,7 @@
 
 .content_iconState{
     display: flex;
-    justify-content: flex-start;
+    justify-content: flex-end;
     align-items: center;
 }
 
@@ -132,15 +131,19 @@
 }
 
 .contentRow{
-    /* padding: 0 30px; */
-    padding: 0!important;
-    margin: 0;
+    border-radius: 11px;
+    border: 2px solid #003066;
+}
+
+.contentContainer{
+    border-radius: 11px;
+    margin: 46px;
 }
 
 .iconSave{
     position: absolute;
     top: 5px;
-    right: 40px;
+    right: 50px;
 }
 
 .iconClose{
@@ -149,7 +152,6 @@
 
 .contentTaskTickets{
     border-top: 2px solid #003066;
-    /* padding: 15px; */
 }
 
 .contentCard{
@@ -174,11 +176,13 @@
 
 .invalidData{
     border: 2px solid #EA6960!important;
-    /* box-shadow: 1px 3px 1px#EA6960!important; */
-
 }
 
 .invalidDataOnfocus{
     border: 2px solid #EA6960!important;
     box-shadow: 0px 0px 11px #EA6960!important;
+}
+
+.goTo{
+    cursor: pointer;
 }

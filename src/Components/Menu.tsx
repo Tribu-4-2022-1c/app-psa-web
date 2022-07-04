@@ -46,7 +46,7 @@ const Menu = () => {
                 <div className={`${menuModuleCSS.optionSegment} ${(pageSelected.nameRoute === routePSA.soporte)?menuModuleCSS.addMarker:''}`}>
                     <NavLink end className={menuModuleCSS.linkEfect} 
                     to={routePSA.soporte} onClick={() => changePage(routePSA.soporte)}>
-                        SOPORTES
+                        SOPORTE
                     </NavLink>
                 </div>
                 <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.recursos?menuModuleCSS.addMarker:''}`}>
