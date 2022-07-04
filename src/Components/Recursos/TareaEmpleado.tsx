@@ -87,20 +87,17 @@ export const TareaEmpleado = (props:any) => {
     const changeTarea = (prop: string, value: any) => {
         cargaActual.code_task = value.target.value;
         setCargaActual(cargaActual);
-        //idTarea = value.target.value;
     }
 
     const changeFecha = (prop: string, value: any) => {
         cargaActual.date = value.target.value;
         setCargaActual(cargaActual);
-        //fechaCarga = value.target.value;
     }
 
     const changeHoras = (prop: string, value: any) => {
         console.log(cargaActual);
         cargaActual.number_hours = value.target.value;
         setCargaActual(cargaActual);
-        //numeroHorasCarga = value.target.value;
     }
         
     const number_hours = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
@@ -120,9 +117,9 @@ export const TareaEmpleado = (props:any) => {
             data: hours,
         }
         const response = await RecursosService().modifyHours(carga);
-        // if(response) {
-        //     window.location.reload();
-        // }
+        if(response) {
+            window.location.reload();
+        }
         handleClose();
     }
 
