@@ -184,10 +184,7 @@ const CalendarioDias = (props:any) => {
             <div
                 className={`${ProductoSoporteCSS.contentDescription} 
         ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
-
-                {(allhoras&&allhoras.length>0)&&<div>{allhoras.map( (version:any,index:number) =>
-                    <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras}  />)}
-                </div>}
+                    <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras}  />
             </div>
         </div>
                     <Modal
