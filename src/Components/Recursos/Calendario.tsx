@@ -9,9 +9,15 @@ import soporteService from "../../Services/soporteService";
 import recursosCSS from "../../Styles/Recursos/Recursos.module.css";
 import {NavLink} from "react-router-dom";
 import versionSoporteStyle from "../../Styles/VersionSoporte.module.css";
+import {render} from "react-dom";
 
 
 export const Calendario = (props:any) => {
+    let dia_hoy=new Date();
+    var day = dia_hoy.getDay(),
+        diff = dia_hoy.getDate() - day + (day == 0 ? -6:1);
+    let [semana, setSemana] = useState(new Date(dia_hoy.setDate(diff)));
+    const [semanastring, setSemanaString] = useState(semana.getFullYear() + '-' + (semana.getMonth() + 1) + '-' + semana.getDate())
 
     const dia = [
         {
@@ -53,6 +59,14 @@ export const Calendario = (props:any) => {
     function goEmpleados() {
     }
 
+    function changeDate() {
+       semana.setDate(semana.getDate()+7)
+        setSemanaString(semana.getFullYear() + '-' + (semana.getMonth() + 1) + '-' + semana.getDate())
+        setSemana(semana)
+    }
+
+
+
     return (
         <div>
             <div >
@@ -74,9 +88,19 @@ export const Calendario = (props:any) => {
                                 <p>EMPLEADOS</p>
                             </div>
                         </NavLink>
+                        <NavLink
+                            to={'/recursos/calendario'}
+                            className={versionSoporteStyle.styleNav}>
+                        <div className={recursosCSS.button} onClick={() => {changeDate();}} >
+                        <p>{semanastring}</p>
+
+                            </div>
+
+                        </NavLink>
                     </div>
+
                     {!load&&dias.map((dias,index) => <div key={index}>
-                        <CalendarioDias dia={dias} />
+                        <CalendarioDias dia={dias} semana={semana}/>
 
                     </div>)}
                 </div >
@@ -84,3 +108,12 @@ export const Calendario = (props:any) => {
         </div>
     )
 }
+
+/*<NavLink
+    to={'/recursos/calendario'}
+    className={versionSoporteStyle.styleNav}
+>
+    <div className={recursosCSS.button} onClick={() => {goCalendario()}} >
+        <p>CALENDARIO</p>
+    </div>
+</NavLink>*/
