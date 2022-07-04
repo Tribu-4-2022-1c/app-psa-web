@@ -12,9 +12,18 @@
     margin: 10px;
 }
 
+.descItem2{
+    margin: 15px;
+}
+
 .label{
     font-weight: 600;
     margin: 10px;
+}
+
+.label2{
+    font-weight: 600;
+    margin: 15px;
 }
 
 .contentIcon{

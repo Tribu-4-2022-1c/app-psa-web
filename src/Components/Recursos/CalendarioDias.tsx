@@ -83,6 +83,7 @@ const CalendarioDias = (props:any) => {
           const recursos_ = async () =>{
               const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
               setTask(allTasks);
+              idTarea = allTasks[0].id;
           }
           recursos_();
         }
@@ -104,6 +105,7 @@ const CalendarioDias = (props:any) => {
         const recursos_ = async () =>{
             const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
+            idTarea = allTasks[0].id;
         }
         recursos_();
     }

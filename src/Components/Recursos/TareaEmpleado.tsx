@@ -169,7 +169,7 @@ export const TareaEmpleado = (props:any) => {
             <div className={`${versionSoporteStyle.card}` } >
                 {<div>
                     {fechas.map( (fecha:any,index:number) =>
-                        <div className={versionSoporteStyle.contentDescription} key={index}>{diafecha(fecha) == diaActual?<TareasEmpleados fecha={fecha["date"]} horas={fecha["number_hours"]} id={fecha["code_task"]} /> :null}
+                        <div className={versionSoporteStyle.contentDescription} key={index}>{diafecha(fecha) == diaActual?<TareasEmpleados proyecto={fecha["project"]} horas={fecha["number_hours"]} id={fecha["task"]} /> :null}
                             <div className={versionSoporteStyle.contentIcon}  
                                 onClick={() => modifyHour(fecha)}>{diafecha(fecha) == diaActual? <FaEdit />:null }
                             </div>
