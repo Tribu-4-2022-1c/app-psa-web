@@ -25,6 +25,7 @@ export interface Tarea {
     fecha_fin:   string;
     estado:      string;
     lider:       Lider;
+    producto:    string;
 
   }
   export interface ProyectoSinLider {
@@ -40,6 +41,7 @@ export interface Tarea {
     fecha_inicio:string;
     fecha_fin:   string;
     estado:      string;
+    producto:     string;
   }
 
 
@@ -53,5 +55,6 @@ export interface Tarea {
     nombre: string,
     version: string,
     descripcion: string,
-    tipo: string
+    tipo: string,
+    producto: string
   }

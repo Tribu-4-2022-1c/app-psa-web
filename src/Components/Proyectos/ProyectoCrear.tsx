@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
 import { Patch, Proyecto, ProyectoSinLider } from '../../models/Proyectos.models';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
@@ -28,11 +28,13 @@ const ProyectoCrear = (props: any) =>{
         horaEstimada: 0,
         fecha_inicio: "",
         fecha_fin:   "",
-        estado:      "PENDIENTE"
+        estado:      "PENDIENTE",
+        producto:    "PSA Spring CRM"
       }
 
-    const [proyectoActual, setProyectoActual] = useState(proyectoInicial)
-    const changeValue = (prop: string, value: any) => {
+  const [proyectoActual, setProyectoActual] = useState(proyectoInicial)
+
+  const changeValue = (prop: string, value: any) => {
         setElementosVacios(false)
         setProyectoActual({ ...proyectoActual, [prop]: value.target.value });
         if (prop === "estado"){
@@ -45,10 +47,23 @@ const ProyectoCrear = (props: any) =>{
         }
       }
       
-    const updateData = async () => {
+  const updateData = async () => {
     const response = await ProyectoService().actualizarProyecto(proyectoActual);
     console.log(response)
+
   }    
+
+  const [productos,setProductos] = useState([])
+
+
+  useEffect(() => {
+    const productos_ = async () => {
+      const getProductos:any = await ProyectoService().getAllProductos();
+      setProductos(getProductos)
+    }
+    productos_();
+  },[])
+
 
   const typesProject = [
     'IMPLEMENTACION', 'DESARROLLO'
@@ -59,14 +74,22 @@ const ProyectoCrear = (props: any) =>{
   ]
   function clickGuardar(e: { preventDefault: () => void; }) {
     e.preventDefault()
-    console.log(proyectoActual)
     if (proyectoActual.nombre ==="" || proyectoActual.descripcion === ""){
         setElementosVacios(true)
         return false;
     }
-    
+    console.log(proyectoActual)
     ProyectoService().postProyecto(proyectoActual)
   }
+
+  const changeProducto = (prop: string, value: any) => {
+    setProyectoActual({ ...proyectoActual, [prop]: value.target.value });
+    console.log(proyectoActual)
+    
+  }
+
+
+
     const handelSubmit = (e: { preventDefault: () => void; }) =>{
 
     }
@@ -85,7 +108,7 @@ const ProyectoCrear = (props: any) =>{
                 as="textarea"
                 id="nombre"
                 disabled={disabled}
-                value={proyectoActual.nombre || ""}
+                value={proyectoActual.nombre}
                 onChange={(e) => changeValue("nombre",e)}/>
               <Form.Label className={detalleProjectCSS.label} htmlFor="inputPassword5">Descripción:</Form.Label>
               <Form.Control
@@ -126,7 +149,7 @@ const ProyectoCrear = (props: any) =>{
                 id="startDate"
                 disabled={disabled}
                 defaultValue={proyectoActual.fecha_inicio}
-                onChange={(value) => changeValue('creationDate', value)}
+                onChange={(value) => changeValue('fecha_inicio', value)}
               />
               <FaCalendar className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
             </div>
@@ -151,7 +174,9 @@ const ProyectoCrear = (props: any) =>{
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Producto:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select >
+                <Form.Select value={proyectoActual.producto} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeProducto("producto",e)}>
+                    {productos.map((type: any, index: number) => <option key={index} value={type.name}>{type.name}</option>)}
                 </Form.Select>
               </div>
             </div>

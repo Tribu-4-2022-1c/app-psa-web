@@ -5,6 +5,7 @@ const HerokuUrl = "https://api-psa-proyectos-squad-12.herokuapp.com"
 const LocalUrl = "http://localhost:8080/proyectos"
 
 const URL = HerokuUrl
+const SoporteURL = "https://psa-api-soporte.herokuapp.com"
 
 const ProyectoService = () =>{
     const getAllTaksFor =(id: String = "") =>{
@@ -149,6 +150,42 @@ const ProyectoService = () =>{
         })
     }
 
+    const getTicketsPara = (id: String = "") =>{
+        return fetch(SoporteURL + "/tasks/"+id+"/tickettasks" ,
+        {
+            method: "GET",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },   
+        }).then(async (res) => {
+            if (res){
+                return res.json();}
+            else{
+                return [];
+            }
+            })
+        .catch((error) => console.error("Error",error))
+    }
+
+    const getAllProductos = () =>{
+        return fetch(SoporteURL + "/products" ,
+        {
+            method: "GET",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },   
+        }).then(async (res) => {
+            if (res){
+                return res.json();}
+            else{
+                return [];
+            }
+            })
+        .catch((error) => console.error("Error",error))
+    }
+
 
 
     return{
@@ -160,7 +197,9 @@ const ProyectoService = () =>{
         removeProyecto,
         removeTarea,
         getTareaFor,
-        postTarea
+        postTarea,
+        getTicketsPara,
+        getAllProductos
     }
 }
 export default ProyectoService

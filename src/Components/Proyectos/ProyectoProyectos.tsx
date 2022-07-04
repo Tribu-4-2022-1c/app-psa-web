@@ -41,7 +41,9 @@ export const ProyectoProyectos = (props: any) => {
     lider:       {
       id: 0,
       name: ""
-    }
+    
+    },
+    producto:    "",
   }
 
   const typesProject = [
@@ -54,14 +56,27 @@ export const ProyectoProyectos = (props: any) => {
 
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);
   const [disabled, setdisabled] = useState(true);
+  const [productos,setProductos] = useState([])
+
+
   const deleteTarea = (id:string) => {
     ProyectoService().removeTarea(id)
     console.log("ss");
     //setshow(true);
   }
   const changeValue = (prop: string, value: any) => {
+
     setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
+    console.log(proyectoActual)
   }
+
+  const changeProducto = (prop: string, value: any) => {
+    console.log(value.target.value)
+    setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
+    console.log(proyectoActual)
+    
+  }
+
 
   const updateData = async () => {
     const response = await ProyectoService().actualizarProyecto(proyectoActual, id);
@@ -91,6 +106,14 @@ export const ProyectoProyectos = (props: any) => {
     proyecto_();
   },[]);
 
+  useEffect(() => {
+    const productos_ = async () => {
+      const getProductos:any = await ProyectoService().getAllProductos();
+      setProductos(getProductos)
+    }
+    productos_();
+  })
+
 
   if (!proyectoActual){
     return <></>
@@ -103,7 +126,8 @@ export const ProyectoProyectos = (props: any) => {
       nombre: proyectoActual.nombre,
       version: proyectoActual.version,
       descripcion: proyectoActual.descripcion,
-      tipo: proyectoActual.tipo
+      tipo: proyectoActual.tipo,
+      producto: proyectoActual.producto
     }
     
     ProyectoService().actualizarProyecto(patch,id)
@@ -157,7 +181,7 @@ export const ProyectoProyectos = (props: any) => {
                 id="startDate"
                 disabled = {disabled}
                 defaultValue={proyectoActual.fecha_inicio}
-                onChange={(value) => changeValue('creationDate', value)}
+                onChange={(value) => changeValue('fecha_inicio', value)}
               />
              <FaCalendar className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
             </div>
@@ -182,7 +206,9 @@ export const ProyectoProyectos = (props: any) => {
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Producto:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={detalleProjectCSS.type} disabled={disabled} >
+                <Form.Select value={proyectoActual.producto} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeProducto("producto",e)}>
+                    {productos.map((type: any, index: number) => <option key={index} value={type.name}>{type.name}</option>)}
                 </Form.Select>
               </div>
             </div>
