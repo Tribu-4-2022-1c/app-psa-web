@@ -203,7 +203,7 @@ export const ProyectoProyectos = (props: any) => {
       </div>
       <Row className={detalleProjectCSS.col8} md={40} lg={40} m={40}>
         <Col className={detalleProjectCSS.col8} md={20} lg={20} m={20}>
-          <div className={`${detalleProjectCSS.contentTaskprojects} ${(proyecto) ? detalleProjectCSS.uninformation : ''}`}>
+          <div className={`${detalleProjectCSS.contentTaskprojects} ${(tareas&&tareas.length===0) ? detalleProjectCSS.uninformation : ''}`}>
             {((tareas)&& !(Object.keys(tareas).length === 0)) && <Table responsive bordered >
               <thead>
                 <tr>
