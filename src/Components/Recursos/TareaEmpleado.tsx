@@ -145,7 +145,7 @@ export const TareaEmpleado = (props:any) => {
         cargaInicial.code_project = fechas['code_project'];
         cargaInicial.code_employee = fechas['code_employee'];
         setCargaActual(cargaInicial);
-        defaultProject = typesTask.findIndex((type: any, index: number) => fechas['code_project'].toString().includes(type['id']));
+        //defaultProject = typesTask.findIndex((type: any, index: number) => fechas['code_project'].toString().includes(type['id']));
         handleShowModify();
     }
 
