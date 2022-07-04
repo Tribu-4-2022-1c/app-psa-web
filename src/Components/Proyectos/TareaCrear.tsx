@@ -24,11 +24,11 @@ export const TareaCrear = (props:any) => {
     nombre: "",
     fechaCreacion: "",
     recursoAsignado: {
-      id: 0,
+      id_recurso: 0,
       name: ""
     },
-    estado: "Pendiente",
-    prioridad: "BAJA",
+    estado: "",
+    prioridad: "",
     recursosAsignados: [],
     proyectoID: proyecto_id,
     objetivo: ''
@@ -36,7 +36,7 @@ export const TareaCrear = (props:any) => {
   
 
   const typesPrioridad = [
-    'ALTA', 'MEDIA','BAJA'
+    'Alta', 'Mdia','Baja'
   ]
 
   const typesStatus = [
@@ -53,7 +53,7 @@ export const TareaCrear = (props:any) => {
   const changeRecurso = (prop: string, value: any) =>{
     const lider: Lider = {
       name: value.target.value,
-      id: value.target.value,
+      id_recurso: value.target.value,
     }
     settareaInicial({...tareaActual, [prop]: lider})
   }

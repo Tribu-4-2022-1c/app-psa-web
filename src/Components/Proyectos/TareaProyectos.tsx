@@ -14,8 +14,7 @@ export const TareaProyectos = (props:any) => {
   const {id} = useParams();
   const [tickets, setTickets] = useState<Array<""> | null>(null)
   const [tarea, setTareas] = useState<Tarea  | null>(null)
-  const [recursos, setRecursos] = useState([])
-
+ 
 
 
   const tareaInicial: Tarea = {
@@ -24,7 +23,7 @@ export const TareaProyectos = (props:any) => {
     nombre: "",
     fechaCreacion: "",
     recursoAsignado: {
-      id: 0,
+      id_recurso: 0,
       name: ""
     },
     estado: "",
@@ -48,12 +47,10 @@ export const TareaProyectos = (props:any) => {
 
 
   const changeValue = (prop: string, value: any) => {
-    
     settareaInicial({ ...tareaActual, [prop]: value.target.value });
   }
 
   const updateData = async () => {
-    console.log(tareaActual)
    const response = await ProyectoService().actualizarTarea(tareaActual,id);
    console.log(response)
   }
@@ -65,14 +62,13 @@ export const TareaProyectos = (props:any) => {
     setdisabled(state);
   }
 
-  useEffect(()=>{
-    const recursos_ = async () =>{
-        const getRecursos:any = await ProyectoService().getRecursos();
-        setRecursos(getRecursos);
-    }
-    recursos_();
-  },[]);
-
+  //useEffect(()=>{
+  //  const tareas_ = async () =>{
+  //      const getTareas:any = await ProyectoService().getTickesPara(id);
+  //      setTareas(getTareas);
+  //  }
+  //  tareas_();
+  //},[]);
 
   useEffect(()=>{
     const proyecto_ = async () =>{
@@ -100,7 +96,7 @@ export const TareaProyectos = (props:any) => {
     //ProyectoService().actualizarTarea(patch,id)
   }
   
- 
+  console.log(id)
   return (
     <div>
       <MenuDescription proyecto={tareaActual.nombre} title={"Tarea"} />
@@ -115,7 +111,7 @@ export const TareaProyectos = (props:any) => {
                 as="textarea"
                 id="nombre"
                 disabled={disabled}
-                value={tareaActual.nombre || ""}
+                value={tareaActual.nombre}
                 onChange={(e) => changeValue("nombre",e)}/>
               <Form.Label className={detalleProjectCSS.label} htmlFor="inputPassword5">Objetivo:</Form.Label>
               <Form.Control
@@ -124,8 +120,8 @@ export const TareaProyectos = (props:any) => {
                 id="descripcion"
                 rows={8}
                 disabled={disabled}
-                defaultValue={tareaActual.objetivo}
-                onChange={(e) => changeValue("descripcion",e)} />
+                value={tareaActual.objetivo}
+                onChange={(e) => changeValue("objetivo",e)} />
             </div>
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
@@ -147,7 +143,7 @@ export const TareaProyectos = (props:any) => {
                 type="text"
                 id="startDate"
                 disabled = {disabled}
-                defaultValue={tareaActual.fechaCreacion}
+                value={tareaActual.fechaCreacion}
                 onChange={(value) => changeValue('fechaCreacion', value)}
               />
              <FaCalendar className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
@@ -159,7 +155,7 @@ export const TareaProyectos = (props:any) => {
                 type="text"
                 id="startDate"
                 disabled = {disabled}
-                defaultValue={tareaActual.horasEstimadas}
+                value={tareaActual.horasEstimadas}
                 onChange={(value) => changeValue('horasEstimadas', value)}
               />
              <FaClock className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
@@ -184,12 +180,14 @@ export const TareaProyectos = (props:any) => {
             </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Recurso Asignado:</Form.Label>
-              <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={tareaActual.recursoAsignado.name} disabled={disabled} className={` 
-                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("recursoAsignado",e)}>
-                    {recursos.map((type: any, index: number) => <option key={index} value={type.nombre}>{type.nombre}</option>)}
-                </Form.Select>
-              </div>
+              <Form.Control
+                className={`${(disabled) ? detalleProjectCSS.disabled : ''} ${detalleProjectCSS.input}`}
+                type="text"
+                id="startDate"
+                disabled = {true}
+                defaultValue={tareaActual.recursoAsignado.name}
+                onChange={(value) => changeValue('recursoAsignado', value)}
+              />
              <FaPersonBooth className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
             </div>
    

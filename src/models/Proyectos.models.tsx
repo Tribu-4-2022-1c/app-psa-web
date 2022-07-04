@@ -46,7 +46,7 @@ export interface Tarea {
 
 
   export interface Lider{
-    id: number;
+    id_recurso: number;
     name: string;
   }
 

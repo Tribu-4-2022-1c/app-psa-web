@@ -39,7 +39,7 @@ export const ProyectoProyectos = (props: any) => {
     fecha_fin:   "",
     estado:      "",
     lider:       {
-      id: 0,
+      id_recurso: 0,
       name: ""
     
     },
@@ -51,7 +51,7 @@ export const ProyectoProyectos = (props: any) => {
   ]
 
   const typesStatus = [
-    'PENDIENTE', 'ASIGNADO', 'FINALIZADO'
+    'Pendiente', 'Asignado', 'Finalizado',"En curso"
   ]
 
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);

@@ -63,6 +63,7 @@ const ProyectoService = () =>{
     }
 
     const actualizarTarea = (patch: Tarea, id: String = "") =>{
+        
         return fetch(URL + "/tareas"+ "/" + id + "/actualizar",
         {
             method: "PUT",
@@ -70,6 +71,7 @@ const ProyectoService = () =>{
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
               },
+            
             body: JSON.stringify(patch)
         }).then(() => {
             console.log("Se cambio el proyecto")
