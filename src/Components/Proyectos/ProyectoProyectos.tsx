@@ -58,7 +58,7 @@ export const ProyectoProyectos = (props: any) => {
   }
 
   const updateData = async () => {
-    const response = await ProyectoService().actualizarProyecto(proyectoActual);
+    const response = await ProyectoService().actualizarProyecto(proyectoActual, id);
     console.log(response)
   }
 
@@ -159,8 +159,8 @@ export const ProyectoProyectos = (props: any) => {
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Tipo:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} defaultValue = {proyectoActual.tipo}onChange={(e) => changeValue("tipo",e)}>
+                <Form.Select value={proyectoActual.tipo} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} onChange={(e) => changeValue("tipo",e)}>
                   {typesProject.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                 </Form.Select>
               </div>
@@ -168,8 +168,8 @@ export const ProyectoProyectos = (props: any) => {
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Estado:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} defaultValue = {proyectoActual.estado} onChange={(e) => changeValue("estado",e)}>
+                <Form.Select value={proyectoActual.estado} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("estado",e)}>
                     {typesStatus.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                 </Form.Select>
               </div>
