@@ -61,9 +61,14 @@ const soporteService = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(hours)
-            }).then(() =>{
-            console.log("Se han cargado correctamente las horas")
-        })
+            }).then(async (res) => {
+            if (res){
+                console.log("Se han cargado correctamente las horas")
+                return res.json();}
+            else{
+                return;
+            }
+        }).catch((error) => console.error("Error",error))
     }
 
     const getHoursByEmployeeAndTask = (legajo: number, codeTask: number) =>{
