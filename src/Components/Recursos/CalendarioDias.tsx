@@ -2,7 +2,7 @@ import {TareaEmpleado} from "./TareaEmpleado";
 
 import React, { useEffect, useState } from 'react'
 import ProductoSoporteCSS from  '../../Styles/ProductoSoporte.module.css'//'../ Soporte/'
-import { FaCalendar, FaPlusCircle } from 'react-icons/fa'
+import {FaCalendar, FaPlusCircle, FaTrash} from 'react-icons/fa'
 import { TareasEmpleados } from './TareasEmpleados'; 
 import { Button, Col, Form, Modal, Row } from 'react-bootstrap';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
@@ -77,14 +77,12 @@ const CalendarioDias = (props:any) => {
         const recursos_ = async () =>{
           const allProjects:any =  await ProyectoService().getAllProjects()
           setProjects(allProjects);
-          console.log("id proyecto:", allProjects[0].id)
           idProyecto = allProjects[0].id;
           const recursos_ = async () =>{
               const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
               setTask(allTasks);
           }
           recursos_();
-          console.log(allProjects)
         }
         recursos_();
       },[]);
@@ -94,7 +92,6 @@ const CalendarioDias = (props:any) => {
         const recursos_ = async () =>{
             const allTasks: any = [];
             setTask(allTasks);
-            console.log(allTasks)
         }
         recursos_();
     },[]);
@@ -102,7 +99,6 @@ const CalendarioDias = (props:any) => {
 
     const changeProyecto = (prop: string, value: any) => {
         idProyecto = value.target.value;
-        console.log("id proyecto elegido: ", idProyecto)
         const recursos_ = async () =>{
             const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
@@ -114,23 +110,17 @@ const CalendarioDias = (props:any) => {
         idTarea = value.target.value;
     }
 
-
-
     const changeFecha = (prop: string, value: any) => {
         fechaCarga = value.target.value;
-        console.log(fechaCarga)
     }
 
     const changeHoras = (prop: string, value: any) => {
-        console.log(value.target.value)
         numeroHorasCarga = value.target.value;
     }
         
     const number_hours = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
-        
 
-
-    const handleSubmit = (e: { preventDefault: () => void; }) =>{
+    const handleSubmit = async (e: { preventDefault: () => void; }) =>{
         e.preventDefault()
         console.log("id proyecto: ", idProyecto)
         console.log("id tarea: ", idTarea)
@@ -147,7 +137,11 @@ const CalendarioDias = (props:any) => {
         let carga: Hours = {
             data: hours,
         }
-        RecursosService().loadHours(carga)
+        const response = await RecursosService().loadHours(carga);
+        if(response) {
+            window.location.reload();
+        }
+        handleClose();
     }
 
     const [show, setShow] = useState(false);
@@ -160,7 +154,6 @@ const CalendarioDias = (props:any) => {
     useEffect(() => {
         const tasks_ = async () =>{
             let allhora:any = await recursosService().getHoursBetween(1,"2022-07-03","2022-07-09");
-            console.log(allhora.length)
             sethoras(allhora);
             setload(false);
         }
@@ -184,7 +177,7 @@ const CalendarioDias = (props:any) => {
             <div
                 className={`${ProductoSoporteCSS.contentDescription} 
         ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
-                    <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras}  />
+                    <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras} currentHour={allhoras[0]}  />
             </div>
         </div>
                     <Modal

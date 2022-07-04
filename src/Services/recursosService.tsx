@@ -47,8 +47,9 @@ const soporteService = () => {
                     'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(hours)
-            }).then(() =>{
-            console.log("Se han cargado correctamente las horas")
+            }).then((response) =>{
+                console.log("Se han cargado correctamente las horas")
+                return response.json();
         })
     }
 
@@ -121,15 +122,16 @@ const soporteService = () => {
     }
 
     const deleteHours = (code: number) =>{
-        fetch(URL + "/delete/" + code,
+        return fetch(URL + "/delete/" + code,
             {
                 method: "DELETE",
                 headers:{
                     Accept:"application/json",
                     "content_type": "application/json"
                 },
-            }).then(() =>{
+            }).then(async () => {
             console.log("Se ha eliminado la carga de horas correctamente")
+            return "OK";
         })
     }
 
@@ -139,6 +141,7 @@ const soporteService = () => {
         modifyHours,
         getHoursByEmployeeAndTask,
         getHoursBetween,
+        deleteHours,
     }
 }
 

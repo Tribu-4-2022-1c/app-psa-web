@@ -5,6 +5,7 @@ import versionSoporteStyle from "../../Styles/VersionSoporte.module.css";
 export const TareasEmpleados = (props:any) => {
     const {fecha} = props;
     const {horas} = props;
+    const {currentHour} = props;
     const {id} = props
   return (
     <div>
