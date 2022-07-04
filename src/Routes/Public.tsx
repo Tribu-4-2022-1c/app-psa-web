@@ -1,6 +1,7 @@
 import {Routes,Route} from "react-router-dom";
 import ProyectoCrear from "../Components/Proyectos/ProyectoCrear";
 import { ProyectoProyectos } from "../Components/Proyectos/ProyectoProyectos";
+import { TareaProyectos } from "../Components/Proyectos/TareaProyectos";
 import { CrearTicket } from '../Components/Soporte/CrearTicket';
 import { DetalleTicket } from '../Components/Soporte/DetalleTicket';
 import { Tickets } from '../Components/Soporte/Tickets';
@@ -15,6 +16,7 @@ const Public = () => {
         <Route path='/' element={<ProyectosPage />} />
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/proyectos/:id' element={ <ProyectoProyectos /> } />
+        <Route path='/proyectos/tarea/:id' element={ <TareaProyectos /> } />
         <Route path='/proyectos/crear_proyecto' element={ <ProyectoCrear /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />

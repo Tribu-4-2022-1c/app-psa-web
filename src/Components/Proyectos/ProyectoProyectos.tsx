@@ -5,7 +5,7 @@ import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import { Patch, Proyecto, Tarea } from "../../models/Proyectos.models";
 import CardHeader from 'react-bootstrap/esm/CardHeader';
-import { Navigate, useParams } from 'react-router-dom';
+import { Link, Navigate, useParams } from 'react-router-dom';
 import  ProyectoService  from "../../Services/proyectosService";
 import { MdHighlightOff } from 'react-icons/md';
 
@@ -214,7 +214,7 @@ export const ProyectoProyectos = (props: any) => {
                   <td>{tarea.horasEstimadas}</td>
                                     <td>{tarea.fechaCreacion}</td>
                   <td>
-                    <FaEye />
+                    <Link className={detalleProjectCSS.styleNav} to={'/proyectos/tarea/' + tarea["id"]} state={{ tarea }}><FaEye /></Link>
                   </td>
                 </tr>)}
               </tbody>
@@ -233,6 +233,7 @@ export const ProyectoProyectos = (props: any) => {
   )
   
 }
+
 
 
 
