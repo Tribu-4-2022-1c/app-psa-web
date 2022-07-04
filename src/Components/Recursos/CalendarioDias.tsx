@@ -1,3 +1,5 @@
+import {TareaEmpleado} from "./TareaEmpleado";
+
 import React, { useEffect, useState } from 'react'
 import ProductoSoporteCSS from  '../../Styles/ProductoSoporte.module.css'//'../ Soporte/'
 import { FaCalendar, FaPlusCircle } from 'react-icons/fa'
@@ -8,6 +10,7 @@ import { Hours, HoursData } from '../../models/Recursos.models';
 import RecursosService from '../../Services/recursosService';
 import ProyectoService from '../../Services/proyectosService';
 import {ProyectoSinLider} from "../../models/Proyectos.models";
+import recursosService from "../../Services/recursosService";
 
 let idProyecto = 0;
 let idTarea = 0;
@@ -17,7 +20,6 @@ let numeroHorasCarga = 1;
 const CalendarioDias = (props:any) => {
     const {dia} = props;
     const {diaSelect} = props;
-
 
     const [disabled, setdisabled] = useState(false);
     const [elementosVacios, setElementosVacios] = useState(false);
@@ -152,6 +154,19 @@ const CalendarioDias = (props:any) => {
 
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+    const {horaSelect} = props;
+    const [allhoras, sethoras] = useState([]);
+    const [load, setload] = useState(true);
+    useEffect(() => {
+        const tasks_ = async () =>{
+            let allhora:any = await recursosService().getHoursBetween(1,"2022-07-03","2022-07-09");
+            console.log(allhora.length)
+            sethoras(allhora);
+            setload(false);
+        }
+        tasks_();
+    },[]);
+
 
     return (
         < >
@@ -165,10 +180,14 @@ const CalendarioDias = (props:any) => {
                 <div className={ProductoSoporteCSS.contentIcon} onClick={handleShow}>
                     <FaPlusCircle  />
                 </div>
-                
             </div>
-            <div>
-                <TareasEmpleados />
+            <div
+                className={`${ProductoSoporteCSS.contentDescription} 
+        ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
+
+                {(allhoras&&allhoras.length>0)&&<div>{allhoras.map( (version:any,index:number) =>
+                    <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras}  />)}
+                </div>}
             </div>
         </div>
                     <Modal
@@ -252,4 +271,5 @@ const CalendarioDias = (props:any) => {
     )
 }
 
-export default CalendarioDias;
+
+    export default CalendarioDias;

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react'
 import soporteCSS from "../../Styles/Soporte.module.css";
 import {Audio} from "react-loader-spinner";
 import CalendarioDias from "../Recursos/CalendarioDias";
-import {VersionesSoporte} from "../Soporte/VersionesSoporte";
+import {TareaEmpleado} from "../Recursos/TareaEmpleado";
 
 import soporteService from "../../Services/soporteService";
 import recursosCSS from "../../Styles/Recursos/Recursos.module.css";
@@ -28,7 +28,11 @@ export const Calendario = (props:any) => {
         },
         {
             dia:"Viernes",
-        }
+        },{
+            dia:"Sabado",
+        },{
+            dia:"Domingo",
+        },
 
     ]
     const winHeight =  window.innerHeight*.8;
@@ -73,6 +77,7 @@ export const Calendario = (props:any) => {
                     </div>
                     {!load&&dias.map((dias,index) => <div key={index}>
                         <CalendarioDias dia={dias} />
+
                     </div>)}
                 </div >
             </div>

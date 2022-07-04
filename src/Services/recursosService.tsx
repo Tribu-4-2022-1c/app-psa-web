@@ -70,6 +70,15 @@ const soporteService = () => {
             }
         }).catch((error) => console.error("Error",error))
     }
+    const horas = [
+        {
+            code: 0,
+            number_hours: 0,
+            date: "2022-07-03",
+            code_task: 0,
+            code_project: 0,
+            code_employee: 0
+        }]
 
     const getHoursByEmployeeAndTask = (legajo: number, codeTask: number) =>{
         fetch(URL + "/find/?codeEmployee=" + legajo + "&codeTask=" + codeTask,
@@ -82,7 +91,6 @@ const soporteService = () => {
             })
             .then(async (res) => {
                 if (res){
-                    console.log("response json: ", res.json())
                     return res.json();}
                 else{
                     return [];
@@ -92,7 +100,7 @@ const soporteService = () => {
     }
 
     const getHoursBetween = (legajo: number, startDate: string, endDate: string) =>{
-        fetch(URL + "/find/?codeEmployee=" + legajo + "&startDate=" + startDate + "&endDate=" + endDate,
+        return fetch(URL + "/find/between/?codeEmployee=" + legajo + "&startDate=" + startDate + "&endDate=" + endDate,
             {
                 method: "GET",
                 headers:{
@@ -102,12 +110,13 @@ const soporteService = () => {
             })
             .then(async (res) => {
                 if (res){
-                    console.log("response json: ", res.json())
-                    return res.json();}
+                    let test = res.json()
+                    return test;
+                }
                 else{
                     return [];
                 }
-            })
+           })
             .catch((error) => console.error("Error",error))
     }
 
@@ -129,6 +138,7 @@ const soporteService = () => {
         loadHours,
         modifyHours,
         getHoursByEmployeeAndTask,
+        getHoursBetween,
     }
 }
 
