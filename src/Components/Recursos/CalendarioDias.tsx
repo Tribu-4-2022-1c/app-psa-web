@@ -20,12 +20,14 @@ let numeroHorasCarga = 1;
 const CalendarioDias = (props:any) => {
     const {dia} = props;
     const {diaSelect} = props;
+    const {semana} = props;
 
     const [disabled, setdisabled] = useState(false);
     const [elementosVacios, setElementosVacios] = useState(false);
     const [asignar_projecto, setASignarProjecto] = useState(false);
     const [typesTask, setTask] = useState([]);
     const [typesProject, setProjects] = useState([]);
+
 
     const cargaInicial: HoursData = {
         code: 0,
@@ -151,9 +153,23 @@ const CalendarioDias = (props:any) => {
     const {horaSelect} = props;
     const [allhoras, sethoras] = useState([]);
     const [load, setload] = useState(true);
+    let diainicial = new Date(semana);
+    let mes;
+    let numerodia;
+    let finsemana = new Date(diainicial.setDate(diainicial.getDate()+6))
+    let mesfinsemana;
+    let diafinsemana;
+
     useEffect(() => {
         const tasks_ = async () =>{
-            let allhora:any = await recursosService().getHoursBetween(1,"2022-07-03","2022-07-09");
+            console.log(finsemana);
+            ((semana.getMonth() + 1) < 10 ? mes = "0" + (semana.getMonth() + 1) : mes = semana.getMonth() + 1);
+            ((semana.getDate()) < 10 ? numerodia = "0" + (semana.getDate()) : numerodia = semana.getDate());
+            ((finsemana.getMonth() + 1) < 10 ? mesfinsemana = "0" + (finsemana.getMonth() + 1) : mesfinsemana = finsemana.getMonth() + 1);
+            ((finsemana.getDate()) < 10 ? diafinsemana = "0" + (finsemana.getDate()) : diafinsemana = finsemana.getDate());
+            let startdate:string =( semana.getFullYear() + '-' + (mes) + '-' +numerodia) as string;
+            let enddate:string = (semana.getFullYear() + '-' + mesfinsemana + '-' + diafinsemana) as string;
+            let allhora:any = await recursosService().getHoursBetween(1,startdate,enddate );
             sethoras(allhora);
             setload(false);
         }
@@ -263,3 +279,4 @@ const CalendarioDias = (props:any) => {
 
 
     export default CalendarioDias;
+

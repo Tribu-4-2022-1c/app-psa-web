@@ -11,6 +11,7 @@ import SoportePage from '../Pages/SoportePage';
 import LogInPage from "../Pages/LogInPage";
 import { ProyectoProyectos } from '../Components/Proyectos/ProyectoProyectos';
 import ProyectoCrear from '../Components/Proyectos/ProyectoCrear';
+import Menu from "../Components/Menu";
 
 const Public = () => {
   return (
@@ -26,6 +27,7 @@ const Public = () => {
         <Route path='/soporte/:product/:version/crear' element={ <CrearTicket /> } />
         <Route path='/soporte/ticket/detalle' element={ <DetalleTicket /> } />
         <Route path='*' element={ <HomePage /> } />
+        <Route path='/menu' element={ <Menu /> } />
     </Routes>
   )
 }

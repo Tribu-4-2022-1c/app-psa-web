@@ -1,10 +1,13 @@
 import React from 'react';
-
+import getUser from "../Pages/LogInPage";
 import menuModuleCSS from '../Styles/Menu.module.css';
 import img from '../assets/psa_icon.png';
 import { Link, NavLink, useLocation } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 const Menu = () => {
+
+
+
     const routePSA = {
         proyectos: '/proyectos',
         recursos: '/recursos',
@@ -17,6 +20,7 @@ const Menu = () => {
     }
     const { pathname } = useLocation();
     const [pageSelected, setpageSelected] = useState(intialStatePageSelected);
+    const [logon, setlog] = useState(false)
 
     const changePage = (route:string) => {
         setpageSelected({...pageSelected,nameRoute:route,isSelected:true});
@@ -54,17 +58,17 @@ const Menu = () => {
                         RECURSOS
                     </NavLink>
                 </div>
-                {logged === false ? (
+                {logon === false ? (
                 <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
-                    <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
+                    {<NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => {changePage(routePSA.login); setlog(true)}}>
                         Log in
-                    </NavLink>
+                    </NavLink>}
                 </div>
                 ) : (
                     <div className={`${menuModuleCSS.optionSegment} ${pageSelected.nameRoute === routePSA.login?menuModuleCSS.addMarker:''}`}>
-                    <NavLink end className={menuModuleCSS.linkEfect} to={routePSA.login} onClick={() => changePage(routePSA.login)}>
-                        Already Logged
-                    </NavLink>
+                        <div className={menuModuleCSS.linkEfect} >{
+                            "LOGGED"
+                        } </div>
                 </div>
                 )}
             </div>
