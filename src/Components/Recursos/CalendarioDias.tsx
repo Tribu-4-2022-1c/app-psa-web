@@ -9,9 +9,15 @@ import RecursosService from '../../Services/recursosService';
 import ProyectoService from '../../Services/proyectosService';
 import {ProyectoSinLider} from "../../models/Proyectos.models";
 
+let idProyecto = 0;
+let idTarea = 0;
+let fechaCarga = " ";
+let numeroHorasCarga = 1;
+
 const CalendarioDias = (props:any) => {
     const {dia} = props;
     const {diaSelect} = props;
+
 
     const [disabled, setdisabled] = useState(false);
     const [elementosVacios, setElementosVacios] = useState(false);
@@ -63,20 +69,19 @@ const CalendarioDias = (props:any) => {
         }
       }
 
-    let idProyecto = 0;
+
       
     useEffect(() => {
         const recursos_ = async () =>{
           const allProjects:any =  await ProyectoService().getAllProjects()
           setProjects(allProjects);
-          if(allProjects.length > 0) {
-              idProyecto = allProjects[0].id;
-              const recursos_ = async () =>{
-                  const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
-                  setTask(allTasks);
-              }
-              recursos_();
+          console.log("id proyecto:", allProjects[0].id)
+          idProyecto = allProjects[0].id;
+          const recursos_ = async () =>{
+              const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+              setTask(allTasks);
           }
+          recursos_();
           console.log(allProjects)
         }
         recursos_();
@@ -95,6 +100,7 @@ const CalendarioDias = (props:any) => {
 
     const changeProyecto = (prop: string, value: any) => {
         idProyecto = value.target.value;
+        console.log("id proyecto elegido: ", idProyecto)
         const recursos_ = async () =>{
             const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
@@ -102,20 +108,16 @@ const CalendarioDias = (props:any) => {
         recursos_();
     }
 
-    let idTarea = 0;
-
     const changeTarea = (prop: string, value: any) => {
         idTarea = value.target.value;
     }
 
-    let fechaCarga = "";
+
 
     const changeFecha = (prop: string, value: any) => {
         fechaCarga = value.target.value;
         console.log(fechaCarga)
     }
-
-    let numeroHorasCarga = 1;
 
     const changeHoras = (prop: string, value: any) => {
         console.log(value.target.value)
@@ -128,10 +130,10 @@ const CalendarioDias = (props:any) => {
 
     const handleSubmit = (e: { preventDefault: () => void; }) =>{
         e.preventDefault()
-        console.log(idProyecto)
-        console.log(idTarea)
-        console.log(fechaCarga)
-        console.log(numeroHorasCarga)
+        console.log("id proyecto: ", idProyecto)
+        console.log("id tarea: ", idTarea)
+        console.log("fecha:", fechaCarga)
+        console.log("numero horas: ", numeroHorasCarga)
         let hours: HoursData = {
             code: 0,
             number_hours: numeroHorasCarga,
