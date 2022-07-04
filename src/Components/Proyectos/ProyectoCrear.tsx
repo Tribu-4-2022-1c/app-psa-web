@@ -108,7 +108,7 @@ const ProyectoCrear = (props: any) =>{
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
           <div className={detalleProjectCSS.contentItem}>
-                {<Button className={detalleProjectCSS.iconSave} onClick={() => clickGuardar()} variant="success">Guardar</Button>}
+                {<Button  type="submit" className={detalleProjectCSS.iconSave} onClick={() => clickGuardar()} variant="success">Guardar</Button>}
                 
               </div>
               <div className={detalleProjectCSS.contentItem}>
