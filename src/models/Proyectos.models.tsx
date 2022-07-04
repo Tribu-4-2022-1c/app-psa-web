@@ -58,3 +58,26 @@ export interface Tarea {
     tipo: string,
     producto: string
   }
+
+  export interface TicketTask{
+      id: {
+        task: string,
+        ticket: string
+      }
+  }
+
+  export interface TicketModel{
+    client: string,
+    closureMotive: string,
+    code: 0,
+    creationDate: string,
+    description: string,
+    lastUpdated: string,
+    resolution: string,
+    responsible: string,
+    severity: string,
+    status: string,
+    title: string,
+    type: string,
+    version: string
+  }

@@ -103,7 +103,7 @@ const ProyectoService = () =>{
 	}
 	
 	 const removeTarea = (id: String = "") =>{
-	    return fetch(URL+ "tareas" + "/" + id,
+	    return fetch(URL+ "/tareas" + "/" + id,
 	    {
 		method: "DELETE",
 		headers:{
@@ -186,6 +186,25 @@ const ProyectoService = () =>{
         .catch((error) => console.error("Error",error))
     }
 
+    const getTicket = (id: String) =>{
+        return fetch(SoporteURL+"/tickets/"+id,        
+        {
+            method: "GET",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },   
+        }).then(async (res) => {
+            if (res){
+                res.json()
+                }
+            else{
+                return [];
+            }
+            })    
+        .catch((error) => console.error("Error",error))
+    }
+
 
 
     return{
@@ -199,7 +218,8 @@ const ProyectoService = () =>{
         getTareaFor,
         postTarea,
         getTicketsPara,
-        getAllProductos
+        getAllProductos,
+        getTicket
     }
 }
 export default ProyectoService

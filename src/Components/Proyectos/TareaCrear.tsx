@@ -15,6 +15,7 @@ export const TareaCrear = (props:any) => {
   const [tickets, setTickets] = useState<Array<""> | null>(null)
   const [tarea, setTareas] = useState<Tarea  | null>(null)
   const [proyecto_id,setID] = useState(Number(idProyecto));
+  const [recursos, setRecursos] = useState([]);
 
 
   const tareaInicial: Tarea = {
@@ -93,7 +94,7 @@ export const TareaCrear = (props:any) => {
  
   return (
     <div>
-      <MenuDescription proyecto={tareaActual.nombre} title={"Tarea"} />
+      <MenuDescription proyecto={tareaActual.nombre} title={"Crear Tarea:"} />
       <div>
         <form onSubmit={handelSubmit}>
         <Row className={detalleProjectCSS.contentRow}>

@@ -44,7 +44,7 @@ export const TareaProyectos = (props:any) => {
 
   const [tareaActual, settareaInicial] = useState(tareaInicial);
   const [disabled, setdisabled] = useState(true);
-  const [ticketstask,setTicketstask] = useState([])
+
 
   const changeValue = (prop: string, value: any) => {
     settareaInicial({ ...tareaActual, [prop]: value.target.value });
@@ -62,21 +62,13 @@ export const TareaProyectos = (props:any) => {
     setdisabled(state);
   }
 
-  useEffect(()=>{
-    const tareas_ = async () =>{
-        const getTicketTasks:any = await ProyectoService().getTicketsPara(id);
-        setTicketstask(getTicketTasks);
-    }
-    tareas_();
-  },[]);
   //useEffect(()=>{
   //  const tareas_ = async () =>{
-  //      const getTickets:any = await ProyectoService().getTickesPara(id);
+  //      const getTareas:any = await ProyectoService().getTickesPara(id);
   //      setTareas(getTareas);
   //  }
   //  tareas_();
   //},[]);
-
 
   useEffect(()=>{
     const proyecto_ = async () =>{

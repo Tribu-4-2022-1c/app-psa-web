@@ -243,6 +243,7 @@ export const ProyectoProyectos = (props: any) => {
             {((tareas)&& !(Object.keys(tareas).length === 0)) && <Table responsive bordered >
               <thead>
                 <tr>
+                  <td>ID</td>
                   <td>Nombre de tarea</td>
                   <td>Horas Estimadas</td>
                   <td>Fecha de creacion</td>
@@ -252,9 +253,9 @@ export const ProyectoProyectos = (props: any) => {
               <tbody>
                 
                 {tareas&&tareas.map((tarea: Tarea, index: number) => <tr key={index}>
-                  <td>
-                    {tarea.nombre}
-                  </td>
+                  <td>{tarea.id}</td>
+                  <td>{tarea.nombre}</td>
+
                   <td>{tarea.horasEstimadas}</td>
                   <td>{tarea.fechaCreacion}</td>
                   <td>
