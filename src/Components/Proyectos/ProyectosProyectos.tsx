@@ -5,14 +5,16 @@ import MenuDescription from './MenuDescription';
 import projectsCSS from '../../Styles/Proyectos/ProyectoProyectos.module.css';
 import { Link } from 'react-router-dom';
 import { ModalComponentDelete } from './ModalDeleteProyecto';
+import ProyectoService from '../../Services/proyectosService';
 
 export const ProyectosProyectos = (props: any) => {
     const { proyecto } = props;
  const [show, setshow] = useState(false);
  
- const deleteProject = () => {
+ const deleteProject = (id: string) => {
+    ProyectoService().removeProyecto(id)
     console.log("ss");
-    setshow(true);
+ //   setshow(true);
   }
  const closeModal = () => {
     setshow(false);
@@ -75,8 +77,8 @@ export const ProyectosProyectos = (props: any) => {
 			<td>
 			    <div className={projectsCSS.contentItem}>
 			        <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>
-                    <ModalComponentDelete show={show} id={ticket["id"]} name={ticket["nombre"]} closeModal={closeModal} />
-			        <div className={projectsCSS.styleNav} onClick={() =>deleteProject()}><FaTrash /></div>
+                    <Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Se eliminara el proyecto ' +ticket["nombre"])) {deleteProject(ticket["id"]) }; }}><FaTrash /></Link>
+
 			    </div>
 			</td>
 
@@ -86,4 +88,5 @@ export const ProyectosProyectos = (props: any) => {
         </div>
     )
 }
+
 

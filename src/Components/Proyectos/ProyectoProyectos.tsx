@@ -49,9 +49,10 @@ export const ProyectoProyectos = (props: any) => {
 
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);
   const [disabled, setdisabled] = useState(true);
-  const deleteTarea = () => {
+  const deleteTarea = (id:string) => {
+    ProyectoService().removeProyecto(id)
     console.log("ss");
-    setshow(true);
+    //setshow(true);
   }
   const changeValue = (prop: string, value: any) => {
     setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
@@ -222,8 +223,8 @@ export const ProyectoProyectos = (props: any) => {
                   <td>
                   <div className={projectsCSS.contentItem}>
                     <Link className={projectsCSS.styleNav} to={'/proyectos/tarea/' + tarea["id"]} state={{ tarea }}><FaEye /></Link>
-                    <ModalComponentDelete show={show} closeModal={closeModal} />
-			              <div className={projectsCSS.styleNav} onClick={() =>deleteTarea()}><FaTrash /></div>
+                    
+                    <Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Se eliminara la tarea ' +tarea["nombre"] )) {deleteTarea(tarea["id"]) }; }}><FaTrash /></Link>
                   </div>
                   </td>
                 </tr>)}
@@ -243,6 +244,7 @@ export const ProyectoProyectos = (props: any) => {
   )
   
 }
+
 
 
 
