@@ -18,11 +18,11 @@ export const ModalComponentDelete = (props: any) => {
                 centered
             >
                 <ModalHeader>
-                    <Modal.Title className={modalCSS.titleTarea}>Eliminar Proyecto</Modal.Title>
+                    <Modal.Title className={modalCSS.titleTarea}>Eliminar Tarea</Modal.Title>
                     <IoCloseCircleSharp onClick={() => closeModal()} className={modalCSS.iconClose} />
                 </ModalHeader>
                 <Modal.Body>
-                    <div> El proyecto sera eliminado </div>
+                    <div> La Tarea sera eliminado </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button  onClick={() => borrarProyecto()}>
@@ -36,6 +36,5 @@ export const ModalComponentDelete = (props: any) => {
         </div>
     )
 }
-
 
 

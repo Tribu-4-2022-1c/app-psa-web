@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
-import { FaCalendar, FaEdit, FaEye } from 'react-icons/fa';
+import { FaCalendar, FaEdit, FaEye, FaTrash } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import { Patch, Proyecto, Tarea } from "../../models/Proyectos.models";
@@ -8,13 +8,16 @@ import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import  ProyectoService  from "../../Services/proyectosService";
 import { MdHighlightOff } from 'react-icons/md';
-
+import { ModalComponentDelete } from './ModalDeleteTarea';
+import projectsCSS from '../../Styles/Proyectos/ProyectoProyectos.module.css';
 export const ProyectoProyectos = (props: any) => {
-
+  const [show, setshow] = useState(false);
   const {id} = useParams();
   const [tareas, setTareas] = useState<Array<Tarea> | null>(null)
   const [proyecto, setProyecto] = useState<Proyecto  | null>(null)
-
+  const closeModal = () => {
+    setshow(false);
+  }
 
 
   const proyectoInicial: Proyecto = {
@@ -46,7 +49,10 @@ export const ProyectoProyectos = (props: any) => {
 
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);
   const [disabled, setdisabled] = useState(true);
-
+  const deleteTarea = () => {
+    console.log("ss");
+    setshow(true);
+  }
   const changeValue = (prop: string, value: any) => {
     setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
   }
@@ -214,7 +220,11 @@ export const ProyectoProyectos = (props: any) => {
                   <td>{tarea.horasEstimadas}</td>
                                     <td>{tarea.fechaCreacion}</td>
                   <td>
-                    <Link className={detalleProjectCSS.styleNav} to={'/proyectos/tarea/' + tarea["id"]} state={{ tarea }}><FaEye /></Link>
+                  <div className={projectsCSS.contentItem}>
+                    <Link className={projectsCSS.styleNav} to={'/proyectos/tarea/' + tarea["id"]} state={{ tarea }}><FaEye /></Link>
+                    <ModalComponentDelete show={show} closeModal={closeModal} />
+			              <div className={projectsCSS.styleNav} onClick={() =>deleteTarea()}><FaTrash /></div>
+                  </div>
                   </td>
                 </tr>)}
               </tbody>
@@ -233,6 +243,7 @@ export const ProyectoProyectos = (props: any) => {
   )
   
 }
+
 
 
 
