@@ -100,6 +100,21 @@ const ProyectoService = () =>{
 		console.log("Se borro el proyecto")
 	    })
 	}
+	
+	 const removeTarea = (id: String = "") =>{
+	    return fetch('https://api-psa-proyectos-squad-12.herokuapp.com/tareas' + "/" + id,
+	    {
+		method: "DELETE",
+		headers:{
+		    Accept:"application/json",
+		    "content_type": "application/json"
+		  },
+	    })
+	    .then( () => {
+		console.log("Se borro la tarea")
+	    })
+	}
+
 
 
     return{
@@ -108,7 +123,8 @@ const ProyectoService = () =>{
         actualizarProyecto,
         actualizarTarea,
         postProyecto,
-        removeProyecto
+        removeProyecto,
+        removeTarea
     }
 }
 export default ProyectoService

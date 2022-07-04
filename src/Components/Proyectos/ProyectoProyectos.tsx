@@ -50,7 +50,7 @@ export const ProyectoProyectos = (props: any) => {
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);
   const [disabled, setdisabled] = useState(true);
   const deleteTarea = (id:string) => {
-    ProyectoService().removeProyecto(id)
+    ProyectoService().removeTarea(id)
     console.log("ss");
     //setshow(true);
   }
