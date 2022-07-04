@@ -32,7 +32,7 @@ const CalendarioDias = (props:any) => {
         number_hours: -1,
         date: '',
         code_task: -1,
-        code_proyect: -1, /* Number(typesProject[1]['id']),*/
+        code_project: -1, /* Number(typesProject[1]['id']),*/
         code_employee: 1
     }
 
@@ -59,10 +59,10 @@ const CalendarioDias = (props:any) => {
     const changeValue = (prop: string, value: any) => {
         setElementosVacios(false)
         setCargaActual({ ...cargaActual, [prop]: value.target.value });
-        cargaActual.code_proyect = Number(ProyectoService().getProjectByName(value.target.value))
+        cargaActual.code_project = Number(ProyectoService().getProjectByName(value.target.value))
         if (prop === "proyecto"){
             if ( value.target.value ){
-                cargaActual.code_proyect = Number(ProyectoService().getProjectByName(value.target.value))
+                cargaActual.code_project = Number(ProyectoService().getProjectByName(value.target.value))
                 setASignarProjecto(true)
             }
             else{
@@ -131,7 +131,7 @@ const CalendarioDias = (props:any) => {
             number_hours: numeroHorasCarga,
             date: fechaCarga,
             code_task: idTarea,
-            code_proyect: idProyecto,
+            code_project: idProyecto,
             code_employee: 1
         }
         let carga: Hours = {

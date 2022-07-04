@@ -29,7 +29,7 @@ export const TareaEmpleado = (props:any) => {
         number_hours: -1,
         date: '',
         code_task: -1,
-        code_proyect: -1, /* Number(typesProject[1]['id']),*/
+        code_project: -1, /* Number(typesProject[1]['id']),*/
         code_employee: 1
     }
 
@@ -75,6 +75,8 @@ export const TareaEmpleado = (props:any) => {
 
     const changeProyecto = (prop: string, value: any) => {
         idProyecto = value.target.value;
+        cargaActual.code_project = idProyecto;
+        setCargaActual(cargaActual);
         const recursos_ = async () =>{
             const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
@@ -83,31 +85,35 @@ export const TareaEmpleado = (props:any) => {
     }
 
     const changeTarea = (prop: string, value: any) => {
-        idTarea = value.target.value;
+        cargaActual.code_task = value.target.value;
+        setCargaActual(cargaActual);
+        //idTarea = value.target.value;
     }
 
     const changeFecha = (prop: string, value: any) => {
-        fechaCarga = value.target.value;
+        cargaActual.date = value.target.value;
+        setCargaActual(cargaActual);
+        //fechaCarga = value.target.value;
     }
 
     const changeHoras = (prop: string, value: any) => {
-        numeroHorasCarga = value.target.value;
+        console.log(cargaActual);
+        cargaActual.number_hours = value.target.value;
+        setCargaActual(cargaActual);
+        //numeroHorasCarga = value.target.value;
     }
         
     const number_hours = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
 
     const handleSubmit = async (e: { preventDefault: () => void; }) =>{
         e.preventDefault()
-        console.log("id proyecto: ", idProyecto)
-        console.log("id tarea: ", idTarea)
-        console.log("fecha:", fechaCarga)
-        console.log("numero horas: ", numeroHorasCarga)
+        console.log("carga actual: ", cargaActual)
         let hours: HoursData = {
             code: idHourCurrent,
-            number_hours: numeroHorasCarga,
-            date: fechaCarga,
-            code_task: idTarea,
-            code_proyect: idProyecto,
+            number_hours: cargaActual.number_hours,
+            date: cargaActual.date,
+            code_task: cargaActual.code_task,
+            code_project: cargaActual.code_project,
             code_employee: 1
         }
         let carga: Hours = {
@@ -134,7 +140,7 @@ export const TareaEmpleado = (props:any) => {
         cargaInicial.number_hours = fechas['number_hours'];
         cargaInicial.date = fechas['date'];
         cargaInicial.code_task = fechas['code_task'];
-        cargaInicial.code_proyect = fechas['code_proyect'];
+        cargaInicial.code_project = fechas['code_project'];
         cargaInicial.code_employee = fechas['code_employee'];
         setCargaActual(cargaInicial);
         handleShow();

@@ -7,7 +7,7 @@ export interface HoursData {
     number_hours: number,
     date: string,
     code_task: number,
-    code_proyect: number,
+    code_project: number,
     code_employee: number
 }
 
