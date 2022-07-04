@@ -1,11 +1,13 @@
 import { ProyectosProyectos } from "../Components/Proyectos/ProyectosProyectos"
 import { Patch, Proyecto, ProyectoSinLider, Tarea } from "../models/Proyectos.models"
+import RecursosPage from "../Pages/RecursosPage"
 
 const HerokuUrl = "https://api-psa-proyectos-squad-12.herokuapp.com"
 const LocalUrl = "http://localhost:8080/proyectos"
 
 const URL = HerokuUrl
 const SoporteURL = "https://psa-api-soporte.herokuapp.com"
+let RecursosURL = "https://api-psa-recursos.herokuapp.com"
 
 const ProyectoService = () =>{
     const getAllTaksFor =(id: String = "") =>{
@@ -196,7 +198,7 @@ const ProyectoService = () =>{
             },   
         }).then(async (res) => {
             if (res){
-                res.json()
+                return res.json()
                 }
             else{
                 return [];
@@ -204,6 +206,26 @@ const ProyectoService = () =>{
             })    
         .catch((error) => console.error("Error",error))
     }
+
+    const getRecursos = () => {
+        return fetch(SoporteURL+"/employees",{
+            method: "GET",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },   
+        }).then(async (res) => {
+            if (res){
+
+                return res.json()
+                }
+            else{
+                return [];
+            }
+            })    
+        .catch((error) => console.error("Error",error))
+    }
+    
 
 
 
@@ -219,7 +241,8 @@ const ProyectoService = () =>{
         postTarea,
         getTicketsPara,
         getAllProductos,
-        getTicket
+        getTicket,
+        getRecursos
     }
 }
 export default ProyectoService

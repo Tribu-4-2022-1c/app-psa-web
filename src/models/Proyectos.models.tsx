@@ -67,6 +67,7 @@ export interface Tarea {
   }
 
   export interface TicketModel{
+    id: any;
     client: string,
     closureMotive: string,
     code: 0,
