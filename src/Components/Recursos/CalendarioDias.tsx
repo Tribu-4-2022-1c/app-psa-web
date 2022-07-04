@@ -245,10 +245,10 @@ const CalendarioDias = (props:any) => {
                         </Modal.Body>
                         <Modal.Footer>
                         <Button variant="danger" onClick={handleClose}>
-                            Close
+                            Cancelar
                         </Button>
                         <Button variant="primary" type="submit" onClick={handleSubmit}>
-                            Save Changes
+                            Guardar Cambios
                         </Button>
                         {elementosVacios &&
                         <div>
