@@ -57,7 +57,9 @@ const ProyectoCrear = (props: any) =>{
   const typesStatus = [
     'PENDIENTE', 'ASIGNADO'
   ]
-
+  function clickGuardar() {
+    return <input type="submit" value="Guardar" />;
+  }
     const handelSubmit = (e: { preventDefault: () => void; }) =>{
         e.preventDefault()
         if (proyectoActual.nombre ==="" || proyectoActual.descripcion === ""){
@@ -106,7 +108,7 @@ const ProyectoCrear = (props: any) =>{
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
           <div className={detalleProjectCSS.contentItem}>
-                {<Button className={detalleProjectCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+                {<Button className={detalleProjectCSS.iconSave} onClick={() => clickGuardar()} variant="success">Guardar</Button>}
                 
               </div>
               <div className={detalleProjectCSS.contentItem}>
