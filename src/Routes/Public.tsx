@@ -1,5 +1,6 @@
 import {Routes,Route} from "react-router-dom";
 import ProyectoCrear from "../Components/Proyectos/ProyectoCrear";
+import {TareaCrear} from "../Components/Proyectos/TareaCrear";
 import { ProyectoProyectos } from "../Components/Proyectos/ProyectoProyectos";
 import { TareaProyectos } from "../Components/Proyectos/TareaProyectos";
 import { CrearTicket } from '../Components/Soporte/CrearTicket';
@@ -18,6 +19,7 @@ const Public = () => {
         <Route path='/proyectos/:id' element={ <ProyectoProyectos /> } />
         <Route path='/proyectos/tarea/:id' element={ <TareaProyectos /> } />
         <Route path='/proyectos/crear_proyecto' element={ <ProyectoCrear /> } />
+        <Route path='/proyectos/crear_tarea' element={ <TareaCrear /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />
         <Route path='/soporte/:product/:version' element={ <Tickets /> } />

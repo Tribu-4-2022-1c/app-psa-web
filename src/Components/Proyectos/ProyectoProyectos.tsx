@@ -108,7 +108,7 @@ export const ProyectoProyectos = (props: any) => {
  
   return (
     <div>
-      <MenuDescription proyecto={proyectoActual.nombre} title={"Proyecto"} />
+      <MenuDescription proyecto={proyectoActual.nombre} flagGenerateTask={true} title={"Proyecto"} />
       <div>
         <form onSubmit={handelSubmit}>
         <Row className={detalleProjectCSS.contentRow}>
