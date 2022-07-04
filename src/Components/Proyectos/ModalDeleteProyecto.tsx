@@ -1,6 +1,7 @@
 import { Button, Modal, ModalHeader } from 'react-bootstrap'
 import { IoCloseCircleSharp } from "react-icons/io5";
 import modalCSS from '../../Styles/Proyectos/ModalDelete.module.css';
+import  ProyectoService  from "../../Services/proyectosService";
 
 export const ModalComponentDelete = (props: any) => {
     const initialTaskData: any = {
