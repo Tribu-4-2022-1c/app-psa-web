@@ -59,6 +59,20 @@ const ProyectoService = () =>{
     })
     }
 
+    const actualizarTarea = (patch: Patch, id: String = "") =>{
+        return fetch(URL + "/" + id + "/actualizar",
+        {
+            method: "PUT",
+            headers:{
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+            body: JSON.stringify(patch)
+        }).then(() => {
+            console.log("Se cambio el proyecto")
+        })
+        }
+
     const postProyecto = (proyecto: ProyectoSinLider) =>{
         return fetch(URL,
             {
@@ -79,7 +93,9 @@ const ProyectoService = () =>{
         getAllTaksFor,
         getProyectoFor,
         actualizarProyecto,
+        actualizarTarea,
         postProyecto
     }
 }
 export default ProyectoService
+
