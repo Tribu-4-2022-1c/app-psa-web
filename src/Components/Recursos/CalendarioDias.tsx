@@ -62,11 +62,21 @@ const CalendarioDias = (props:any) => {
             }
         }
       }
+
+    let idProyecto = 0;
       
     useEffect(() => {
         const recursos_ = async () =>{
           const allProjects:any =  await ProyectoService().getAllProjects()
           setProjects(allProjects);
+          if(allProjects.length > 0) {
+              idProyecto = allProjects[0].id;
+              const recursos_ = async () =>{
+                  const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+                  setTask(allTasks);
+              }
+              recursos_();
+          }
           console.log(allProjects)
         }
         recursos_();
@@ -83,20 +93,33 @@ const CalendarioDias = (props:any) => {
     },[]);
 
 
-
-    const [proyectoActual, setProyectoActual] = useState(proyectoInicial)
-    const [idProyecto, setIdProyecto] = useState(0)
     const changeProyecto = (prop: string, value: any) => {
-        setIdProyecto(value.target.value)
-        console.log("event: ", value.target.value)
-        console.log("id proyecto: ", idProyecto)
+        idProyecto = value.target.value;
         const recursos_ = async () =>{
             const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
-            console.log("all tasks: " ,allTasks)
-
         }
         recursos_();
+    }
+
+    let idTarea = 0;
+
+    const changeTarea = (prop: string, value: any) => {
+        idTarea = value.target.value;
+    }
+
+    let fechaCarga = "";
+
+    const changeFecha = (prop: string, value: any) => {
+        fechaCarga = value.target.value;
+        console.log(fechaCarga)
+    }
+
+    let numeroHorasCarga = 1;
+
+    const changeHoras = (prop: string, value: any) => {
+        console.log(value.target.value)
+        numeroHorasCarga = value.target.value;
     }
         
     const number_hours = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
@@ -105,13 +128,22 @@ const CalendarioDias = (props:any) => {
 
     const handleSubmit = (e: { preventDefault: () => void; }) =>{
         e.preventDefault()
-        if (cargaActual.code_task === -1 || cargaActual.number_hours === -1 || cargaActual.date === ''){
-            setElementosVacios(true)
-            return false;
+        console.log(idProyecto)
+        console.log(idTarea)
+        console.log(fechaCarga)
+        console.log(numeroHorasCarga)
+        let hours: HoursData = {
+            code: 0,
+            number_hours: numeroHorasCarga,
+            date: fechaCarga,
+            code_task: idTarea,
+            code_proyect: idProyecto,
+            code_employee: 1
         }
-        console.log(cargaActual)
-        cargaFinal.data = cargaActual
-        RecursosService().loadHours(cargaFinal)
+        let carga: Hours = {
+            data: hours,
+        }
+        RecursosService().loadHours(carga)
     }
 
     const [show, setShow] = useState(false);
@@ -166,7 +198,7 @@ const CalendarioDias = (props:any) => {
                                     id="date"
                                     disabled = {false}
                                     defaultValue={cargaActual.date}
-                                    onChange={(value) => changeValue('date', value)}
+                                    onChange={(value) => changeFecha('date', value)}
                                 />
                                 </div>
                                 <div className={detalleProjectCSS.contentItem}>
@@ -182,8 +214,8 @@ const CalendarioDias = (props:any) => {
                                 <Form.Label className={detalleProjectCSS.label}>Tarea:</Form.Label>
                                 <div className={detalleProjectCSS.contentInput}>
                                     <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                                        ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("task",e)}>
-                                        {typesTask.map((type: any, index: number) => <option key={index} value={type['nombre']}>{type['nombre']}</option>)}
+                                        ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeTarea("task",e)}>
+                                        {typesTask.map((type: any, index: number) => <option key={index} value={type['id']}>{type['nombre']}</option>)}
                                     </Form.Select>
                                 </div>
                                 </div>
@@ -191,7 +223,7 @@ const CalendarioDias = (props:any) => {
                                 <Form.Label className={detalleProjectCSS.label}>Cantidad de horas:</Form.Label>
                                 <div className={detalleProjectCSS.contentInput}>
                                     <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                                        ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("numbers_hours",e)}>
+                                        ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeHoras("numbers_hours",e)}>
                                         {number_hours.map((type: any, index: number) => <option key={index} value={type}>{type}</option>)}
                                     </Form.Select>
                                 </div>
@@ -204,7 +236,7 @@ const CalendarioDias = (props:any) => {
                         <Button variant="danger" onClick={handleClose}>
                             Close
                         </Button>
-                        <Button variant="primary" type="submit" onClick={handleClose}>
+                        <Button variant="primary" type="submit" onClick={handleSubmit}>
                             Save Changes
                         </Button>
                         {elementosVacios &&
