@@ -86,7 +86,20 @@ const ProyectoService = () =>{
                 console.log("Se creo correctamente el proyecto")
             })
     }
-
+    
+	const removeProyecto = (id: String = "") =>{
+	    return fetch(URL + "/" + id,
+	    {
+		method: "DELETE",
+		headers:{
+		    Accept:"application/json",
+		    "content_type": "application/json"
+		  },
+	    })
+	    .then( () => {
+		console.log("Se borro el proyecto")
+	    })
+	}
 
 
     return{
@@ -94,7 +107,8 @@ const ProyectoService = () =>{
         getProyectoFor,
         actualizarProyecto,
         actualizarTarea,
-        postProyecto
+        postProyecto,
+        removeProyecto
     }
 }
 export default ProyectoService

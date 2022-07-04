@@ -75,7 +75,7 @@ export const ProyectosProyectos = (props: any) => {
 			<td>
 			    <div className={projectsCSS.contentItem}>
 			        <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>
-                    <ModalComponentDelete show={show} closeModal={closeModal} />
+                    <ModalComponentDelete show={show} id={ticket["id"]} name={ticket["nombre"]} closeModal={closeModal} />
 			        <div className={projectsCSS.styleNav} onClick={() =>deleteProject()}><FaTrash /></div>
 			    </div>
 			</td>

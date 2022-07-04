@@ -6,9 +6,11 @@ export const ModalComponentDelete = (props: any) => {
     const initialTaskData: any = {
 
     }
+    const { id, name} = props;
     const { show, closeModal } = props;
     function borrarProyecto(): void {
-        throw new Error('Function not implemented.');
+        ProyectoService().removeProyecto(id)
+        closeModal()
     }
     return (
         <div>
@@ -22,7 +24,7 @@ export const ModalComponentDelete = (props: any) => {
                     <IoCloseCircleSharp onClick={() => closeModal()} className={modalCSS.iconClose} />
                 </ModalHeader>
                 <Modal.Body>
-                    <div> El proyecto sera eliminado </div>
+                     <div> El proyecto {id} - {name} sera eliminado </div>
                 </Modal.Body>
                 <Modal.Footer>
                     <Button  onClick={() => borrarProyecto()}>
