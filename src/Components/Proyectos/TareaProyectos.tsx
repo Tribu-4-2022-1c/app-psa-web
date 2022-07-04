@@ -126,7 +126,7 @@ export const TareaProyectos = (props:any) => {
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
            <div className={detalleProjectCSS.contentItem}>
-                {!disabled && <Button className={detalleProjectCSS.iconSave} onClick={() => updateData()} variant="success">Guardar</Button>}
+                {!disabled && <Button className={detalleProjectCSS.iconSave} onClick={() => (updateData(),changeStateEdit(true)) } variant="success">Guardar</Button>}
                 {!disabled && <MdHighlightOff className={`${detalleProjectCSS.editIcon} ${detalleProjectCSS.iconClose}`} onClick={() => changeStateEdit(true)} />}
                 {disabled && <FaEdit className={`${detalleProjectCSS.editIcon}`} onClick={() => changeStateEdit(false)} />}
               </div>
