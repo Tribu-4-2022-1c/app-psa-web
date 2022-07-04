@@ -1,32 +1,27 @@
 import React, {useEffect, useState} from 'react'
 import ProductoSoporteCSS from  '../../Styles/ProductoSoporte.module.css'//'../ Soporte/'
 import { FaPlusCircle } from 'react-icons/fa'
-import { TareasEmpleados } from './TareasEmpleados';
 import {TareaEmpleado} from "./TareaEmpleado";
 import recursosService from "../../Services/recursosService";
-import proyectosService from "../../Services/proyectosService";
 import {VersionSoporte} from "../Soporte/VersionSoporte";
+
 const CalendarioDias = (props:any) => {
     const {dia} = props;
     const {diaSelect} = props;
+    const {horaSelect} = props;
     const [allhoras, sethoras] = useState([]);
+    const [load, setload] = useState(true);
     useEffect(() => {
         const tasks_ = async () =>{
-            let allhoras:any = recursosService.getHoursBetween(1,"2022-07-03","2022-07-09");
-            sethoras(allhoras);
+            let allhora:any = await recursosService().getHoursBetween(1,"2022-07-03","2022-07-09");
+            console.log(allhora.length)
+            sethoras(allhora);
+            setload(false);
         }
         tasks_();
     },[]);
 
-    const horas = [
-        {
-            code: 0,
-            number_hours: 0,
-            date: "2022-07-03",
-            code_task: 0,
-            code_project: 0,
-            code_employee: 0
-        },]
+
 
 
 
@@ -47,12 +42,14 @@ const CalendarioDias = (props:any) => {
             <div
                 className={`${ProductoSoporteCSS.contentDescription} 
         ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
-            <div>
-                <TareaEmpleado fecha={horas} diaActual={dia['dia']} horas={horas} />
-                </div>
+
+                {(allhoras&&allhoras.length>0)&&<div>{allhoras.map( (version:any,index:number) =>
+                    <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras}  />)}
+                </div>}
             </div>
         </div>
     )
 }
 
-export default CalendarioDias;
+
+    export default CalendarioDias;

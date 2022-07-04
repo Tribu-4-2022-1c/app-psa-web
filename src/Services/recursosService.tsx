@@ -27,7 +27,8 @@ const soporteService = () => {
         const url = "https://api-psa-recursos.herokuapp.com/resources";
         return fetch(url).then( async (response) => {
             if(response){
-                return response.json();
+                let test = response.json()
+                return test;
             }else{
                 return [];
             }
@@ -86,7 +87,6 @@ const soporteService = () => {
             })
             .then(async (res) => {
                 if (res){
-                    console.log("response json: ", res.json())
                     return res.json();}
                 else{
                     return [];
@@ -96,7 +96,6 @@ const soporteService = () => {
     }
 
     const getHoursBetween = (legajo: number, startDate: string, endDate: string) =>{
-        console.log("res")
         return fetch(URL + "/find/between/?codeEmployee=" + legajo + "&startDate=" + startDate + "&endDate=" + endDate,
             {
                 method: "GET",
@@ -107,13 +106,13 @@ const soporteService = () => {
             })
             .then(async (res) => {
                 if (res){
-                   
-                    return res.json();
+                    let test = res.json()
+                    return test;
                 }
                 else{
-                    return horas;
+                    return [];
                 }
-            })
+           })
             .catch((error) => console.error("Error",error))
     }
 
@@ -135,7 +134,7 @@ const soporteService = () => {
         loadHours,
         modifyHours,
         getHoursByEmployeeAndTask,
-        getHoursBetween
+        getHoursBetween,
     }
 }
 
