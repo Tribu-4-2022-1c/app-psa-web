@@ -211,7 +211,9 @@ export const ProyectoProyectos = (props: any) => {
          <Link className={detalleProjectCSS.styleNav} to={"/proyectos/crear_tarea/"+id+"/"} state={{}}><div className={detalleProjectCSS.button}>
           <p>NUEVA TAREA</p>
         </div></Link>
-          <div className={`${detalleProjectCSS.contentTaskprojects} ${(proyecto) ? detalleProjectCSS.uninformation : ''}`}>
+          <div className={`${detalleProjectCSS.contentTaskprojects} ${(proyecto) ? detalleProjectCSS.uninformation : ''}`}/>
+
+          <div className={`${detalleProjectCSS.contentTaskprojects} ${(tareas&&tareas.length===0) ? detalleProjectCSS.uninformation : ''}`}>
             {((tareas)&& !(Object.keys(tareas).length === 0)) && <Table responsive bordered >
               <thead>
                 <tr>
@@ -247,8 +249,8 @@ export const ProyectoProyectos = (props: any) => {
               </Card>
             }
           </div>
-        </Col>
-      </Row>
+            </Col>
+            </Row>
     </div>
   )
   
