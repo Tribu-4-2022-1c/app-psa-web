@@ -7,6 +7,7 @@ import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import { Hours, HoursData } from '../../models/Recursos.models';
 import RecursosService from '../../Services/recursosService';
 import ProyectoService from '../../Services/proyectosService';
+import {ProyectoSinLider} from "../../models/Proyectos.models";
 
 const CalendarioDias = (props:any) => {
     const {dia} = props;
@@ -25,6 +26,21 @@ const CalendarioDias = (props:any) => {
         code_task: -1,
         code_proyect: -1, /* Number(typesProject[1]['id']),*/
         code_employee: 1
+    }
+
+    const proyectoInicial: ProyectoSinLider = {
+        id: "",
+        nombre:      "",
+        tipo:        "DESARROLLO",
+        cliente:     "",
+        alcance:     "",
+        version:     "",
+        descripcion: "",
+        tareas:      [],
+        horaEstimada: 0,
+        fecha_inicio: "",
+        fecha_fin:   "",
+        estado:      "PENDIENTE"
     }
 
     const cargaFinal: Hours = {
@@ -51,18 +67,37 @@ const CalendarioDias = (props:any) => {
         const recursos_ = async () =>{
           const allProjects:any =  await ProyectoService().getAllProjects()
           setProjects(allProjects);
+          console.log(allProjects)
         }
         recursos_();
       },[]);
 
+
     useEffect(() => {
         const recursos_ = async () =>{
-            const allTasks:any = await ProyectoService().getTaskForProject(typesProject[1]['id'])
+            const allTasks: any = [];
             setTask(allTasks);
+            console.log(allTasks)
         }
         recursos_();
     },[]);
-    
+
+
+
+    const [proyectoActual, setProyectoActual] = useState(proyectoInicial)
+    const [idProyecto, setIdProyecto] = useState(0)
+    const changeProyecto = (prop: string, value: any) => {
+        setIdProyecto(value.target.value)
+        console.log("event: ", value.target.value)
+        console.log("id proyecto: ", idProyecto)
+        const recursos_ = async () =>{
+            const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+            setTask(allTasks);
+            console.log("all tasks: " ,allTasks)
+
+        }
+        recursos_();
+    }
         
     const number_hours = [ 1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24]
         
@@ -138,8 +173,8 @@ const CalendarioDias = (props:any) => {
                                 <Form.Label className={detalleProjectCSS.label}>Proyecto:</Form.Label>
                                 <div className={detalleProjectCSS.contentInput}>
                                     <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                                        ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} defaultValue = {typesProject[1]} onChange={(e) => changeValue("project",e)}>
-                                    {typesProject.map((type: any, index: number) => <option key={index} value={type['nombre']}>{type['nombre']}</option>)}
+                                        ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} defaultValue = {typesProject[0]} onChange={(e) => changeProyecto("type",e)}>
+                                    {typesProject.map((type: any, index: number) => <option key={index} value={type['id']} >{type['nombre']}</option>)}
                                     </Form.Select>
                                 </div>
                                 </div>
