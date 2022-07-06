@@ -10,10 +10,13 @@ import recursosCSS from "../../Styles/Recursos/Recursos.module.css";
 import {NavLink} from "react-router-dom";
 import versionSoporteStyle from "../../Styles/VersionSoporte.module.css";
 import {render} from "react-dom";
+import {FaArrowLeft, FaArrowRight, FaEdit} from "react-icons/fa";
+import {Empleados} from "./Empleados";
 
 
 export const Calendario = (props:any) => {
     let dia_hoy=new Date();
+    let semana_hoy = new Date();
     var day = dia_hoy.getDay(),
         diff = dia_hoy.getDate() - day + (day == 0 ? -6:1);
     let [semana, setSemana] = useState(new Date(dia_hoy.setDate(diff)));
@@ -60,12 +63,21 @@ export const Calendario = (props:any) => {
     }
 
     function changeDate() {
-       semana.setDate(semana.getDate()+7)
-        setSemanaString(semana.getFullYear() + '-' + (semana.getMonth() + 1) + '-' + semana.getDate())
-        setSemana(semana)
+        semana.setDate(semana.getDate()-7);
+        setSemanaString(semana.getFullYear() + '-' + (semana.getMonth() + 1) + '-' + semana.getDate());
+        setSemana(semana);
     }
 
 
+    function changeDateFoward() {
+        semana.setDate(semana.getDate()+7);
+        if(semana_hoy<semana){
+            semana.setDate((new Date(semana_hoy).getDate()) - day + (day == 0 ? -6:1))
+        }else{
+            setSemanaString(semana.getFullYear() + '-' + (semana.getMonth() + 1) + '-' + semana.getDate())
+            setSemana(semana)}
+
+    }
 
     return (
         <div>
@@ -91,19 +103,23 @@ export const Calendario = (props:any) => {
                         <NavLink
                             to={'/recursos/calendario'}
                             className={versionSoporteStyle.styleNav}>
-                        <div className={recursosCSS.button} onClick={() => {changeDate();}} >
-                        <p>{semanastring}</p>
+                            <div className={recursosCSS.button} onClick={() => {changeDate();}} >
+                                <FaArrowLeft />
+                            </div>
+                            <div className={recursosCSS.button}  >
+                                <p>{semanastring}</p>
 
                             </div>
-
+                            <div className={recursosCSS.button} onClick={() => {changeDateFoward();}} >
+                                <FaArrowRight />
+                            </div>
                         </NavLink>
                     </div>
-
-                    {!load&&dias.map((dias,index) => <div key={index}>
-                        <CalendarioDias dia={dias} semana={semana}/>
-
-                    </div>)}
                 </div >
+                {!load&&dias.map((dias,index) => <div key={index}>
+                    <CalendarioDias dia={dias} semana={semana}/>
+                </div>)}
+
             </div>
         </div>
     )
