@@ -62,10 +62,10 @@ const CalendarioDias = (props:any) => {
     const changeValue = (prop: string, value: any) => {
         setElementosVacios(false)
         setCargaActual({ ...cargaActual, [prop]: value.target.value });
-        cargaActual.code_project = Number(ProyectoService().getProjectByName(value.target.value))
+        cargaActual.code_project = Number(RecursosService().getProjectByName(value.target.value))
         if (prop === "proyecto"){
             if ( value.target.value ){
-                cargaActual.code_project = Number(ProyectoService().getProjectByName(value.target.value))
+                cargaActual.code_project = Number(RecursosService().getProjectByName(value.target.value))
                 setASignarProjecto(true)
             }
             else{
@@ -78,11 +78,11 @@ const CalendarioDias = (props:any) => {
 
     useEffect(() => {
         const recursos_ = async () =>{
-            const allProjects:any =  await ProyectoService().getAllProjects()
+            const allProjects:any =  await RecursosService().getAllProjects()
             setProjects(allProjects);
             idProyecto = allProjects[0].id;
             const recursos_ = async () =>{
-                const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+                const allTasks: any = await RecursosService().getTaskForProject(idProyecto.toString())
                 setTask(allTasks);
                 if(allTasks.length == 0) {
                     idTarea = 0;
@@ -108,7 +108,7 @@ const CalendarioDias = (props:any) => {
     const changeProyecto = (prop: string, value: any) => {
         idProyecto = value.target.value;
         const recursos_ = async () =>{
-            const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+            const allTasks: any = await RecursosService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
             if(allTasks.length == 0) {
                 idTarea = 0;

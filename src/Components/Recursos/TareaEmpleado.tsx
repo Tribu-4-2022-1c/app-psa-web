@@ -52,11 +52,11 @@ export const TareaEmpleado = (props:any) => {
 
     useEffect(() => {
         const recursos_ = async () =>{
-          const allProjects:any =  await ProyectoService().getAllProjects()
+          const allProjects:any =  await RecursosService().getAllProjects()
           setProjects(allProjects);
           idProyecto = allProjects[0].id;
           const recursos_ = async () =>{
-              const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+              const allTasks: any = await RecursosService().getTaskForProject(idProyecto.toString())
               setTask(allTasks);
           }
           recursos_();
@@ -79,7 +79,7 @@ export const TareaEmpleado = (props:any) => {
         cargaActual.code_project = idProyecto;
         setCargaActual(cargaActual);
         const recursos_ = async () =>{
-            const allTasks: any = await ProyectoService().getTaskForProject(idProyecto.toString())
+            const allTasks: any = await RecursosService().getTaskForProject(idProyecto.toString())
             setTask(allTasks);
         }
         recursos_();

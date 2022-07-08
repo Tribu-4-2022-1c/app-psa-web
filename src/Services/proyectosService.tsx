@@ -74,60 +74,19 @@ const ProyectoService = () =>{
     }
 
 
-    const getAllProjects = () => {
-        const url = "https://api-psa-proyectos-squad-12.herokuapp.com/proyectos";
-        return fetch(url).then( async (response) => {
-            if(response){
-                return response.json();
-            }else{
-                return [];
-            }
-        })
-            .catch( error => {
-                console.log(error);
-                return [];
-            })
-    }
 
-    const getProjectByName = (nombre: String = "") => {
-        const url = URL + "/obtener-por-nombre?nombre=" + nombre;
-        return fetch(url).then( async (response) => {
-            if(response){
-                return response.json();
-            }else{
-                return [];
-            }
-        })
-            .catch( error => {
-                console.log(error);
-                return [];
-            })
-    }
 
-    const getTaskForProject = (id: String = "") => {
-        const url = URL + "/" + id + "/tareas";
-        return fetch(url).then( async (response) => {
-            if(response){
-                return response.json();
-            }else{
-                return [];
-            }
-        })
-            .catch( error => {
-                console.log(error);
-                return [];
-            })
-    }
+
+
+
 
 
     return{
         getAllTaksFor,
         getProyectoFor,
-        getAllProjects,
         actualizarProyecto,
         postProyecto,
-        getProjectByName,
-        getTaskForProject
+
     }
 }
 export default ProyectoService
