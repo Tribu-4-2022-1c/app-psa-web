@@ -210,7 +210,7 @@ const ProyectoService = () =>{
     }
 
     const getRecursos = () => {
-        return fetch(SoporteURL+"/employees",{
+        return fetch(RecursosURL+"/resources",{
             method: "GET",
             headers:{
                 'Accept': 'application/json',
@@ -218,7 +218,6 @@ const ProyectoService = () =>{
             },   
         }).then(async (res) => {
             if (res){
-
                 return res.json()
                 }
             else{

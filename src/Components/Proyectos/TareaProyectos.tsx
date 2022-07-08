@@ -3,18 +3,19 @@ import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
 import { FaCalendar, FaEdit, FaClock, FaPersonBooth } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
-import { Patch, Proyecto, Tarea } from "../../models/Proyectos.models";
+import { Patch, Proyecto, RecrusoSoporte, Tarea } from "../../models/Proyectos.models";
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Navigate, useParams } from 'react-router-dom';
 import  ProyectoService  from "../../Services/proyectosService";
 import { MdHighlightOff } from 'react-icons/md';
+import MostrarTicket from './MostrarTicket';
 
 export const TareaProyectos = (props:any) => {
    
   const {id} = useParams();
   const [tickets, setTickets] = useState<Array<""> | null>(null)
   const [tarea, setTareas] = useState<Tarea  | null>(null)
- 
+  const [recursos, setRecursos] = useState<Array<RecrusoSoporte>>([]);
 
 
   const tareaInicial: Tarea = {
@@ -44,17 +45,38 @@ export const TareaProyectos = (props:any) => {
 
   const [tareaActual, settareaInicial] = useState(tareaInicial);
   const [disabled, setdisabled] = useState(true);
+  const [lider,setLider] = useState(0)
 
 
   const changeValue = (prop: string, value: any) => {
+    if(prop == "recursoAsignado"){
+      settareaInicial({...tareaActual,[prop]:{
+        "id_recurso": recursos[value.target.value].file,
+        "name": recursos[value.target.value].name + " "+ recursos[value.target.value].lastname
+      }})
+      setLider(value.target.value)
+      return 
+    }
     settareaInicial({ ...tareaActual, [prop]: value.target.value });
   }
 
+
   const updateData = async () => {
+    console.log(tareaActual)
    const response = await ProyectoService().actualizarTarea(tareaActual,id);
    console.log(response)
   }
 
+  useEffect(()=>{
+    const proyecto_ = async () =>{
+        const getTarea:any = await ProyectoService().getTareaFor(id);
+        if (getTarea.recursoAsignado != null){
+          setLider(getTarea.recursoAsignado.id_recurso-1)
+        }
+        settareaInicial(getTarea);
+    }
+    proyecto_();
+  },[]);
   const changeStateEdit = (state:boolean) => {
     if(state){
      
@@ -62,21 +84,25 @@ export const TareaProyectos = (props:any) => {
     setdisabled(state);
   }
 
-  //useEffect(()=>{
-  //  const tareas_ = async () =>{
-  //      const getTareas:any = await ProyectoService().getTickesPara(id);
-  //      setTareas(getTareas);
-  //  }
-  //  tareas_();
-  //},[]);
-
   useEffect(()=>{
-    const proyecto_ = async () =>{
-        const getTarea:any = await ProyectoService().getTareaFor(id);
-        settareaInicial(getTarea);
+    const tareas_ = async () =>{
+        const getTareas:any = await ProyectoService().getTicketsPara(id);
+        setTickets(getTareas);
     }
-    proyecto_();
+    tareas_();
   },[]);
+
+
+
+  useEffect(() =>{
+    const recursos_ = async() =>{
+      let getRecursos: any = await ProyectoService().getRecursos();
+      setRecursos(getRecursos)
+    }
+    recursos_();
+  },[])
+
+
 
 
   if (!tareaActual){
@@ -96,7 +122,6 @@ export const TareaProyectos = (props:any) => {
     //ProyectoService().actualizarTarea(patch,id)
   }
   
-  console.log(id)
   return (
     <div>
       <MenuDescription proyecto={tareaActual.nombre} title={"Tarea"} />
@@ -180,14 +205,10 @@ export const TareaProyectos = (props:any) => {
             </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Recurso Asignado:</Form.Label>
-              <Form.Control
-                className={`${(disabled) ? detalleProjectCSS.disabled : ''} ${detalleProjectCSS.input}`}
-                type="text"
-                id="startDate"
-                disabled = {true}
-                defaultValue={tareaActual.recursoAsignado.name}
-                onChange={(value) => changeValue('recursoAsignado', value)}
-              />
+              <Form.Select value={lider} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("recursoAsignado",e)}>
+                    {recursos.map((recurso: RecrusoSoporte, index: number) => <option key={recurso.file} value={index}>{recurso.name}{" "}{recurso.lastname}</option>)}
+                </Form.Select>
              <FaPersonBooth className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
             </div>
    
@@ -199,23 +220,28 @@ export const TareaProyectos = (props:any) => {
       <Row className={detalleProjectCSS.col8} md={40} lg={40} m={40}>
         <Col className={detalleProjectCSS.col8} md={20} lg={20} m={20}>
           <div className={`${detalleProjectCSS.contentTaskprojects} ${(tarea) ? detalleProjectCSS.uninformation : ''}`}>
-            {((tickets)&& !(Object.keys(tickets).length === 0)) && <Table responsive bordered >
+            {((tickets)&& !(Object.keys(tickets).length === 0)) && 
+            <Table responsive bordered >
               <thead>
                 <tr>
-                  <td>Nombre de tarea</td>
-                  <td>Horas Estimadas</td>
-                  <td>Fecha de creacion</td>
-                  <td>Mas informacion</td>
+                  <td>Codigo</td>
+                  <td>Titulo</td>
+                  <td>Cliente</td>
+                  <td>Tipo</td>
+                  <td>Severidad</td>
                 </tr>
               </thead>
               <tbody>
-           
+              {(tickets)&&tickets.map( (ticket,index) => 
+              <tr key={index}>
+              <MostrarTicket unTicket = {ticket}/>
+              </tr>)}
               </tbody>
             </Table>}
             {((tickets) && (Object.keys(tickets).length === 0)) &&
               <Card className={detalleProjectCSS.contentCard}>
                 <CardHeader>
-                  No hay Tareas Asociadas a este Proyecto
+                  No hay Tickets Asociados a este Proyecto
                 </CardHeader>
               </Card>
             }
@@ -226,5 +252,5 @@ export const TareaProyectos = (props:any) => {
   )
   
   
-}
 
+}

@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
 import { FaCalendar, FaEdit, FaEye, FaTrash } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
-import { Patch, Proyecto, Tarea } from "../../models/Proyectos.models";
+import { Patch, Proyecto, RecrusoSoporte, Tarea } from "../../models/Proyectos.models";
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Link, Navigate, useParams } from 'react-router-dom';
 import  ProyectoService  from "../../Services/proyectosService";
@@ -18,6 +18,7 @@ export const ProyectoProyectos = (props: any) => {
   const {id} = useParams();
   const [tareas, setTareas] = useState<Array<Tarea> | null>(null)
   const [proyecto, setProyecto] = useState<Proyecto  | null>(null)
+  let [recursos,setRecursos] = useState<Array<RecrusoSoporte>>([])
   const closeModal = () => {
     setshow(false);
   }
@@ -39,8 +40,8 @@ export const ProyectoProyectos = (props: any) => {
     fecha_fin:   "",
     estado:      "",
     lider:       {
-      id_recurso: 0,
-      name: ""
+      id_recurso: 1,
+      name: "Un Lider"
     
     },
     producto:    "",
@@ -57,6 +58,7 @@ export const ProyectoProyectos = (props: any) => {
   const [proyectoActual, setproyectoInicial] = useState(proyectoInicial);
   const [disabled, setdisabled] = useState(true);
   const [productos,setProductos] = useState([])
+  const [lider,setLider] = useState(0)
 
 
   const deleteTarea = (id:string) => {
@@ -65,7 +67,14 @@ export const ProyectoProyectos = (props: any) => {
     //setshow(true);
   }
   const changeValue = (prop: string, value: any) => {
-
+    if(prop == "lider"){
+      setproyectoInicial({...proyectoActual,[prop]:{
+        "id_recurso": recursos[value.target.value].file,
+        "name": recursos[value.target.value].name + " "+ recursos[value.target.value].lastname
+      }})
+      setLider(value.target.value)
+      return
+    }
     setproyectoInicial({ ...proyectoActual, [prop]: value.target.value });
     console.log(proyectoActual)
   }
@@ -79,6 +88,7 @@ export const ProyectoProyectos = (props: any) => {
 
 
   const updateData = async () => {
+    console.log(proyectoActual)
     const response = await ProyectoService().actualizarProyecto(proyectoActual, id);
     console.log(response)
   }
@@ -101,6 +111,9 @@ export const ProyectoProyectos = (props: any) => {
   useEffect(()=>{
     const proyecto_ = async () =>{
         const getProyecto:any = await ProyectoService().getProyectoFor(id);
+        if (getProyecto.lider != null){
+          setLider(getProyecto.lider.id_recurso-1)
+        }
         setproyectoInicial(getProyecto);
     }
     proyecto_();
@@ -112,8 +125,15 @@ export const ProyectoProyectos = (props: any) => {
       setProductos(getProductos)
     }
     productos_();
-  })
+  },[])
 
+  useEffect(() =>{
+    const recursos_ = async() =>{
+      let getRecursos: any = await ProyectoService().getRecursos();
+      setRecursos(getRecursos)
+    }
+    recursos_();
+  },[])
 
   if (!proyectoActual){
     return <></>
@@ -132,7 +152,8 @@ export const ProyectoProyectos = (props: any) => {
     
     ProyectoService().actualizarProyecto(patch,id)
   }
-  
+
+  console.log(recursos)
   return (
     <div>
       
@@ -220,9 +241,11 @@ export const ProyectoProyectos = (props: any) => {
               </div>
             </div>
             <div className={detalleProjectCSS.contentItem}>
-              <Form.Label className={detalleProjectCSS.label}>Customizacion:</Form.Label>
+              <Form.Label className={detalleProjectCSS.label}>Lider asignado:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={detalleProjectCSS.type} disabled={disabled} >
+              <Form.Select value={lider} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("lider",e)}>
+                    {recursos.map((recurso: RecrusoSoporte, index: number) => <option key={recurso.file} value={index}>{recurso.name}  {" "} {recurso.lastname}</option>)}
                 </Form.Select>
               </div>
             </div>

@@ -1,7 +1,7 @@
 
 import { useEffect, useState } from 'react';
 import { Button, Col, Form, Row } from 'react-bootstrap';
-import { Patch, Proyecto, ProyectoSinLider } from '../../models/Proyectos.models';
+import { Patch, Proyecto, ProyectoSinLider, RecrusoSoporte } from '../../models/Proyectos.models';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
 import tareasCSS from "../../Styles/Proyectos/TareasProyectos.module.css";
 import MenuDescription from './MenuDescription';
@@ -15,8 +15,9 @@ const ProyectoCrear = (props: any) =>{
     const [disabled, setdisabled] = useState(false);
     const [elementosVacios, setElementosVacios] = useState(false);
     const [asignar_lider, setASignarLider] = useState(false);
+    let [recursos,setRecursos] = useState<Array<RecrusoSoporte>>([])
     
-    const proyectoInicial: ProyectoSinLider = {
+    const proyectoInicial: Proyecto = {
         id: "",
         nombre:      "",
         tipo:        "DESARROLLO",
@@ -29,12 +30,26 @@ const ProyectoCrear = (props: any) =>{
         fecha_inicio: "",
         fecha_fin:   "",
         estado:      "PENDIENTE",
-        producto:    "PSA Spring CRM"
+        producto:    "PSA Spring CRM",
+        lider:       {
+          id_recurso: 1,
+          name: "Un Lider"
+        
+        }
       }
 
   const [proyectoActual, setProyectoActual] = useState(proyectoInicial)
+  const [lider,setLider] = useState(1)
 
   const changeValue = (prop: string, value: any) => {
+    if(prop == "lider"){
+      setProyectoActual({...proyectoActual,[prop]:{
+        "id_recurso": recursos[value.target.value].file,
+        "name": recursos[value.target.value].name + " "+ recursos[value.target.value].lastname
+      }})
+      setLider(value.target.value)
+      return
+    }
         setElementosVacios(false)
         setProyectoActual({ ...proyectoActual, [prop]: value.target.value });
         if (prop === "estado"){
@@ -64,13 +79,21 @@ const ProyectoCrear = (props: any) =>{
     productos_();
   },[])
 
+  useEffect(() =>{
+    const recursos_ = async() =>{
+      let getRecursos: any = await ProyectoService().getRecursos();
+      setRecursos(getRecursos)
+    }
+    recursos_();
+  },[])
+
 
   const typesProject = [
     'IMPLEMENTACION', 'DESARROLLO'
   ]
 
   const typesStatus = [
-    'PENDIENTE', 'ASIGNADO'
+    'PENDIENTE', 'ASIGNADO', "En curso"
   ]
   function clickGuardar(e: { preventDefault: () => void; }) {
     e.preventDefault()
@@ -188,18 +211,18 @@ const ProyectoCrear = (props: any) =>{
               </div>
             </div>
             <div className={detalleProjectCSS.contentItem}>
-              <Form.Label className={detalleProjectCSS.label}>Customizacion:</Form.Label>
+              <Form.Label className={detalleProjectCSS.label}>Lider:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select >
+              <Form.Select value={lider} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("lider",e)}>
+                    {recursos.map((recurso: RecrusoSoporte, index: number) => <option key={recurso.file} value={index}>{recurso.name}  {" "} {recurso.lastname}</option>)}
                 </Form.Select>
               </div>
             </div>
             {false && asignar_lider && <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Lider:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={detalleProjectCSS.type} disabled={disabled} className={` 
-                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`} onChange={(e) => changeValue("lider",e)}>
-                </Form.Select>
+
               </div>
 
             </div>

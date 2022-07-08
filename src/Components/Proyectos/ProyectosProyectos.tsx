@@ -21,6 +21,9 @@ export const ProyectosProyectos = (props: any) => {
   }
     const headsTable = [
         {
+            id:"Id",
+        },
+        {
             id: "Nombre",
         },
         {
@@ -37,9 +40,6 @@ export const ProyectosProyectos = (props: any) => {
         },
         {
             id: "Producto",
-        },
-        {
-            id: "Version",
         },
         {
             id: "Horas Estimadas",
@@ -66,22 +66,20 @@ export const ProyectosProyectos = (props: any) => {
                 </thead>
                 <tbody>
                 {(proyecto)&&proyecto.map( (ticket: { [x: string]: string; },index: Key | null | undefined) => <tr key={index}>
+                    <td>{ticket["id"]}</td>
                     <td>{ticket['nombre']}</td>
                     <td>{ticket['descripcion']}</td>
                     <td>{ticket['fecha_inicio']}</td>
                     <td>{ticket['estado']}</td>
                     <td>{ticket['tipo']}</td>
                     <td>{ticket['producto']}</td>
-                    <td>{ticket['version']}</td>
                     <td>{ticket['horaestimada']}</td>
-			<td>
-			    <div className={projectsCSS.contentItem}>
-			        <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>
-                    <Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Se eliminara el proyecto ' +ticket["nombre"])) {deleteProject(ticket["id"]) }; }}><FaTrash /></Link>
-
-			    </div>
-			</td>
-
+			        <td>
+			        <div className={projectsCSS.contentItem}>
+			            <Link className={projectsCSS.styleNav} to={'/proyectos/' + ticket["id"]} state={{ ticket }}><FaFolder /></Link>
+                        <Link className={projectsCSS.styleNav} to={`#`} onClick={() => { if (window.confirm('Se eliminara el proyecto ' +ticket["nombre"])) {deleteProject(ticket["id"]) }; }}><FaTrash /></Link>
+			        </div>
+			        </td>
                     </tr>)}
                 </tbody>
             </Table>

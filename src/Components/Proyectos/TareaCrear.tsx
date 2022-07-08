@@ -3,7 +3,7 @@ import { Button, Card, Col, Form, Row, Table } from 'react-bootstrap';
 import { FaCalendar, FaEdit, FaClock, FaPersonBooth } from 'react-icons/fa';
 import MenuDescription from './MenuDescription';
 import detalleProjectCSS from '../../Styles/Proyectos/Detalle.module.css';
-import { Lider, Patch, Proyecto, Tarea } from "../../models/Proyectos.models";
+import { Lider, Patch, Proyecto, RecrusoSoporte, Tarea } from "../../models/Proyectos.models";
 import CardHeader from 'react-bootstrap/esm/CardHeader';
 import { Navigate, useParams } from 'react-router-dom';
 import  ProyectoService  from "../../Services/proyectosService";
@@ -15,8 +15,8 @@ export const TareaCrear = (props:any) => {
   const [tickets, setTickets] = useState<Array<""> | null>(null)
   const [tarea, setTareas] = useState<Tarea  | null>(null)
   const [proyecto_id,setID] = useState(Number(idProyecto));
-  const [recursos, setRecursos] = useState([]);
-
+  const [recursos, setRecursos] = useState<Array<RecrusoSoporte>>([]);
+  const [lider,setLider] = useState(0)
 
   const tareaInicial: Tarea = {
     id: 0,
@@ -47,6 +47,14 @@ export const TareaCrear = (props:any) => {
   const [disabled, setdisabled] = useState(false);
 
   const changeValue = (prop: string, value: any) => {
+    if(prop == "recursoAsignado"){
+      settareaInicial({...tareaActual,[prop]:{
+        "id_recurso": recursos[value.target.value].file,
+        "name": recursos[value.target.value].name + " "+ recursos[value.target.value].lastname
+      }})
+      setLider(value.target.value)
+      return 
+    }
     settareaInicial({ ...tareaActual, [prop]: value.target.value });
   }
 
@@ -70,6 +78,14 @@ export const TareaCrear = (props:any) => {
     setdisabled(state);
   }
 
+  useEffect(() =>{
+    const recursos_ = async() =>{
+      let getRecursos: any = await ProyectoService().getRecursos();
+      setRecursos(getRecursos)
+    }
+    recursos_();
+  },[])
+
 
 
 
@@ -91,7 +107,6 @@ export const TareaCrear = (props:any) => {
     console.log(answer)
   }
   
-  console.log(tareaActual)
   return (
     <div>
       <MenuDescription proyecto={tareaActual.nombre} title={"Crear Tarea:"} />
@@ -174,14 +189,10 @@ export const TareaCrear = (props:any) => {
             </div>
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Recurso Asignado:</Form.Label>
-              <Form.Control
-                className={`${(disabled) ? detalleProjectCSS.disabled : ''} ${detalleProjectCSS.input}`}
-                type="text"
-                id="startDate"
-                disabled = {disabled}
-                defaultValue={tareaActual.recursoAsignado.name}
-                onChange={(value) => changeRecurso('recursoAsignado', value)}
-              />
+              <Form.Select value={lider} disabled={disabled} className={` 
+                    ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeValue("recursoAsignado",e)}>
+                    {recursos.map((recurso: RecrusoSoporte, index: number) => <option key={recurso.file} value={index}>{recurso.name}{" "}{recurso.lastname}</option>)}
+                </Form.Select>
              <FaPersonBooth className={`${detalleProjectCSS.icon}  ${detalleProjectCSS.calendar}`} />
             </div>
    

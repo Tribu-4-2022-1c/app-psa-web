@@ -82,3 +82,9 @@ export interface Tarea {
     type: string,
     version: string
   }
+
+  export interface RecrusoSoporte{
+    file: number,
+    name: string,
+    lastname: string
+  }
