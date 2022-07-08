@@ -11,6 +11,8 @@ import SoportePage from '../Pages/SoportePage';
 import LogInPage from "../Pages/LogInPage";
 import { ProyectoProyectos } from '../Components/Proyectos/ProyectoProyectos';
 import ProyectoCrear from '../Components/Proyectos/ProyectoCrear';
+import { TareaCrear } from '../Components/Proyectos/TareaCrear';
+import { TareaProyectos } from '../Components/Proyectos/TareaProyectos';
 
 const Public = () => {
   return (
@@ -19,6 +21,9 @@ const Public = () => {
         <Route path='/proyectos' element={ <ProyectosPage /> } />
         <Route path='/proyectos/:id' element={ <ProyectoProyectos /> } />
         <Route path='/proyectos/crear_proyecto' element={ <ProyectoCrear /> } />
+        <Route path='/proyectos/crear_tarea/:idProyecto/' element={ <TareaCrear /> } />
+        <Route path='/proyectos/tarea/:id' element={ <TareaProyectos /> } />
+        <Route path='/proyectos/crear_tarea/:idProyecto/' element={ <TareaCrear /> } />
         <Route path='/recursos' element={ <RecursosPage /> }/>
         <Route path='/recursos/calendario' element={ <Calendario /> }/>
         <Route path='/soporte' element={ <SoportePage /> } />

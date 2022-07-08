@@ -1,6 +1,6 @@
 export interface Tarea {
-    id: string,
-    horasEstimadas: string,
+    id: number,
+    horasEstimadas: number,
     nombre: string,
     fechaCreacion: string,
     recursoAsignado: Lider;
@@ -8,7 +8,7 @@ export interface Tarea {
     prioridad: string,
     objetivo: string,
     recursosAsignados: Array<Lider>,
-    proyectoID: string
+    proyectoID: number
   }
 
   export interface Proyecto {
@@ -25,6 +25,7 @@ export interface Tarea {
     fecha_fin:   string;
     estado:      string;
     lider:       Lider;
+    producto:    string;
 
   }
   export interface ProyectoSinLider {
@@ -40,11 +41,12 @@ export interface Tarea {
     fecha_inicio:string;
     fecha_fin:   string;
     estado:      string;
+    producto:     string;
   }
 
 
   export interface Lider{
-    id: number;
+    id_recurso: number;
     name: string;
   }
 
@@ -53,5 +55,36 @@ export interface Tarea {
     nombre: string,
     version: string,
     descripcion: string,
-    tipo: string
+    tipo: string,
+    producto: string
+  }
+
+  export interface TicketTask{
+      id: {
+        task: string,
+        ticket: string
+      }
+  }
+
+  export interface TicketModel{
+    id: any;
+    client: string,
+    closureMotive: string,
+    code: 0,
+    creationDate: string,
+    description: string,
+    lastUpdated: string,
+    resolution: string,
+    responsible: string,
+    severity: string,
+    status: string,
+    title: string,
+    type: string,
+    version: string
+  }
+
+  export interface RecrusoSoporte{
+    file: number,
+    name: string,
+    lastname: string
   }
