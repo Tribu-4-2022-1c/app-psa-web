@@ -33,7 +33,7 @@ const ProyectoCrear = (props: any) =>{
         producto:    "PSA Spring CRM",
         lider:       {
           id_recurso: 1,
-          name: "Un Lider"
+          name: "Mario Mendoza"
         
         }
       }
@@ -101,8 +101,8 @@ const ProyectoCrear = (props: any) =>{
         setElementosVacios(true)
         return false;
     }
-    console.log(proyectoActual)
     ProyectoService().postProyecto(proyectoActual)
+    document.location.reload()
   }
 
   const changeProducto = (prop: string, value: any) => {
@@ -121,6 +121,7 @@ const ProyectoCrear = (props: any) =>{
     <div>
         <MenuDescription title = "Crear un nuevo proyecto"/>
         <div>
+
         <form onSubmit={handelSubmit}>
         <Row className={detalleProjectCSS.contentRow}>
           <Col className={detalleProjectCSS.col4} md={6} lg={6} m={6}>
@@ -154,10 +155,16 @@ const ProyectoCrear = (props: any) =>{
             </div>
           </Col>
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
+          {elementosVacios &&
+          <div className= {detalleProjectCSS.labelError}>
+            Hay elementos vacios
+          </div>
+        }
           <div className={detalleProjectCSS.contentItem}>
                 {<Button  type="submit" className={detalleProjectCSS.iconSave} onClick={(e) => clickGuardar(e)} variant="success">Guardar</Button>}
-                
+
               </div>
+              
               <div className={detalleProjectCSS.contentItem}>
               
               </div>
@@ -200,13 +207,6 @@ const ProyectoCrear = (props: any) =>{
                 <Form.Select value={proyectoActual.producto} disabled={disabled} className={` 
                     ${detalleProjectCSS.input} ${detalleProjectCSS.addRightSelect}`}  onChange={(e) => changeProducto("producto",e)}>
                     {productos.map((type: any, index: number) => <option key={index} value={type.name}>{type.name}</option>)}
-                </Form.Select>
-              </div>
-            </div>
-            <div className={detalleProjectCSS.contentItem}>
-              <Form.Label className={detalleProjectCSS.label}>Version:</Form.Label>
-              <div className={detalleProjectCSS.contentInput}>
-                <Form.Select >
                 </Form.Select>
               </div>
             </div>

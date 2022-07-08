@@ -156,3 +156,9 @@
     
 }
 
+.labelError{
+    font-weight: 700;
+    margin-right: 15px;
+    color:#d8151e;
+}
+

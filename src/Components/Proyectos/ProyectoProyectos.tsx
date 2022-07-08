@@ -234,13 +234,6 @@ export const ProyectoProyectos = (props: any) => {
               </div>
             </div>
             <div className={detalleProjectCSS.contentItem}>
-              <Form.Label className={detalleProjectCSS.label}>Version:</Form.Label>
-              <div className={detalleProjectCSS.contentInput}>
-                <Form.Select value={detalleProjectCSS.type} disabled={disabled} >
-                </Form.Select>
-              </div>
-            </div>
-            <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Lider asignado:</Form.Label>
               <div className={detalleProjectCSS.contentInput}>
               <Form.Select value={lider} disabled={disabled} className={` 

@@ -17,6 +17,7 @@ export const TareaCrear = (props:any) => {
   const [proyecto_id,setID] = useState(Number(idProyecto));
   const [recursos, setRecursos] = useState<Array<RecrusoSoporte>>([]);
   const [lider,setLider] = useState(0)
+  const [elementosVacios, setElementosVacios] = useState(false);
 
   const tareaInicial: Tarea = {
     id: 0,
@@ -24,8 +25,8 @@ export const TareaCrear = (props:any) => {
     nombre: "",
     fechaCreacion: "",
     recursoAsignado: {
-      id_recurso: 0,
-      name: ""
+      id_recurso: 1,
+      name: "Mario Mendoza"
     },
     estado: "Pendiente",
     prioridad: "Baja",
@@ -47,6 +48,7 @@ export const TareaCrear = (props:any) => {
   const [disabled, setdisabled] = useState(false);
 
   const changeValue = (prop: string, value: any) => {
+    setElementosVacios(false)
     if(prop == "recursoAsignado"){
       settareaInicial({...tareaActual,[prop]:{
         "id_recurso": recursos[value.target.value].file,
@@ -101,10 +103,14 @@ export const TareaCrear = (props:any) => {
   const handelSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault()
     setID(Number(idProyecto))
+    if (tareaActual.nombre ==="" || tareaActual.objetivo === ""){
+      setElementosVacios(true)
+      return false;
+  }
     settareaInicial({...tareaActual,["proyectoID"]:proyecto_id})
     console.log(tareaActual)
     const answer = ProyectoService().postTarea(tareaActual)
-    console.log(answer)
+    document.location.reload()
   }
   
   return (
@@ -137,7 +143,11 @@ export const TareaCrear = (props:any) => {
           <Col className={detalleProjectCSS.col8} md={6} lg={6} m={6}>
            <div className={detalleProjectCSS.contentItem}>
            {<Button  type="submit" className={detalleProjectCSS.iconSave} onSubmit={(e) => handelSubmit(e)} variant="success">Guardar</Button>}
-                
+           {elementosVacios &&
+          <div className= {detalleProjectCSS.labelError}>
+            Hay elementos vacios
+          </div>
+        }
                 </div>
                 <div className={detalleProjectCSS.contentItem}>
                 
@@ -145,6 +155,7 @@ export const TareaCrear = (props:any) => {
                 <div className={detalleProjectCSS.contentItem}>
                 
                 </div>
+
             <div className={detalleProjectCSS.contentItem}>
               <Form.Label className={detalleProjectCSS.label}>Fecha de Creacion:</Form.Label>
               <Form.Control
