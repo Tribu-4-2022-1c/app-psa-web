@@ -28,8 +28,6 @@ export const Empleados = (props:any) => {
   useEffect(() => {
     const recursos_ = async () =>{
       const allNombres:any = await recursosService().getNombres();
-      const allApellidos:any = await recursosService().getApellidos();
-      const allLegajos:any = await recursosService().getLegajos();
       setnombre(allNombres);
       /*setapellido(allApellidos)
       setlegajo(allLegajos)*/
@@ -62,9 +60,9 @@ export const Empleados = (props:any) => {
           </thead>
           <tbody>
           {(nombre)&&nombre.map( (empleado, index) => <tr key={index}>
-            <td>{empleado['legajo']}</td>
-            <td>{empleado['Nombre']}</td>
-            <td>{empleado['Apellido']}</td>
+            <td>{empleado['file']}</td>
+            <td>{empleado['name']}</td>
+            <td>{empleado['lastname']}</td>
           </tr>)}
           </tbody>
         </Table>

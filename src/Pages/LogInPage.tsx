@@ -1,15 +1,20 @@
-import React from 'react'
+import React, {useState} from 'react'
 import LoginButton from "../Components/Recursos/LoginButton";
 import loginButton from "../Components/Recursos/LoginButton";
 import versionSoporteStyle from "../Styles/VersionSoporte.module.css";
 import {NavLink, Route} from "react-router-dom";
 import {link} from "fs";
 
+
+
 const LogInPage = () => {
+
+    const [username, setUsername] = useState("");
 
     function goProyectos(){
 
     }
+
 
     return (
         <div>
@@ -18,7 +23,7 @@ const LogInPage = () => {
           Usuario:
         </label>
       </form>
-      <input type="text" name="name" />
+      <input type="text" name={username} onChange={({ target }) => setUsername(target.value)}/>
       <form>
         <label>
           Contraseña:
@@ -34,5 +39,7 @@ const LogInPage = () => {
       </div>
     )
 }
+
+
 
 export default LogInPage;

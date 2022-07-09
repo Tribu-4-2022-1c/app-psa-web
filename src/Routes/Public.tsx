@@ -13,6 +13,7 @@ import { ProyectoProyectos } from '../Components/Proyectos/ProyectoProyectos';
 import ProyectoCrear from '../Components/Proyectos/ProyectoCrear';
 import { TareaCrear } from '../Components/Proyectos/TareaCrear';
 import { TareaProyectos } from '../Components/Proyectos/TareaProyectos';
+import Menu from "../Components/Menu";
 
 const Public = () => {
   return (
@@ -31,6 +32,7 @@ const Public = () => {
         <Route path='/soporte/:product/:version/crear' element={ <CrearTicket /> } />
         <Route path='/soporte/ticket/detalle' element={ <TicketDetalle /> } />
         <Route path='*' element={ <HomePage /> } />
+        <Route path='/menu' element={ <Menu /> } />
     </Routes>
   )
 }

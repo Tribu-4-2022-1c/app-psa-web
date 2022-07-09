@@ -230,6 +230,12 @@ const ProyectoService = () =>{
 
 
 
+
+
+
+
+
+
     return{
         getAllTaksFor,
         getProyectoFor,

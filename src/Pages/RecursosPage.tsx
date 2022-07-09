@@ -48,7 +48,7 @@ const RecursosPage = () => {
         />
 
         </div>}
-      <div className={recursosCSS.contentButton} >
+      {!load && <div className={recursosCSS.contentButton} >
         <NavLink
             to={'/recursos/calendario'}
             className={versionSoporteStyle.styleNav}
@@ -57,11 +57,12 @@ const RecursosPage = () => {
             <p>CALENDARIO</p>
           </div>
         </NavLink>
-      </div>
+      </div>}
       {!load &&
           <div className={`${Empleados}`}>
             <Empleados employee={nombres} />
           </div>
+
       }
 
       </div >
