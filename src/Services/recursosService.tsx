@@ -1,6 +1,7 @@
 import {Hours} from "../models/Recursos.models";
 
 const URL = "https://api-psa-recursos.herokuapp.com/hours"
+const HerokuUrl = "https://api-psa-proyectos-squad-12.herokuapp.com/proyectos"
 
 const soporteService = () => {
 
@@ -151,7 +152,7 @@ const soporteService = () => {
     }
 
     const getTaskForProject = (id: String = "") => {
-        const url = URL + "/" + id + "/tareas";
+        const url = HerokuUrl + "/" + id + "/tareas";
         return fetch(url).then( async (response) => {
             if(response){
                 return response.json();
