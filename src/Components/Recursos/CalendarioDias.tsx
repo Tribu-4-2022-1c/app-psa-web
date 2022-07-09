@@ -51,7 +51,8 @@ const CalendarioDias = (props:any) => {
         horaEstimada: 0,
         fecha_inicio: "",
         fecha_fin:   "",
-        estado:      "PENDIENTE"
+        estado:      "PENDIENTE",
+        producto:     ''
     }
 
     const cargaFinal: Hours = {
