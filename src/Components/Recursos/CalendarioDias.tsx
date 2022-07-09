@@ -190,7 +190,6 @@ const CalendarioDias = (props:any) => {
 
     return (
         <div >
-            <div>
                 <div
                     className={`${ProductoSoporteCSS.card} 
         ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
@@ -206,7 +205,7 @@ const CalendarioDias = (props:any) => {
         ${(diaSelect&&dia&&diaSelect.id===dia.id)?ProductoSoporteCSS.isSelected:''}`}>
                     <TareaEmpleado fechas={allhoras} diaActual={dia['dia']} horas={allhoras} currentHour={allhoras[0]}  />
                 </div>
-            </div>
+
             <Modal
                 show={show}
                 onHide={handleClose}

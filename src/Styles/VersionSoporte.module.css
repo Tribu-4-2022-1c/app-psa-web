@@ -8,6 +8,18 @@
     color: #003066;
 }
 
+.card2{
+    padding: 0px 20px;
+    width: 250%;
+    height: auto;
+    background: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid #003066;
+    color: #003066;
+}
+
 .descItem{
     margin: 10px;
 }
@@ -34,6 +46,14 @@
     width: 6%;
 }
 
+.contentIconRecursos{
+    padding: 0px 15px;
+    font-size: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
 .isSelected{
     background: #0083C61A;
 }
@@ -42,6 +62,18 @@
     display: flex;
     width: 80%;
     justify-content: space-between;
+    font-weight: 700;
+}
+
+.contentDescriptionRecursos{
+    display: flex;
+    width: 200%;
+    justify-content: space-between;
+    font-weight: 700;
+}
+
+.contentDescription2{
+    display: flex;
     font-weight: 700;
 }
 
